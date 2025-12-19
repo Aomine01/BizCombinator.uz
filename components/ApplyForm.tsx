@@ -58,11 +58,23 @@ export default function ApplyForm() {
 
             setStatus('success');
             setFileName(null);
-            e.currentTarget.reset();
+
+            // Safely reset form
+            if (e.currentTarget) {
+                e.currentTarget.reset();
+            }
         } catch (error: any) {
             console.error('Submission Error:', error);
             setStatus('error');
-            setErrorMessage(error.message || 'Failed to send application. Please try again.');
+
+            // More specific error messages
+            if (error.message?.includes('413') || error.message?.includes('large')) {
+                setErrorMessage('File too large. Please use a smaller file (max 5MB).');
+            } else if (error.message?.includes('File')) {
+                setErrorMessage(error.message);
+            } else {
+                setErrorMessage('Failed to send application. Please try again or try without a file.');
+            }
         }
     };
 
