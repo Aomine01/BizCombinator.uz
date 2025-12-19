@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-syne);
+}
+
+:root {
+  --background: #050505;
+  --foreground: #ffffff;
+
+  --primary: #ff2200;
+  /* Red to match logo */
+  --secondary: #0ea5e9;
+
+  --font-inter: "Inter", sans-serif;
+  --font-syne: "Syne", sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter);
+  overflow-x: hidden;
+}
+
+/* Utilities extracted from reference */
+.glass {
+  backdrop-filter: blur(12px);
+  background: rgba(20, 0, 0, 0.6);
+  border: 1px solid rgba(255, 34, 0, 0.08);
+}
+
+.glass-card {
+  backdrop-filter: blur(16px);
+  background: rgba(20, 0, 0, 0.4);
+  border: 1px solid rgba(255, 34, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px rgba(255, 34, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 34, 0, 0.3);
+  box-shadow: 0 12px 40px rgba(255, 34, 0, 0.15), inset 0 1px rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.text-gradient {
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(135deg, #ff2200, #ff5533);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.glow-orb {
+  filter: blur(80px);
+  pointer-events: none;
+  border-radius: 50%;
+  position: absolute;
+  opacity: 0.4;
+  z-index: 0;
+}
+
+/* Animations */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Swiper overrides if needed, but handled in component */
