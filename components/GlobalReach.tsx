@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView, useSpring, useMotionValue, useTransform } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import Globe3D from "@/components/Globe3D";
 import { Globe3DErrorBoundary } from "@/components/Globe3DErrorBoundary";
@@ -30,6 +30,11 @@ function Counter({ value, prefix = "", suffix = "" }: { value: number; prefix?: 
 
 export default function GlobalReach() {
     const { t } = useLanguage();
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        setIsMobile(window.innerWidth < 768);
+    }, []);
 
     return (
         <section className="py-24 relative overflow-hidden min-h-screen flex items-center">
@@ -86,9 +91,19 @@ export default function GlobalReach() {
                     {/* Connected Globe Visual */}
                     <div className="relative h-[600px] flex items-center justify-center">
                         <div className="absolute inset-0 flex items-center justify-center">
-                            <Globe3DErrorBoundary>
-                                <Globe3D />
-                            </Globe3DErrorBoundary>
+                            {isMobile ? (
+                                /* Mobile Fallback - GPU optimized */
+                                <div
+                                    className="w-[300px] h-[300px] rounded-full"
+                                    style={{
+                                        background: 'radial-gradient(circle at center, rgba(220, 38, 38, 0.15) 0%, transparent 70%)'
+                                    }}
+                                />
+                            ) : (
+                                <Globe3DErrorBoundary>
+                                    <Globe3D />
+                                </Globe3DErrorBoundary>
+                            )}
                         </div>
                     </div>
 

@@ -76,7 +76,8 @@ export default function BusinessTypes() {
                         <motion.div
                             drag="x"
                             dragConstraints={{ right: 0, left: -width }}
-                            className="flex gap-6"
+                            className="flex gap-6 touch-pan-y"
+                            style={{ willChange: "transform" }}
                         >
                             {BUSINESS_DATA.map((card, index) => (
                                 <motion.div
@@ -96,6 +97,8 @@ export default function BusinessTypes() {
                                             src={card.image}
                                             alt={card.title}
                                             fill
+                                            loading="lazy"
+                                            sizes="(max-width: 768px) 300px, 400px"
                                             className={`object-cover transition-transform duration-700 ${activeIndex === index ? "scale-110" : "scale-100"}`}
                                         />
                                         <div className={`absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent transition-opacity duration-500 ${activeIndex === index ? "opacity-90" : "opacity-80"}`} />
