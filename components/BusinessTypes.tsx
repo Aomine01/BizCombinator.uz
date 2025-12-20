@@ -62,7 +62,7 @@ export default function BusinessTypes() {
                     <h2 className="text-3xl md:text-5xl font-heading font-bold text-white mb-6">
                         Who We Work With
                     </h2>
-                    <p className="text-slate-400 max-w-2xl text-lg">
+                    <p className="text-slate-400 text-lg w-full text-left m-0 p-0">
                         Empowering innovators across every stage of growth.
                     </p>
                 </motion.div>
