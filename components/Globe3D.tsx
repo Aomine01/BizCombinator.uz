@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MotionValue } from "framer-motion";
 
 interface Globe3DProps {
@@ -25,6 +25,16 @@ interface ProjectedDot {
 
 export default function Globe3D({ scrollProgress }: Globe3DProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    // Fix hydration mismatch: Start with desktop, update client-side
+    const [isMobile, setIsMobile] = useState(false);
+    const [isReady, setIsReady] = useState(false);
+
+    useEffect(() => {
+        // Client-side only mobile detection
+        setIsMobile(window.innerWidth < 768);
+        // Trigger fade-in after particle count is determined
+        setTimeout(() => setIsReady(true), 50); // Small delay for smooth transition
+    }, []);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -38,8 +48,7 @@ export default function Globe3D({ scrollProgress }: Globe3DProps) {
         let speed = 0.002;
         let animationFrameId: number;
 
-        // Mobile detection and optimization
-        const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+        // Use isMobile state (not direct window check)
         const DOT_COUNT = isMobile ? 300 : 600; // 50% reduction on mobile
         const MOBILE_PARTICLE_BOOST = isMobile ? 1.15 : 1.0; // 15% larger particles on mobile
         const GLOBE_RADIUS = 220;
@@ -187,14 +196,21 @@ export default function Globe3D({ scrollProgress }: Globe3DProps) {
             canvas.removeEventListener('mouseenter', handleMouseEnter);
             canvas.removeEventListener('mouseleave', handleMouseLeave);
             cancelAnimationFrame(animationFrameId);
+
+            // Canvas cleanup to prevent memory leaks
+            if (ctx) {
+                ctx.clearRect(0, 0, width, height);
+            }
         };
-    }, [scrollProgress]);
+    }, [scrollProgress, isMobile]); // Re-run when mobile state changes
 
     return (
-        <canvas
-            ref={canvasRef}
-            className="w-full h-full max-w-[600px] max-h-[600px] cursor-pointer"
-            style={{ width: '100%', height: '100%', willChange: 'transform' }}
-        />
+        <div className={`transition-opacity duration-1000 ease-out ${isReady ? 'opacity-100' : 'opacity-0'}`}>
+            <canvas
+                ref={canvasRef}
+                className="w-full h-full max-w-[600px] max-h-[600px] cursor-pointer"
+                style={{ width: '100%', height: '100%', willChange: 'transform' }}
+            />
+        </div>
     );
 }

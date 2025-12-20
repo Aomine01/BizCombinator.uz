@@ -6,11 +6,13 @@ import "./globals.css";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap", // Prevent invisible text during font load
 });
 
 const syne = Syne({
   variable: "--font-syne",
   subsets: ["latin"],
+  display: "swap", // Prevent invisible text during font load
 });
 
 export const metadata: Metadata = {

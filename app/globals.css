@@ -21,6 +21,18 @@
   --font-syne: "Syne", sans-serif;
 }
 
+/* Mobile Touch Optimizations */
+html {
+  touch-action: manipulation;
+  /* Remove 300ms tap delay */
+}
+
+html,
+body {
+  overscroll-behavior-y: none;
+  /* Prevent rubber-banding */
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

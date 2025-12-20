@@ -1,7 +1,13 @@
 {
   "functions": {
     "app/api/apply/route.ts": {
-      "maxDuration": 30
+      "maxDuration": 60,
+      "memory": 1024
+    }
+  },
+  "api": {
+    "bodyParser": {
+      "sizeLimit": "10mb"
     }
   }
 }

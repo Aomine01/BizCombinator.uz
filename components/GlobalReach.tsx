@@ -4,6 +4,7 @@ import { motion, useInView, useSpring, useMotionValue, useTransform } from "fram
 import { useEffect, useRef } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import Globe3D from "@/components/Globe3D";
+import { Globe3DErrorBoundary } from "@/components/Globe3DErrorBoundary";
 
 function Counter({ value, prefix = "", suffix = "" }: { value: number; prefix?: string; suffix?: string }) {
     const ref = useRef<HTMLSpanElement>(null);
@@ -85,7 +86,9 @@ export default function GlobalReach() {
                     {/* Connected Globe Visual */}
                     <div className="relative h-[600px] flex items-center justify-center">
                         <div className="absolute inset-0 flex items-center justify-center">
-                            <Globe3D />
+                            <Globe3DErrorBoundary>
+                                <Globe3D />
+                            </Globe3DErrorBoundary>
                         </div>
                     </div>
 

@@ -131,7 +131,7 @@ export default function ApplyForm() {
                                     type="text"
                                     name="user_name"
                                     required
-                                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary/50 outline-none transition-all"
+                                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary/50 outline-none transition-all text-base"
                                     placeholder="John Doe"
                                 />
                             </div>
@@ -141,7 +141,7 @@ export default function ApplyForm() {
                                     type="email"
                                     name="user_email"
                                     required
-                                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary/50 outline-none transition-all"
+                                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary/50 outline-none transition-all text-base"
                                     placeholder="john@example.com"
                                 />
                             </div>
@@ -151,7 +151,7 @@ export default function ApplyForm() {
                                     type="tel"
                                     name="user_phone"
                                     required
-                                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary/50 outline-none transition-all"
+                                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary/50 outline-none transition-all text-base"
                                     placeholder="+998 90 123 45 67"
                                 />
                             </div>
@@ -163,7 +163,7 @@ export default function ApplyForm() {
                                 type="text"
                                 name="startup_name"
                                 required
-                                className="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary/50 outline-none transition-all"
+                                className="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary/50 outline-none transition-all text-base"
                                 placeholder="My Unicorn"
                             />
                         </div>
@@ -174,7 +174,7 @@ export default function ApplyForm() {
                                 name="stage"
                                 required
                                 defaultValue=""
-                                className="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary/50 outline-none transition-all appearance-none cursor-pointer"
+                                className="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary/50 outline-none transition-all appearance-none cursor-pointer text-base"
                             >
                                 <option value="" disabled>{t.form.selectStage}</option>
                                 <option value="idea">{t.form.stages.idea}</option>

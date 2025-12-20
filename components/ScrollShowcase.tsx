@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Globe3D from "@/components/Globe3D";
+import { Globe3DErrorBoundary } from "@/components/Globe3DErrorBoundary";
 
 const SLIDES = [
     {
@@ -42,7 +43,9 @@ export default function ScrollShowcase() {
                     style={{ scale, rotate, opacity }}
                     className="w-full max-w-4xl aspect-square relative opacity-50"
                 >
-                    <Globe3D scrollProgress={scrollYProgress} />
+                    <Globe3DErrorBoundary>
+                        <Globe3D scrollProgress={scrollYProgress} />
+                    </Globe3DErrorBoundary>
                 </motion.div>
 
                 {/* Background Gradient Mesh */}

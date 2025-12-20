@@ -118,7 +118,10 @@ _Sent from BizCombinator Website_
 
         // Check if we have a file to send
         if (pitch_deck && pitch_deck.size > 0) {
-            console.log("Sending Document...");
+            console.log("=== FILE UPLOAD ATTEMPT ===");
+            console.log("File name:", pitch_deck.name);
+            console.log("File size:", pitch_deck.size, "bytes");
+            console.log("File type:", pitch_deck.type);
 
             const telegramFormData = new FormData();
             telegramFormData.append('chat_id', TELEGRAM_CHAT_ID);
@@ -128,17 +131,31 @@ _Sent from BizCombinator Website_
 
             const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument`;
 
+            console.log("Sending to Telegram API...");
+
             const response = await fetch(url, {
                 method: 'POST',
                 body: telegramFormData,
                 // Do NOT set Content-Type header, let fetch set it with boundary
             });
 
+            const responseData = await response.text();
+            console.log("Telegram API response status:", response.status);
+            console.log("Telegram API response:", responseData);
+
             if (!response.ok) {
-                const errorText = await response.text();
-                console.error("TELEGRAM DOCUMENT API ERROR:", errorText);
-                throw new Error(`Telegram Document API Failed: ${errorText}`);
+                console.error("TELEGRAM DOCUMENT API ERROR:", responseData);
+
+                // Parse Telegram error if possible
+                try {
+                    const errorJson = JSON.parse(responseData);
+                    throw new Error(`Telegram Error: ${errorJson.description || 'File upload failed'}`);
+                } catch (e) {
+                    throw new Error(`Telegram Document API Failed (${response.status}): ${responseData}`);
+                }
             }
+
+            console.log("✅ Document sent successfully");
         } else {
             // Send text only
             console.log("Sending Text Message...");
