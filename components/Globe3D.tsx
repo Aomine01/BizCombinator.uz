@@ -38,9 +38,13 @@ export default function Globe3D({ scrollProgress }: Globe3DProps) {
         let speed = 0.002;
         let animationFrameId: number;
 
-        const dots: Dot[] = [];
-        const DOT_COUNT = 600;
+        // Mobile detection and optimization
+        const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+        const DOT_COUNT = isMobile ? 300 : 600; // 50% reduction on mobile
+        const MOBILE_PARTICLE_BOOST = isMobile ? 1.15 : 1.0; // 15% larger particles on mobile
         const GLOBE_RADIUS = 220;
+
+        const dots: Dot[] = [];
 
         // Initialize dots on a sphere
         for (let i = 0; i < DOT_COUNT; i++) {
@@ -51,7 +55,7 @@ export default function Globe3D({ scrollProgress }: Globe3DProps) {
             const z = GLOBE_RADIUS * Math.cos(phi);
             dots.push({
                 x, y, z,
-                size: Math.random() < 0.1 ? 2.5 : 1,
+                size: (Math.random() < 0.1 ? 2.5 : 1) * MOBILE_PARTICLE_BOOST,
                 velocity: {
                     x: (Math.random() - 0.5) * 2,
                     y: (Math.random() - 0.5) * 2,
@@ -190,7 +194,7 @@ export default function Globe3D({ scrollProgress }: Globe3DProps) {
         <canvas
             ref={canvasRef}
             className="w-full h-full max-w-[600px] max-h-[600px] cursor-pointer"
-            style={{ width: '100%', height: '100%' }}
+            style={{ width: '100%', height: '100%', willChange: 'transform' }}
         />
     );
 }
