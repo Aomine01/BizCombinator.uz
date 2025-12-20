@@ -57,12 +57,12 @@ export default function BusinessTypes() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="mb-12"
+                    className="mb-12 flex flex-col items-start text-left"
                 >
-                    <h2 className="text-3xl md:text-5xl font-heading font-bold text-white mb-6">
+                    <h2 className="text-3xl md:text-5xl font-heading font-bold text-white mb-6 w-full">
                         Who We Work With
                     </h2>
-                    <p className="text-slate-400 text-lg w-full text-left m-0 p-0">
+                    <p className="text-slate-400 text-lg m-0 p-0 text-left">
                         Empowering innovators across every stage of growth.
                     </p>
                 </motion.div>
