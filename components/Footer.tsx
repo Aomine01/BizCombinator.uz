@@ -87,22 +87,44 @@ export default function Footer() {
 }
 
 function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
+    const commonClass =
+        "w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary hover:bg-black transition-all duration-300";
+
+    // Avoid placeholder "#" links (hurts Lighthouse SEO "links are crawlable")
+    if (!href || href === "#") {
+        return <span className={commonClass}>{icon}</span>;
+    }
+
     return (
-        <a
-            href={href}
-            className="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary hover:bg-black transition-all duration-300"
-        >
+        <a href={href} className={commonClass} target="_blank" rel="noreferrer">
             {icon}
         </a>
     );
 }
 
 function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
+    const content = (
+        <>
+            <span className="w-1.5 h-1.5 rounded-full bg-primary/0 group-hover:bg-primary transition-all duration-300" />
+            {children}
+        </>
+    );
+
+    // Avoid placeholder "#" links (hurts Lighthouse SEO "links are crawlable")
+    if (!href || href === "#") {
+        return (
+            <li>
+                <span className="text-slate-400 flex items-center gap-2 group cursor-default">
+                    {content}
+                </span>
+            </li>
+        );
+    }
+
     return (
         <li>
             <Link href={href} className="text-slate-400 hover:text-primary transition-colors flex items-center gap-2 group">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary/0 group-hover:bg-primary transition-all duration-300" />
-                {children}
+                {content}
             </Link>
         </li>
     );

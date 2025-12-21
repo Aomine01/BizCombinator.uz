@@ -26,7 +26,17 @@ export default function ScrollShowcase() {
         [t.showcase.slides]
     );
 
-    // Mobile / reduced-motion version: no sticky globe, no scroll progress transforms.
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start start", "end end"]
+    });
+
+    // Transform helix appearance based on scroll
+    const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1.2, 1.5]); // Increase scale at end for explosion
+    const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
+    const opacity = useTransform(scrollYProgress, [0, 0.1, 0.8], [0, 1, 1]); // Keep visible at end
+
+    // Mobile / reduced-motion version: no sticky globe.
     if (isMobile || reduceMotion) {
         return (
             <section className="py-24 relative overflow-hidden">
@@ -48,16 +58,6 @@ export default function ScrollShowcase() {
             </section>
         );
     }
-
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end end"]
-    });
-
-    // Transform helix appearance based on scroll
-    const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1.2, 1.5]); // Increase scale at end for explosion
-    const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
-    const opacity = useTransform(scrollYProgress, [0, 0.1, 0.8], [0, 1, 1]); // Keep visible at end
 
     return (
         <section ref={containerRef} className="relative h-[300vh]">
