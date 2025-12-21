@@ -47,7 +47,9 @@ export default function ScrollShowcase() {
                         <Globe3DErrorBoundary fallback={
                             <div className="w-[300px] h-[300px] rounded-full bg-primary/10" />
                         }>
-                            <Globe3D quality="low" paused={true} />
+                            <div className="w-[300px] h-[300px] rounded-full overflow-hidden">
+                                <Globe3D quality="low" paused={true} />
+                            </div>
                         </Globe3DErrorBoundary>
                     </div>
                     <div className="grid gap-8 max-w-2xl mx-auto">

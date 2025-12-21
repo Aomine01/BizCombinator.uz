@@ -105,10 +105,12 @@ export default function GlobalReach() {
                                     </div>
                                 </div>
                             }>
-                                <Globe3D
-                                    quality={isMobile ? "low" : "high"}
-                                    paused={reduceMotion || !globeInView}
-                                />
+                                <div className="w-[300px] h-[300px] sm:w-[380px] sm:h-[380px] md:w-[520px] md:h-[520px] rounded-full overflow-hidden">
+                                    <Globe3D
+                                        quality={isMobile ? "low" : "high"}
+                                        paused={reduceMotion || !globeInView}
+                                    />
+                                </div>
                             </Globe3DErrorBoundary>
                         </div>
                     </div>

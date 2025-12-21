@@ -84,7 +84,7 @@ export default function Timeline() {
                     {/* Progress Line */}
                     <motion.div
                         style={{ scaleY: lineScaleY }}
-                        className="absolute left-[20px] md:left-1/2 top-0 bottom-0 w-0.5 bg-primary -translate-x-1/2 md:translate-x-0 z-10 origin-top shadow-[0_0_15px_rgba(255,102,0,0.6)]"
+                        className="absolute left-[20px] md:left-1/2 top-0 bottom-0 w-0.5 bg-primary -translate-x-1/2 md:translate-x-0 z-10 origin-top [will-change:transform] [transform:translateZ(0)] shadow-none md:shadow-[0_0_15px_rgba(255,102,0,0.6)]"
                     />
 
                     <div className="space-y-24">

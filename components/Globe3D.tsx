@@ -290,11 +290,15 @@ export default function Globe3D({
     }, [scrollProgress, isMobile, isVisible, reduceMotion, quality, paused]); // re-run when quality/paused changes
 
     return (
-        <div ref={wrapperRef} className={`transition-opacity duration-1000 ease-out ${isReady ? 'opacity-100' : 'opacity-0'}`}>
+        // Canvas is square; we mask it into a circle for the “globe” silhouette.
+        <div
+            ref={wrapperRef}
+            className={`relative rounded-full overflow-hidden transition-opacity duration-1000 ease-out ${isReady ? 'opacity-100' : 'opacity-0'}`}
+        >
             <canvas
                 ref={canvasRef}
-                className="w-full h-full max-w-[600px] max-h-[600px] cursor-pointer"
-                style={{ width: '100%', height: '100%', willChange: 'transform' }}
+                className="block w-full h-full max-w-[600px] max-h-[600px] cursor-pointer"
+                style={{ width: '100%', height: '100%' }}
             />
         </div>
     );
