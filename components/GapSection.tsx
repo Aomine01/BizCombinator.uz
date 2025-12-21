@@ -21,18 +21,8 @@ export default function GapSection() {
     const problemIcons = ["Brain", "Handshake", "TrendingUp"];
     const solutionIcons = ["Users", "Brain", "Rocket"];
 
-    // Mock details for expandable items
-    const problemDetails = [
-        "First-time founders often struggle with navigating complex industry regulations and market dynamics.",
-        "Without a warm intro, getting in front of VCs and Angels is statistically near-impossible.",
-        "Premature scaling is the #1 reason startups fail. Knowing when to push is critical."
-    ];
-
-    const solutionDetails = [
-        "Network with 500+ mentors from Fortune 500 companies who have been there.",
-        "Get personalized insights powered by our proprietary AI engine to validate your moves.",
-        "Structured roadmap to secure your Seed or Series A funding with metrics that matter."
-    ];
+    const problemDetails = t.gap.problemDetails;
+    const solutionDetails = t.gap.solutionDetails;
 
     return (
         <section id="the-gap" className="py-24 relative overflow-hidden">

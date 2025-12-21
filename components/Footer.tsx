@@ -1,10 +1,12 @@
 "use client";
 
-import { Github, Linkedin, MessageCircle, Send, Twitter } from "lucide-react";
+import { Linkedin, Send, Twitter } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Footer() {
+    const { t } = useLanguage();
     return (
         <footer className="bg-black border-t border-slate-900 pt-20 pb-10 relative overflow-hidden font-sans">
             {/* Background Elements */}
@@ -26,8 +28,7 @@ export default function Footer() {
                             </div>
                         </Link>
                         <p className="text-slate-400 mb-8 leading-relaxed">
-                            The accelerator of the future. Transforming ambitious ideas into global empires through
-                            funding, mentorship, and AI-driven growth.
+                            {t.footer.tagline}
                         </p>
                         <div className="flex items-center gap-4">
                             <SocialLink href="#" icon={<Twitter size={20} />} />
@@ -38,31 +39,31 @@ export default function Footer() {
 
                     {/* Program */}
                     <div>
-                        <h4 className="text-white font-bold mb-6">Program</h4>
+                        <h4 className="text-white font-bold mb-6">{t.footer.columns.program}</h4>
                         <ul className="space-y-4">
-                            <FooterLink href="#timeline">The Journey</FooterLink>
-                            <FooterLink href="#apply">Apply Now</FooterLink>
-                            <FooterLink href="#mentors">Mentors</FooterLink>
-                            <FooterLink href="#global">Global Network</FooterLink>
+                            <FooterLink href="#the-journey">{t.footer.links.journey}</FooterLink>
+                            <FooterLink href="#apply-form">{t.footer.links.apply}</FooterLink>
+                            <FooterLink href="#mentors">{t.footer.links.mentors}</FooterLink>
+                            <FooterLink href="#global">{t.footer.links.global}</FooterLink>
                         </ul>
                     </div>
 
                     {/* Company */}
                     <div>
-                        <h4 className="text-white font-bold mb-6">Company</h4>
+                        <h4 className="text-white font-bold mb-6">{t.footer.columns.company}</h4>
                         <ul className="space-y-4">
-                            <FooterLink href="#">About Us</FooterLink>
-                            <FooterLink href="#">Success Stories</FooterLink>
-                            <FooterLink href="#">For Investors</FooterLink>
-                            <FooterLink href="#">Contact</FooterLink>
+                            <FooterLink href="#">{t.footer.links.about}</FooterLink>
+                            <FooterLink href="#">{t.footer.links.stories}</FooterLink>
+                            <FooterLink href="#">{t.footer.links.investors}</FooterLink>
+                            <FooterLink href="#">{t.footer.links.contact}</FooterLink>
                         </ul>
                     </div>
 
                     {/* Connect */}
                     <div>
-                        <h4 className="text-white font-bold mb-6">Uzbekistan HQ</h4>
-                        <p className="text-slate-400 mb-2">Tashkent, Mirabad District</p>
-                        <p className="text-slate-400 mb-4">Oybek Street 12, Block B</p>
+                        <h4 className="text-white font-bold mb-6">{t.footer.columns.hq}</h4>
+                        <p className="text-slate-400 mb-2">{t.footer.hq.line1}</p>
+                        <p className="text-slate-400 mb-4">{t.footer.hq.line2}</p>
                         <a href="mailto:hello@bizcombinator.com" className="text-primary hover:text-white transition-colors block mb-2">
                             hello@bizcombinator.com
                         </a>
@@ -74,10 +75,10 @@ export default function Footer() {
 
                 {/* Bottom Bar */}
                 <div className="pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
-                    <p>© 2025 BizCombinator. All rights reserved.</p>
+                    <p>{t.footer.copyright}</p>
                     <div className="flex gap-8">
-                        <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
-                        <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>
+                        <Link href="#" className="hover:text-white transition-colors">{t.footer.links.privacy}</Link>
+                        <Link href="#" className="hover:text-white transition-colors">{t.footer.links.terms}</Link>
                     </div>
                 </div>
             </div>

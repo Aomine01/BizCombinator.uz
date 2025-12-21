@@ -1,16 +1,20 @@
-import { motion } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import Image from "next/image";
-import { MENTORS_CONTENT } from "@/constants/data";
 import { useLanguage } from "@/context/LanguageContext";
+import { useRef } from "react";
 
 export default function MentorsGrid() {
     const { t } = useLanguage();
+    const reduceMotion = useReducedMotion();
+    const sectionRef = useRef<HTMLElement>(null);
+    const inView = useInView(sectionRef, { margin: "-10% 0px -10% 0px" });
 
     // Duplicate content for seamless CSS loop
-    const items = [...MENTORS_CONTENT, ...MENTORS_CONTENT];
+    const items = [...t.mentors.items, ...t.mentors.items];
+    const shouldAnimate = !reduceMotion && inView;
 
     return (
-        <section id="mentors" className="py-24 relative overflow-hidden">
+        <section ref={sectionRef} id="mentors" className="py-24 relative overflow-hidden">
             {/* Decor */}
             <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[128px] translate-x-1/2 translate-y-1/2" />
 
@@ -36,7 +40,7 @@ export default function MentorsGrid() {
                     <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-slate-950 to-transparent z-10 pointer-events-none" />
 
                     {/* Scrolling Track - Pure CSS Animation */}
-                    <div className="mentors-track flex gap-6">
+                    <div className="mentors-track flex gap-6" style={{ animationPlayState: shouldAnimate ? "running" : "paused" }}>
                         {items.map((mentor, index) => (
                             <div
                                 key={`${mentor.id}-${index}`}
@@ -86,6 +90,12 @@ export default function MentorsGrid() {
 
                 .mentors-marquee-wrapper:hover .mentors-track {
                     animation-play-state: paused;
+                }
+
+                @media (prefers-reduced-motion: reduce) {
+                    .mentors-track {
+                        animation: none !important;
+                    }
                 }
             `}</style>
         </section>

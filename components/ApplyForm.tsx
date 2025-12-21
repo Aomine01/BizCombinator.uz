@@ -20,13 +20,13 @@ export default function ApplyForm() {
             const maxSize = 10 * 1024 * 1024; // 10MB
 
             if (!allowedTypes.includes(file.type)) {
-                setErrorMessage('Invalid file type. Please upload PDF, PPT, or DOC files only.');
+                setErrorMessage(t.form.errors.invalidFileType);
                 e.target.value = ''; // Clear input
                 return;
             }
 
             if (file.size > maxSize) {
-                setErrorMessage('File too large. Maximum size is 10MB.');
+                setErrorMessage(t.form.errors.fileTooLarge);
                 e.target.value = ''; // Clear input
                 return;
             }
@@ -50,10 +50,13 @@ export default function ApplyForm() {
                 body: formData,
             });
 
-            const result = await response.json();
+            const result = await response.json().catch(() => ({} as any));
 
             if (!response.ok) {
-                throw new Error(result.error || 'Failed to send');
+                // Prefer client-side localized messages.
+                if (response.status === 429) throw new Error(t.form.errors.rateLimited);
+                if (response.status === 400) throw new Error(result.error || t.form.errors.badRequest);
+                throw new Error(t.form.errors.submitFailed);
             }
 
             setStatus('success');
@@ -67,14 +70,7 @@ export default function ApplyForm() {
             console.error('Submission Error:', error);
             setStatus('error');
 
-            // More specific error messages
-            if (error.message?.includes('413') || error.message?.includes('large')) {
-                setErrorMessage('File too large. Please use a smaller file (max 5MB).');
-            } else if (error.message?.includes('File')) {
-                setErrorMessage(error.message);
-            } else {
-                setErrorMessage('Failed to send application. Please try again or try without a file.');
-            }
+            setErrorMessage(error?.message || t.form.errors.submitFailed);
         }
     };
 
@@ -104,15 +100,15 @@ export default function ApplyForm() {
                         <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
                             <CheckCircle className="w-8 h-8 text-green-500" />
                         </div>
-                        <h3 className="text-2xl font-bold text-white mb-2">Application Sent!</h3>
+                        <h3 className="text-2xl font-bold text-white mb-2">{t.form.success.title}</h3>
                         <p className="text-slate-300">
-                            We have received your application. Our team will review it and get back to you shortly.
+                            {t.form.success.body}
                         </p>
                         <button
                             onClick={() => setStatus('idle')}
                             className="mt-6 text-primary hover:text-white transition-colors text-sm font-medium"
                         >
-                            Send another application
+                            {t.form.success.sendAnother}
                         </button>
                     </motion.div>
                 ) : (
@@ -132,7 +128,7 @@ export default function ApplyForm() {
                                     name="user_name"
                                     required
                                     className="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary/50 outline-none transition-all text-base"
-                                    placeholder="John Doe"
+                                    placeholder={t.form.placeholders.name}
                                 />
                             </div>
                             <div className="space-y-2">
@@ -142,7 +138,7 @@ export default function ApplyForm() {
                                     name="user_email"
                                     required
                                     className="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary/50 outline-none transition-all text-base"
-                                    placeholder="john@example.com"
+                                    placeholder={t.form.placeholders.email}
                                 />
                             </div>
                             <div className="space-y-2 md:col-span-2">
@@ -152,7 +148,7 @@ export default function ApplyForm() {
                                     name="user_phone"
                                     required
                                     className="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary/50 outline-none transition-all text-base"
-                                    placeholder="+998 90 123 45 67"
+                                    placeholder={t.form.placeholders.phone}
                                 />
                             </div>
                         </div>
@@ -164,7 +160,7 @@ export default function ApplyForm() {
                                 name="startup_name"
                                 required
                                 className="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary/50 outline-none transition-all text-base"
-                                placeholder="My Unicorn"
+                                placeholder={t.form.placeholders.startup}
                             />
                         </div>
 
@@ -194,10 +190,6 @@ export default function ApplyForm() {
                                     className="hidden"
                                     onChange={handleFileChange}
                                     accept=".pdf,.doc,.docx,.ppt,.pptx"
-                                // Note: EmailJS free tier doesn't support file attachments directly easily without paid tier or base64 conversion
-                                // For now we will just visually show it or user needs strict config. 
-                                // We will remove name="attachment" to prevent confusing errors if they don't have it set up.
-                                // Instead we can ask for a link in a text area if preferred, but for now let's keep UI
                                 />
                                 <label
                                     htmlFor="file-upload"
@@ -210,7 +202,7 @@ export default function ApplyForm() {
                                     <p className="text-xs text-slate-600 mt-1">{t.form.dropHint}</p>
                                 </label>
                             </div>
-                            <p className="text-xs text-slate-500 mt-2">* Pitch deck upload requires backend configuration. For now, please ensure your email is correct.</p>
+                            <p className="text-xs text-slate-500 mt-2">{t.form.pitchNote}</p>
                         </div>
 
                         {status === 'error' && (
@@ -225,8 +217,8 @@ export default function ApplyForm() {
                             disabled={status === 'sending'}
                             className="w-full py-4 bg-primary text-white font-bold rounded-lg shadow-[0_0_20px_rgba(255,87,34,0.3)] hover:shadow-[0_0_30px_rgba(255,87,34,0.5)] transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                            {status === 'sending' ? 'Sending...' : t.form.submit}
-                            {!status && <Send className="w-4 h-4" />}
+                            {status === 'sending' ? t.form.sending : t.form.submit}
+                            {status !== 'sending' && <Send className="w-4 h-4" />}
                         </button>
 
                     </motion.form>

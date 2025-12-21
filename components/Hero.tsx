@@ -43,8 +43,8 @@ export default function Hero() {
                     transition={{ duration: 0.8, delay: 0.1 }}
                     className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-white mb-6 leading-tight"
                 >
-                    THE ACCELERATOR <br />
-                    <span className="text-gradient">OF THE FUTURE</span>
+                    {t.hero.titleLine1} <br />
+                    <span className="text-gradient">{t.hero.titleLine2}</span>
                 </motion.h1>
 
                 <motion.p

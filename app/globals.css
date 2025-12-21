@@ -25,6 +25,7 @@
 html {
   touch-action: manipulation;
   /* Remove 300ms tap delay */
+  scroll-behavior: smooth;
 }
 
 html,
@@ -89,6 +90,9 @@ body {
 
 /* Reduced motion accessibility */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 
   .glass,
   .glass-card {

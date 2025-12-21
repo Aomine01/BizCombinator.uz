@@ -4,11 +4,13 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import { Sparkles, X, Send } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function BizAiWidget() {
+    const { t } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<{ type: "bot" | "user"; text: string }[]>([
-        { type: "bot", text: "Hello! I can help you refine your business idea or answer questions about the accelerator." }
+        { type: "bot", text: t.widget.hello }
     ]);
     const [inputValue, setInputValue] = useState("");
     const [isTyping, setIsTyping] = useState(false);
@@ -22,6 +24,16 @@ export default function BizAiWidget() {
         scrollToBottom();
     }, [messages, isOpen]);
 
+    // Keep the initial greeting in sync with language, but don't overwrite real chat history.
+    useEffect(() => {
+        setMessages((prev) => {
+            if (prev.length === 1 && prev[0]?.type === "bot") {
+                return [{ type: "bot", text: t.widget.hello }];
+            }
+            return prev;
+        });
+    }, [t.widget.hello]);
+
     const handleSend = () => {
         if (!inputValue.trim()) return;
 
@@ -34,7 +46,7 @@ export default function BizAiWidget() {
             setIsTyping(false);
             setMessages((prev) => [...prev, {
                 type: "bot",
-                text: "That sounds like an interesting idea! Please apply to the program so our mentors can review it in detail."
+                text: t.widget.cannedResponse
             }]);
         }, 1000);
     };
@@ -60,7 +72,7 @@ export default function BizAiWidget() {
                                 <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
                                     <Sparkles className="w-4 h-4 text-primary" />
                                 </div>
-                                <span className="font-heading font-bold text-white text-sm">BizAi Assistant</span>
+                                <span className="font-heading font-bold text-white text-sm">{t.widget.title}</span>
                             </div>
                             <button onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-white">
                                 <X className="w-4 h-4" />
@@ -99,7 +111,7 @@ export default function BizAiWidget() {
                                     value={inputValue}
                                     onChange={(e) => setInputValue(e.target.value)}
                                     onKeyDown={handleKeyPress}
-                                    placeholder="Type a message..."
+                                    placeholder={t.widget.placeholder}
                                     className="w-full pl-4 pr-12 py-3 bg-slate-900 border border-slate-700 rounded-xl focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 text-white placeholder-slate-500 text-sm"
                                 />
                                 <button

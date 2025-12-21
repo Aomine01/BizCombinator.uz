@@ -38,7 +38,7 @@ export default function GlobalReach() {
     }, []);
 
     return (
-        <section className="py-24 relative overflow-hidden min-h-screen flex items-center">
+        <section id="global" className="py-24 relative overflow-hidden min-h-screen flex items-center">
             {/* Background Glow */}
             <div className="absolute top-1/2 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[128px] translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
@@ -101,7 +101,16 @@ export default function GlobalReach() {
                                     }}
                                 />
                             ) : (
-                                <Globe3DErrorBoundary>
+                                <Globe3DErrorBoundary fallback={
+                                    <div className="w-full h-full max-w-[600px] max-h-[600px] flex items-center justify-center">
+                                        <div className="text-center text-slate-400">
+                                            <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
+                                                <div className="w-16 h-16 rounded-full bg-primary/20" />
+                                            </div>
+                                            <p className="text-sm">{t.common.globeUnavailable}</p>
+                                        </div>
+                                    </div>
+                                }>
                                     <Globe3D />
                                 </Globe3DErrorBoundary>
                             )}

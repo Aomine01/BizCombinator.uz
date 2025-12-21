@@ -39,7 +39,7 @@ export class Globe3DErrorBoundary extends Component<Props, State> {
                         <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
                             <div className="w-16 h-16 rounded-full bg-primary/20" />
                         </div>
-                        <p className="text-sm">3D visualization unavailable</p>
+                        {/* Intentionally no default text here — callers should provide a localized fallback. */}
                     </div>
                 </div>
             );

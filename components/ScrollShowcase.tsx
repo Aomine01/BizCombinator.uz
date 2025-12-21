@@ -1,30 +1,54 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Globe3D from "@/components/Globe3D";
 import { Globe3DErrorBoundary } from "@/components/Globe3DErrorBoundary";
+import { useLanguage } from "@/context/LanguageContext";
 
-const SLIDES = [
-    {
-        title: "From Zero to One",
-        description: "It starts with a spark. We help you ignite the initial idea, structuring your vision into a viable business model.",
-        color: "from-blue-500 to-cyan-400"
-    },
-    {
-        title: "Rapid Scaling",
-        description: "Once product-market fit is found, we fuel the fire. Our network and resources help you scale exponentially.",
-        color: "from-orange-500 to-amber-400"
-    },
-    {
-        title: "Global Domination",
-        description: "The sky is not the limit. We connect you with global markets, partners, and exit opportunities.",
-        color: "from-purple-500 to-pink-400"
-    }
-];
+const SLIDE_COLORS = ["from-blue-500 to-cyan-400", "from-orange-500 to-amber-400", "from-purple-500 to-pink-400"];
 
 export default function ScrollShowcase() {
+    const { t } = useLanguage();
     const containerRef = useRef<HTMLDivElement>(null);
+    const reduceMotion = useReducedMotion();
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const update = () => setIsMobile(window.innerWidth < 768);
+        update();
+        window.addEventListener("resize", update, { passive: true });
+        return () => window.removeEventListener("resize", update);
+    }, []);
+
+    const slides = useMemo(
+        () => t.showcase.slides.map((s, i) => ({ ...s, color: SLIDE_COLORS[i] ?? "from-primary to-orange-400" })),
+        [t.showcase.slides]
+    );
+
+    // Mobile / reduced-motion version: no sticky globe, no scroll progress transforms.
+    if (isMobile || reduceMotion) {
+        return (
+            <section className="py-24 relative overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#050505_70%)] pointer-events-none" />
+                <div className="container mx-auto px-4 relative z-10">
+                    <div className="grid gap-8 max-w-2xl mx-auto">
+                        {slides.map((slide, index) => (
+                            <div key={index} className="glass rounded-2xl border border-white/10 p-6">
+                                <h3 className={`text-3xl font-heading font-bold mb-3 bg-gradient-to-r ${slide.color} bg-clip-text text-transparent`}>
+                                    {slide.title}
+                                </h3>
+                                <p className="text-slate-300 leading-relaxed">
+                                    {slide.description}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        );
+    }
+
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start start", "end end"]
@@ -43,7 +67,16 @@ export default function ScrollShowcase() {
                     style={{ scale, rotate, opacity }}
                     className="w-full max-w-4xl aspect-square relative opacity-50"
                 >
-                    <Globe3DErrorBoundary>
+                    <Globe3DErrorBoundary fallback={
+                        <div className="w-full h-full max-w-[600px] max-h-[600px] flex items-center justify-center">
+                            <div className="text-center text-slate-400">
+                                <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
+                                    <div className="w-16 h-16 rounded-full bg-primary/20" />
+                                </div>
+                                <p className="text-sm">{t.common.globeUnavailable}</p>
+                            </div>
+                        </div>
+                    }>
                         <Globe3D scrollProgress={scrollYProgress} />
                     </Globe3DErrorBoundary>
                 </motion.div>
@@ -54,7 +87,7 @@ export default function ScrollShowcase() {
 
             {/* Scrolling Content Slides */}
             <div className="absolute inset-0">
-                {SLIDES.map((slide, index) => (
+                {slides.map((slide, index) => (
                     <div key={index} className="h-screen flex items-center justify-center relative pointer-events-none">
                         <motion.div
                             initial={{ opacity: 0, y: 50 }}

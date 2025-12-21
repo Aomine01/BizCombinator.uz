@@ -13,25 +13,8 @@ import Navbar from "@/components/Navbar";
 import BizAiWidget from "@/components/BizAiWidget";
 import Footer from "@/components/Footer";
 import ScrollShowcase from "@/components/ScrollShowcase";
-import { useEffect } from "react";
 
 export default function Home() {
-
-  useEffect(() => {
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const href = anchor.getAttribute('href');
-        if (href) {
-          document.querySelector(href)?.scrollIntoView({
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-  }, []);
-
   return (
     <main className="min-h-screen text-white selection:bg-primary/30">
       <Navbar />
