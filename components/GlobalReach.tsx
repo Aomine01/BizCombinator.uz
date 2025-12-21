@@ -1,7 +1,7 @@
 "use client";
 // Force rebuild: 2025-12-20 19:50
 
-import { motion, useInView, useSpring, useMotionValue, useTransform } from "framer-motion";
+import { motion, useInView, useSpring, useMotionValue, useTransform, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import Globe3D from "@/components/Globe3D";
@@ -32,6 +32,9 @@ function Counter({ value, prefix = "", suffix = "" }: { value: number; prefix?: 
 export default function GlobalReach() {
     const { t } = useLanguage();
     const [isMobile, setIsMobile] = useState(false);
+    const reduceMotion = useReducedMotion();
+    const globeWrapRef = useRef<HTMLDivElement>(null);
+    const globeInView = useInView(globeWrapRef, { margin: "-10% 0px -10% 0px" });
 
     useEffect(() => {
         setIsMobile(window.innerWidth < 768);
@@ -91,29 +94,22 @@ export default function GlobalReach() {
 
                     {/* Connected Globe Visual */}
                     <div className="relative h-[600px] flex items-center justify-center">
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            {isMobile ? (
-                                /* Mobile Fallback - GPU optimized */
-                                <div
-                                    className="w-[300px] h-[300px] rounded-full"
-                                    style={{
-                                        background: 'radial-gradient(circle at center, rgba(220, 38, 38, 0.15) 0%, transparent 70%)'
-                                    }}
-                                />
-                            ) : (
-                                <Globe3DErrorBoundary fallback={
-                                    <div className="w-full h-full max-w-[600px] max-h-[600px] flex items-center justify-center">
-                                        <div className="text-center text-slate-400">
-                                            <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-                                                <div className="w-16 h-16 rounded-full bg-primary/20" />
-                                            </div>
-                                            <p className="text-sm">{t.common.globeUnavailable}</p>
+                        <div ref={globeWrapRef} className="absolute inset-0 flex items-center justify-center">
+                            <Globe3DErrorBoundary fallback={
+                                <div className="w-full h-full max-w-[600px] max-h-[600px] flex items-center justify-center">
+                                    <div className="text-center text-slate-400">
+                                        <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
+                                            <div className="w-16 h-16 rounded-full bg-primary/20" />
                                         </div>
+                                        <p className="text-sm">{t.common.globeUnavailable}</p>
                                     </div>
-                                }>
-                                    <Globe3D />
-                                </Globe3DErrorBoundary>
-                            )}
+                                </div>
+                            }>
+                                <Globe3D
+                                    quality={isMobile ? "low" : "high"}
+                                    paused={reduceMotion || !globeInView}
+                                />
+                            </Globe3DErrorBoundary>
                         </div>
                     </div>
 

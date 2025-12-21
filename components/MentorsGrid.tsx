@@ -79,17 +79,24 @@ export default function MentorsGrid() {
 
             <style jsx>{`
                 @keyframes scroll-left {
-                    0% { transform: translateX(0); }
-                    100% { transform: translateX(-50%); }
+                    0% { transform: translate3d(0, 0, 0); }
+                    100% { transform: translate3d(-50%, 0, 0); }
                 }
 
                 .mentors-track {
-                    animation: scroll-left 40s linear infinite;
+                    animation: scroll-left 26s linear infinite;
                     will-change: transform;
                 }
 
                 .mentors-marquee-wrapper:hover .mentors-track {
                     animation-play-state: paused;
+                }
+
+                /* Slightly faster on mobile to avoid feeling "stuck" */
+                @media (max-width: 767px) {
+                    .mentors-track {
+                        animation-duration: 18s;
+                    }
                 }
 
                 @media (prefers-reduced-motion: reduce) {

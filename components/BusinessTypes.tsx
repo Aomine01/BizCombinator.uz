@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
@@ -15,6 +15,7 @@ const BUSINESS_IMAGES = [
 
 export default function BusinessTypes() {
     const { t } = useLanguage();
+    const reduceMotion = useReducedMotion();
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const carouselRef = useRef<HTMLDivElement>(null);
     const [width, setWidth] = useState(0);
@@ -28,11 +29,28 @@ export default function BusinessTypes() {
     }, []);
 
     useEffect(() => {
-        // Only needed for desktop drag constraints.
-        if (!isMobile && carouselRef.current) {
-            setWidth(carouselRef.current.scrollWidth - carouselRef.current.offsetWidth);
+        const el = carouselRef.current;
+        if (!el) return;
+
+        const update = () => {
+            setWidth(Math.max(0, el.scrollWidth - el.offsetWidth));
+        };
+
+        update();
+
+        // Keep constraints accurate when language/content changes or viewport resizes.
+        let ro: ResizeObserver | null = null;
+        if ("ResizeObserver" in window) {
+            ro = new ResizeObserver(update);
+            ro.observe(el);
         }
-    }, [isMobile]);
+
+        window.addEventListener("resize", update, { passive: true });
+        return () => {
+            ro?.disconnect();
+            window.removeEventListener("resize", update);
+        };
+    }, [t.business.cards.length, isMobile]);
 
     const cards = t.business.cards.map((card, index) => ({
         ...card,
@@ -58,95 +76,68 @@ export default function BusinessTypes() {
 
                 {/* Swiper / Carousel Region */}
                 <div className="relative -mx-4 md:mx-0">
-                    {isMobile ? (
-                        <div
-                            ref={carouselRef}
-                            className="overflow-x-auto px-4 md:px-0 pb-4 [-webkit-overflow-scrolling:touch]"
+                    <motion.div
+                        ref={carouselRef}
+                        className="cursor-grab active:cursor-grabbing overflow-hidden px-4 md:px-0"
+                    >
+                        <motion.div
+                            drag={reduceMotion ? false : "x"}
+                            dragConstraints={{ right: 0, left: -width }}
+                            dragElastic={0.06}
+                            dragMomentum={!reduceMotion}
+                            dragTransition={{
+                                // Standardize "feel" across breakpoints (similar to Swiper freeMode momentum).
+                                power: 0.22,
+                                timeConstant: 260,
+                                bounceStiffness: 520,
+                                bounceDamping: 32,
+                            }}
+                            className="flex gap-6 touch-pan-y"
+                            style={{ willChange: "transform", touchAction: "pan-y" }}
                         >
-                            <div className="flex gap-6 snap-x snap-mandatory">
-                                {cards.map((card, index) => (
-                                    <div
-                                        key={index}
-                                        className="snap-center relative min-w-[300px] h-[460px] rounded-2xl overflow-hidden border border-slate-800"
-                                    >
-                                        <div className="absolute inset-0">
-                                            <Image
-                                                src={card.image}
-                                                alt={card.title}
-                                                fill
-                                                loading="lazy"
-                                                sizes="300px"
-                                                className="object-cover"
-                                            />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90" />
-                                        </div>
-                                        <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                                            <h3 className="text-xl font-bold font-heading mb-2 text-white">
-                                                {card.title}
-                                            </h3>
-                                            <p className="text-slate-300 leading-relaxed text-sm">
+                            {cards.map((card, index) => (
+                                <motion.div
+                                    key={index}
+                                    className={`relative min-w-[300px] ${isMobile ? "h-[460px]" : "md:min-w-[400px] h-[500px]"} rounded-2xl overflow-hidden transition-all duration-500 group border
+                                        ${activeIndex === index
+                                            ? "border-primary shadow-[0_0_30px_rgba(255,34,0,0.3)] z-10"
+                                            : "border-slate-800"
+                                        }
+                                        ${!isMobile ? "grayscale hover:grayscale-0 hover:border-slate-600" : ""}
+                                    `}
+                                    onMouseEnter={isMobile ? undefined : () => setActiveIndex(index)}
+                                    onMouseLeave={isMobile ? undefined : () => setActiveIndex(null)}
+                                >
+                                    {/* Image Background */}
+                                    <div className="absolute inset-0">
+                                        <Image
+                                            src={card.image}
+                                            alt={card.title}
+                                            fill
+                                            loading="lazy"
+                                            sizes={isMobile ? "300px" : "(max-width: 768px) 300px, 400px"}
+                                            className={`object-cover transition-transform duration-700 ${!isMobile && activeIndex === index ? "scale-110" : "scale-100"}`}
+                                        />
+                                        <div className={`absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent transition-opacity duration-500 ${!isMobile && activeIndex === index ? "opacity-90" : "opacity-85"}`} />
+                                    </div>
+
+                                    {/* Content */}
+                                    <div className={`absolute inset-0 ${isMobile ? "p-6" : "p-8"} flex flex-col justify-end select-none pointer-events-none`}>
+                                        <h3 className={`${isMobile ? "text-xl" : "text-2xl"} font-bold font-heading mb-2 text-white`}>
+                                            {card.title}
+                                        </h3>
+
+                                        <div className={`${isMobile ? "max-h-40 opacity-100" : activeIndex === index ? "max-h-40 opacity-100" : "max-h-0 opacity-0"} overflow-hidden transition-all duration-500`}>
+                                            <p className="text-slate-300 leading-relaxed text-sm md:text-base">
                                                 {card.desc}
                                             </p>
-                                            <div className="mt-3 h-1 w-10 bg-primary rounded-full" />
+                                            <div className={`mt-3 h-1 ${isMobile ? "w-10" : "w-12"} bg-primary rounded-full`} />
                                         </div>
                                     </div>
-                                ))}
-                            </div>
-                        </div>
-                    ) : (
-                        <motion.div
-                            ref={carouselRef}
-                            className="cursor-grab active:cursor-grabbing overflow-hidden px-4 md:px-0"
-                        >
-                            <motion.div
-                                drag="x"
-                                dragConstraints={{ right: 0, left: -width }}
-                                className="flex gap-6 touch-pan-y"
-                                style={{ willChange: "transform" }}
-                            >
-                                {cards.map((card, index) => (
-                                    <motion.div
-                                        key={index}
-                                        className={`relative min-w-[300px] md:min-w-[400px] h-[500px] rounded-2xl overflow-hidden transition-all duration-500 group border
-                                            ${activeIndex === index
-                                                ? "border-primary shadow-[0_0_30px_rgba(255,34,0,0.3)] z-10"
-                                                : "border-slate-800 grayscale hover:grayscale-0 hover:border-slate-600"
-                                            }
-                                        `}
-                                        onMouseEnter={() => setActiveIndex(index)}
-                                        onMouseLeave={() => setActiveIndex(null)}
-                                    >
-                                        {/* Image Background */}
-                                        <div className="absolute inset-0">
-                                            <Image
-                                                src={card.image}
-                                                alt={card.title}
-                                                fill
-                                                loading="lazy"
-                                                sizes="(max-width: 768px) 300px, 400px"
-                                                className={`object-cover transition-transform duration-700 ${activeIndex === index ? "scale-110" : "scale-100"}`}
-                                            />
-                                            <div className={`absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent transition-opacity duration-500 ${activeIndex === index ? "opacity-90" : "opacity-80"}`} />
-                                        </div>
-
-                                        {/* Content */}
-                                        <div className="absolute inset-0 p-8 flex flex-col justify-end select-none pointer-events-none">
-                                            <h3 className={`text-2xl font-bold font-heading mb-3 transition-colors duration-300 ${activeIndex === index ? "text-white" : "text-white/90"}`}>
-                                                {card.title}
-                                            </h3>
-
-                                            <div className={`overflow-hidden transition-all duration-500 ${activeIndex === index ? "max-h-40 opacity-100" : "max-h-0 opacity-0"}`}>
-                                                <p className="text-slate-300 leading-relaxed">
-                                                    {card.desc}
-                                                </p>
-                                                <div className="mt-4 h-1 w-12 bg-primary rounded-full" />
-                                            </div>
-                                        </div>
-                                    </motion.div>
-                                ))}
-                            </motion.div>
+                                </motion.div>
+                            ))}
                         </motion.div>
-                    )}
+                    </motion.div>
 
                     {/* Visual Hint for Scrolling */}
                     <div className="hidden md:flex justify-center mt-8 gap-2">

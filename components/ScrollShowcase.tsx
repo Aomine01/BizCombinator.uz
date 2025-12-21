@@ -42,6 +42,14 @@ export default function ScrollShowcase() {
             <section className="py-24 relative overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#050505_70%)] pointer-events-none" />
                 <div className="container mx-auto px-4 relative z-10">
+                    {/* Lightweight globe to preserve feature parity on mobile without scroll-bound transforms */}
+                    <div className="flex justify-center mb-10">
+                        <Globe3DErrorBoundary fallback={
+                            <div className="w-[300px] h-[300px] rounded-full bg-primary/10" />
+                        }>
+                            <Globe3D quality="low" paused={true} />
+                        </Globe3DErrorBoundary>
+                    </div>
                     <div className="grid gap-8 max-w-2xl mx-auto">
                         {slides.map((slide, index) => (
                             <div key={index} className="glass rounded-2xl border border-white/10 p-6">

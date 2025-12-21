@@ -5,6 +5,15 @@ import { MotionValue } from "framer-motion";
 
 interface Globe3DProps {
     scrollProgress?: MotionValue<number>;
+    /**
+     * Rendering quality. "auto" adapts to mobile/desktop.
+     * Use "low" to force a lightweight globe on mobile contexts.
+     */
+    quality?: "auto" | "low" | "high";
+    /**
+     * If true, the animation loop is paused (useful when offscreen).
+     */
+    paused?: boolean;
 }
 
 interface Dot {
@@ -23,17 +32,41 @@ interface ProjectedDot {
     alpha: number;
 }
 
-export default function Globe3D({ scrollProgress }: Globe3DProps) {
+export default function Globe3D({
+    scrollProgress,
+    quality = "auto",
+    paused = false,
+}: Globe3DProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const wrapperRef = useRef<HTMLDivElement>(null);
     // Fix hydration mismatch: Start with desktop, update client-side
     const [isMobile, setIsMobile] = useState(false);
     const [isReady, setIsReady] = useState(false);
+    const [reduceMotion, setReduceMotion] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
 
     useEffect(() => {
         // Client-side only mobile detection
         setIsMobile(window.innerWidth < 768);
+        setReduceMotion(window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false);
         // Trigger fade-in after particle count is determined
         setTimeout(() => setIsReady(true), 50); // Small delay for smooth transition
+    }, []);
+
+    useEffect(() => {
+        // Pause animation when the globe is offscreen (big win for scroll FPS).
+        const el = wrapperRef.current;
+        if (!el || !("IntersectionObserver" in window)) return;
+
+        const obs = new IntersectionObserver(
+            (entries) => {
+                setIsVisible(Boolean(entries[0]?.isIntersecting));
+            },
+            { threshold: 0.05 }
+        );
+
+        obs.observe(el);
+        return () => obs.disconnect();
     }, []);
 
     useEffect(() => {
@@ -42,16 +75,47 @@ export default function Globe3D({ scrollProgress }: Globe3DProps) {
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 
-        let width = canvas.width = 600;
-        let height = canvas.height = 600;
+        if (reduceMotion) return;
+
+        // Size to the rendered element to avoid overdraw on mobile.
+        const wrapper = wrapperRef.current;
+        if (!wrapper) return;
+
+        const dprCap = isMobile ? 1.25 : 2;
+
+        let cssSize = 600;
+        let animationFrameId: number | null = null;
         let rotation = 0;
         let speed = 0.002;
-        let animationFrameId: number;
 
-        // Use isMobile state (not direct window check)
-        const DOT_COUNT = isMobile ? 300 : 600; // 50% reduction on mobile
-        const MOBILE_PARTICLE_BOOST = isMobile ? 1.15 : 1.0; // 15% larger particles on mobile
-        const GLOBE_RADIUS = 220;
+        const qualityMode: "low" | "high" =
+            quality === "high" ? "high" :
+                quality === "low" ? "low" :
+                    isMobile ? "low" : "high";
+
+        const DOT_COUNT =
+            qualityMode === "low"
+                ? (scrollProgress ? 220 : 180)
+                : 600;
+
+        const PARTICLE_BOOST = qualityMode === "low" ? 1.1 : 1.0;
+        const GLOBE_RADIUS = qualityMode === "low" ? 170 : 220;
+
+        const applyCanvasSize = () => {
+            const rect = wrapper.getBoundingClientRect();
+            cssSize = Math.max(220, Math.min(600, Math.floor(rect.width || 600)));
+            const dpr = Math.min(window.devicePixelRatio || 1, dprCap);
+
+            canvas.width = Math.floor(cssSize * dpr);
+            canvas.height = Math.floor(cssSize * dpr);
+            canvas.style.width = `${cssSize}px`;
+            canvas.style.height = `${cssSize}px`;
+
+            // Draw in CSS pixel space while letting the backing store scale with DPR.
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        };
+
+        applyCanvasSize();
 
         const dots: Dot[] = [];
 
@@ -64,7 +128,7 @@ export default function Globe3D({ scrollProgress }: Globe3DProps) {
             const z = GLOBE_RADIUS * Math.cos(phi);
             dots.push({
                 x, y, z,
-                size: (Math.random() < 0.1 ? 2.5 : 1) * MOBILE_PARTICLE_BOOST,
+                size: (Math.random() < 0.1 ? 2.5 : 1) * PARTICLE_BOOST,
                 velocity: {
                     x: (Math.random() - 0.5) * 2,
                     y: (Math.random() - 0.5) * 2,
@@ -74,18 +138,22 @@ export default function Globe3D({ scrollProgress }: Globe3DProps) {
         }
 
         const render = () => {
+            // Hard stop if offscreen or caller requests pause.
+            if (!isVisible || paused) return;
+
             // Safely get progress
             let progress = 0;
             if (scrollProgress) {
                 progress = scrollProgress.get();
             }
 
-            // Trigger explosion after 75% scroll (when entering Global Domination)
+            // Trigger explosion after 75% scroll (used in ScrollShowcase)
             const explosionFactor = Math.max(0, (progress - 0.75) * 8);
 
-            ctx.clearRect(0, 0, width, height);
+            // Clear in CSS pixel space since we've set a dpr transform above.
+            ctx.clearRect(0, 0, cssSize, cssSize);
             ctx.save();
-            ctx.translate(width / 2, height / 2);
+            ctx.translate(cssSize / 2, cssSize / 2);
 
             rotation += speed;
 
@@ -189,23 +257,40 @@ export default function Globe3D({ scrollProgress }: Globe3DProps) {
         const handleMouseEnter = () => { speed = 0.008; };
         const handleMouseLeave = () => { speed = 0.002; };
 
-        canvas.addEventListener('mouseenter', handleMouseEnter);
-        canvas.addEventListener('mouseleave', handleMouseLeave);
+        // Only enable hover interactions on non-touch contexts
+        if (!isMobile) {
+            canvas.addEventListener('mouseenter', handleMouseEnter);
+            canvas.addEventListener('mouseleave', handleMouseLeave);
+        }
+
+        // Keep the canvas sized correctly on resize/orientation changes.
+        const onResize = () => applyCanvasSize();
+        window.addEventListener("resize", onResize, { passive: true });
+
+        let ro: ResizeObserver | null = null;
+        if ("ResizeObserver" in window) {
+            ro = new ResizeObserver(() => applyCanvasSize());
+            ro.observe(wrapper);
+        }
 
         return () => {
-            canvas.removeEventListener('mouseenter', handleMouseEnter);
-            canvas.removeEventListener('mouseleave', handleMouseLeave);
-            cancelAnimationFrame(animationFrameId);
+            if (!isMobile) {
+                canvas.removeEventListener('mouseenter', handleMouseEnter);
+                canvas.removeEventListener('mouseleave', handleMouseLeave);
+            }
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            window.removeEventListener("resize", onResize);
+            ro?.disconnect();
 
             // Canvas cleanup to prevent memory leaks
             if (ctx) {
-                ctx.clearRect(0, 0, width, height);
+                ctx.clearRect(0, 0, cssSize, cssSize);
             }
         };
-    }, [scrollProgress, isMobile]); // Re-run when mobile state changes
+    }, [scrollProgress, isMobile, isVisible, reduceMotion, quality, paused]); // re-run when quality/paused changes
 
     return (
-        <div className={`transition-opacity duration-1000 ease-out ${isReady ? 'opacity-100' : 'opacity-0'}`}>
+        <div ref={wrapperRef} className={`transition-opacity duration-1000 ease-out ${isReady ? 'opacity-100' : 'opacity-0'}`}>
             <canvas
                 ref={canvasRef}
                 className="w-full h-full max-w-[600px] max-h-[600px] cursor-pointer"
