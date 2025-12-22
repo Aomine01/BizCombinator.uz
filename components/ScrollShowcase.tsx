@@ -36,25 +36,30 @@ export default function ScrollShowcase() {
     const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
     const opacity = useTransform(scrollYProgress, [0, 0.1, 0.8], [0, 1, 1]); // Keep visible at end
 
-    // Mobile / reduced-motion version: no sticky globe.
+    // Mobile / reduced-motion version: Particle sphere background with scrolling cards
     if (isMobile || reduceMotion) {
         return (
-            <section className="py-24 relative overflow-hidden">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#050505_70%)] pointer-events-none" />
-                <div className="container mx-auto px-4 relative z-10">
-                    {/* Lightweight globe to preserve feature parity on mobile without scroll-bound transforms */}
-                    <div className="flex justify-center mb-10">
-                        <Globe3DErrorBoundary fallback={
-                            <div className="w-[300px] h-[300px] rounded-full bg-primary/10" />
-                        }>
-                            <div className="w-[300px] h-[300px] rounded-full overflow-hidden">
-                                <Globe3D quality="low" paused={true} />
-                            </div>
+            <section className="py-24 relative overflow-hidden min-h-screen">
+                {/* Background Gradient */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#050505_70%)] pointer-events-none z-0" />
+
+                {/* Particle Sphere Background Layer - Fixed & Centered */}
+                <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center">
+                    <div className="w-[350px] h-[350px] opacity-30">
+                        <Globe3DErrorBoundary fallback={null}>
+                            <Globe3D quality="low" paused={false} />
                         </Globe3DErrorBoundary>
                     </div>
+                </div>
+
+                {/* Content Layer - Scrolls over background */}
+                <div className="container mx-auto px-4 relative z-10">
                     <div className="space-y-16">
                         {slides.map((slide, index) => (
-                            <div key={index} className="glass rounded-2xl border border-white/10 p-6 text-center">
+                            <div
+                                key={index}
+                                className="glass rounded-2xl border border-white/10 p-6 text-center backdrop-blur-md bg-black/40"
+                            >
                                 <h3 className={`text-3xl font-heading font-bold mb-3 bg-gradient-to-r ${slide.color} bg-clip-text text-transparent mx-auto max-w-2xl`}>
                                     {slide.title}
                                 </h3>
