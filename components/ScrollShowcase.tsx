@@ -14,9 +14,11 @@ export default function ScrollShowcase() {
     const globeRef = useRef<HTMLDivElement>(null);
     const reduceMotion = useReducedMotion();
     const [isMobile, setIsMobile] = useState(false);
+    const [isClient, setIsClient] = useState(false);
     const isGlobeVisible = useInView(globeRef, { margin: "0px 0px -20% 0px" });
 
     useEffect(() => {
+        setIsClient(true);
         const update = () => setIsMobile(window.innerWidth < 768);
         update();
         window.addEventListener("resize", update, { passive: true });
@@ -37,6 +39,11 @@ export default function ScrollShowcase() {
     const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1.2, 1.5]); // Increase scale at end for explosion
     const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
     const opacity = useTransform(scrollYProgress, [0, 0.1, 0.8], [0, 1, 1]); // Keep visible at end
+
+    // Don't render until client-side to prevent hydration mismatch
+    if (!isClient) {
+        return null;
+    }
 
     // Mobile / reduced-motion version: Scroll-animated globe background matching desktop
     if (isMobile || reduceMotion) {
