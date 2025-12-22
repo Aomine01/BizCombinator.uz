@@ -87,7 +87,10 @@ export default function ScrollShowcase() {
                             </div>
                         </div>
                     }>
-                        <Globe3D scrollProgress={scrollYProgress} />
+                        <Globe3D
+                            scrollProgress={scrollYProgress}
+                            quality={isMobile ? "low" : "high"}
+                        />
                     </Globe3DErrorBoundary>
                 </motion.div>
 
