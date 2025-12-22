@@ -1,17 +1,24 @@
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 export default function MentorsGrid() {
     const { t } = useLanguage();
     const reduceMotion = useReducedMotion();
     const sectionRef = useRef<HTMLElement>(null);
+    const carouselRef = useRef<HTMLDivElement>(null);
     const inView = useInView(sectionRef, { margin: "-10% 0px -10% 0px" });
+    const [width, setWidth] = useState(0);
 
-    // Duplicate content for seamless CSS loop
-    const items = [...t.mentors.items, ...t.mentors.items];
-    const shouldAnimate = !reduceMotion && inView;
+    // Calculate drag constraints
+    useEffect(() => {
+        if (carouselRef.current) {
+            const scrollWidth = carouselRef.current.scrollWidth;
+            const offsetWidth = carouselRef.current.offsetWidth;
+            setWidth(scrollWidth - offsetWidth);
+        }
+    }, [t.mentors.items]);
 
     return (
         <section ref={sectionRef} id="mentors" className="py-24 relative overflow-hidden">
@@ -33,78 +40,70 @@ export default function MentorsGrid() {
                     </div>
                 </div>
 
-                {/* CSS Marquee Container */}
-                <div className="mentors-marquee-wrapper relative overflow-hidden group">
+                {/* Manual Scroll Container */}
+                <div className="relative -mx-4 md:mx-0">
                     {/* Gradient Overlays */}
                     <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-slate-950 to-transparent z-10 pointer-events-none" />
                     <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-slate-950 to-transparent z-10 pointer-events-none" />
 
-                    {/* Scrolling Track - Pure CSS Animation */}
-                    <div className="mentors-track flex gap-6" style={{ animationPlayState: shouldAnimate ? "running" : "paused" }}>
-                        {items.map((mentor, index) => (
-                            <div
-                                key={`${mentor.id}-${index}`}
-                                className="mentor-card min-w-[280px] md:min-w-[320px] glass-card rounded-3xl p-6 relative group/card overflow-hidden hover:border-primary/50 transition-colors select-none"
-                            >
-                                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500" />
+                    <motion.div
+                        ref={carouselRef}
+                        className="cursor-grab active:cursor-grabbing overflow-hidden px-4 md:px-0"
+                    >
+                        <motion.div
+                            drag="x"
+                            dragConstraints={{ right: 0, left: -width }}
+                            dragElastic={0.1}
+                            dragMomentum={true}
+                            dragTransition={{
+                                power: 0.3,
+                                timeConstant: 200,
+                                bounceStiffness: 400,
+                                bounceDamping: 25,
+                            }}
+                            className="flex gap-6"
+                            style={{ willChange: "transform", touchAction: "pan-y" }}
+                        >
+                            {t.mentors.items.map((mentor, index) => (
+                                <div
+                                    key={mentor.id}
+                                    className="mentor-card min-w-[280px] md:min-w-[320px] glass-card rounded-3xl p-6 relative group/card overflow-hidden hover:border-primary/50 transition-colors select-none"
+                                >
+                                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500" />
 
-                                <div className="relative mb-6">
-                                    <div className="w-24 h-24 rounded-full p-1 border-2 border-primary/20 group-hover/card:border-primary transition-colors mx-auto">
-                                        <div className="w-full h-full rounded-full overflow-hidden relative">
+                                    {/* Avatar */}
+                                    <div className="relative z-10 flex flex-col items-center mb-6">
+                                        <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-primary/30 mb-4 group-hover/card:border-primary transition-colors">
                                             <Image
                                                 src={mentor.image}
                                                 alt={mentor.name}
-                                                fill
-                                                sizes="(max-width: 768px) 120px, 96px"
-                                                className="object-cover pointer-events-none"
+                                                width={96}
+                                                height={96}
+                                                className="object-cover w-full h-full"
                                             />
                                         </div>
-                                    </div>
-                                    <div className="absolute bottom-0 right-1/2 translate-x-1/2 translate-y-1/2 bg-slate-900 border border-slate-700 px-3 py-1 rounded-full text-xs font-bold text-primary whitespace-nowrap">
-                                        {mentor.role}
-                                    </div>
-                                </div>
 
-                                <div className="text-center mt-6">
-                                    <h3 className="text-xl font-bold text-white mb-2">{mentor.name}</h3>
-                                    <p className="text-sm text-slate-400 border-t border-white/5 pt-4">
-                                        {mentor.expertise}
-                                    </p>
+                                        {/* Badge */}
+                                        <span className="px-3 py-1 text-xs font-medium text-primary bg-primary/10 rounded-full border border-primary/20">
+                                            {mentor.role}
+                                        </span>
+                                    </div>
+
+                                    {/* Content */}
+                                    <div className="relative z-10 text-center">
+                                        <h3 className="text-xl font-heading font-bold text-white mb-2">
+                                            {mentor.name}
+                                        </h3>
+                                        <p className="text-sm text-slate-400 leading-relaxed">
+                                            {mentor.expertise}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
+                            ))}
+                        </motion.div>
+                    </motion.div>
                 </div>
             </div>
-
-            <style jsx>{`
-                @keyframes scroll-left {
-                    0% { transform: translate3d(0, 0, 0); }
-                    100% { transform: translate3d(-50%, 0, 0); }
-                }
-
-                .mentors-track {
-                    animation: scroll-left 26s linear infinite;
-                    will-change: transform;
-                }
-
-                .mentors-marquee-wrapper:hover .mentors-track {
-                    animation-play-state: paused;
-                }
-
-                /* Slightly faster on mobile to avoid feeling "stuck" */
-                @media (max-width: 767px) {
-                    .mentors-track {
-                        animation-duration: 18s;
-                    }
-                }
-
-                @media (prefers-reduced-motion: reduce) {
-                    .mentors-track {
-                        animation: none !important;
-                    }
-                }
-            `}</style>
         </section>
     );
 }
