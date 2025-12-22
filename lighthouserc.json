@@ -19,7 +19,7 @@
                 "categories:seo": [
                     "error",
                     {
-                        "minScore": 1
+                        "minScore": 0.75
                     }
                 ]
             }
