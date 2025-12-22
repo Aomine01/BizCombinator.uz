@@ -36,16 +36,25 @@ export default function ScrollShowcase() {
     const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
     const opacity = useTransform(scrollYProgress, [0, 0.1, 0.8], [0, 1, 1]); // Keep visible at end
 
-    // Mobile / reduced-motion version: Clean cards with pop-up animations
+    // Mobile / reduced-motion version: Smaller globe background with pop-up animations
     if (isMobile || reduceMotion) {
         return (
-            <section className="py-24 relative overflow-hidden">
+            <section className="py-24 relative overflow-hidden min-h-screen">
                 {/* Background Gradient */}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#050505_70%)] pointer-events-none z-0" />
 
+                {/* Smaller Particle Sphere Background Layer - Fixed & Centered */}
+                <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center">
+                    <div className="w-[280px] h-[280px] opacity-20">
+                        <Globe3DErrorBoundary fallback={null}>
+                            <Globe3D quality="low" paused={false} />
+                        </Globe3DErrorBoundary>
+                    </div>
+                </div>
+
                 {/* Content Layer - Cards appear one by one */}
                 <div className="container mx-auto px-4 relative z-10">
-                    <div className="space-y-8">
+                    <div className="space-y-16">
                         {slides.map((slide, index) => (
                             <motion.div
                                 key={index}

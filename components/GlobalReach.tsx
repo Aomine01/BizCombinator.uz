@@ -101,29 +101,6 @@ export default function GlobalReach() {
 
                     </motion.div>
 
-                    {/* Connected Globe Visual */}
-                    <div className="relative h-[400px] md:h-[600px] flex items-center justify-center">
-                        <div ref={globeWrapRef} className="absolute inset-0 flex items-center justify-center">
-                            <Globe3DErrorBoundary fallback={
-                                <div className="w-full h-full max-w-[600px] max-h-[600px] flex items-center justify-center">
-                                    <div className="text-center text-slate-400">
-                                        <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-                                            <div className="w-16 h-16 rounded-full bg-primary/20" />
-                                        </div>
-                                        <p className="text-sm">{t.common.globeUnavailable}</p>
-                                    </div>
-                                </div>
-                            }>
-                                <div className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[520px] md:h-[520px] rounded-full overflow-hidden">
-                                    <Globe3D
-                                        quality={isMobile ? "low" : "high"}
-                                        paused={reduceMotion || !globeInView}
-                                    />
-                                </div>
-                            </Globe3DErrorBoundary>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </section>
