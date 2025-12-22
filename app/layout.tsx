@@ -20,18 +20,14 @@ const siteUrl =
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
 
 export const metadata: Metadata = {
-  title: "BizCombinator | The Accelerator of the Future",
-  description: "An international innovation program combining AI, mentorship, and global opportunities.",
-  metadataBase: new URL(siteUrl),
-  alternates: {
-    canonical: "/",
-  },
+  title: "BizCombinator - Transform Ideas into Global Ventures",
+  description: "We help entrepreneurs scale from zero to global domination. Expert mentorship, funding access, and proven strategies to build unicorns.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://bizcombinator.uz'),
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -40,9 +36,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${syne.variable}`}>
       <body
-        className={`${inter.variable} ${syne.variable} font-sans antialiased`}
+        className={`font-sans antialiased`}
       >
         <LanguageProvider>
           {children}
