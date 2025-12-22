@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform, useInView } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Globe3D from "@/components/Globe3D";
 import { Globe3DErrorBoundary } from "@/components/Globe3DErrorBoundary";
@@ -11,8 +11,10 @@ const SLIDE_COLORS = ["from-blue-500 to-cyan-400", "from-orange-500 to-amber-400
 export default function ScrollShowcase() {
     const { t } = useLanguage();
     const containerRef = useRef<HTMLDivElement>(null);
+    const globeRef = useRef<HTMLDivElement>(null);
     const reduceMotion = useReducedMotion();
     const [isMobile, setIsMobile] = useState(false);
+    const isGlobeVisible = useInView(globeRef, { margin: "0px 0px -20% 0px" });
 
     useEffect(() => {
         const update = () => setIsMobile(window.innerWidth < 768);
@@ -44,7 +46,7 @@ export default function ScrollShowcase() {
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#050505_70%)] pointer-events-none z-0" />
 
                 {/* Scroll-Animated Globe Background - Matching Desktop */}
-                <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden pointer-events-none">
+                <div ref={globeRef} className="sticky top-0 h-screen flex items-center justify-center overflow-hidden pointer-events-none">
                     <motion.div
                         style={{
                             scale: useTransform(scrollYProgress, [0, 0.5, 1], [0.6, 1, 1.3]),
@@ -54,7 +56,11 @@ export default function ScrollShowcase() {
                         className="w-[280px] h-[280px]"
                     >
                         <Globe3DErrorBoundary fallback={null}>
-                            <Globe3D quality="low" scrollProgress={scrollYProgress} />
+                            <Globe3D
+                                quality="low"
+                                scrollProgress={scrollYProgress}
+                                paused={!isGlobeVisible}
+                            />
                         </Globe3DErrorBoundary>
                     </motion.div>
                 </div>
