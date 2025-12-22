@@ -83,14 +83,14 @@ export default function BusinessTypes() {
                         <motion.div
                             drag={reduceMotion ? false : "x"}
                             dragConstraints={{ right: 0, left: -width }}
-                            dragElastic={0.06}
-                            dragMomentum={!reduceMotion}
+                            dragElastic={0.1}
+                            dragMomentum={true}
                             dragTransition={{
-                                // Standardize "feel" across breakpoints (similar to Swiper freeMode momentum).
-                                power: 0.22,
-                                timeConstant: 260,
-                                bounceStiffness: 520,
-                                bounceDamping: 32,
+                                // Enhanced momentum for smoother mobile feel
+                                power: 0.3,        // Increased from 0.22 for more momentum
+                                timeConstant: 200, // Reduced from 260 for snappier response
+                                bounceStiffness: 400,
+                                bounceDamping: 25,
                             }}
                             className="flex gap-6 touch-pan-y"
                             style={{ willChange: "transform", touchAction: "pan-y" }}

@@ -9,21 +9,30 @@ import { Globe3DErrorBoundary } from "@/components/Globe3DErrorBoundary";
 
 function Counter({ value, prefix = "", suffix = "" }: { value: number; prefix?: string; suffix?: string }) {
     const ref = useRef<HTMLSpanElement>(null);
+    const numberRef = useRef<HTMLSpanElement>(null);
     const inView = useInView(ref, { once: true, margin: "-100px" });
     const motionValue = useMotionValue(0);
     const springValue = useSpring(motionValue, { stiffness: 50, damping: 20 });
-    const rounded = useTransform(springValue, (latest) => Math.round(latest));
 
     useEffect(() => {
+        // Direct DOM manipulation - no React re-renders
+        const unsubscribe = springValue.on("change", (latest) => {
+            if (numberRef.current) {
+                numberRef.current.textContent = Math.round(latest).toString();
+            }
+        });
+
         if (inView) {
             motionValue.set(value);
         }
-    }, [inView, motionValue, value]);
+
+        return unsubscribe;
+    }, [inView, motionValue, value, springValue]);
 
     return (
         <span ref={ref} className="font-heading font-bold text-5xl md:text-7xl text-white block mb-2 tracking-tight">
             {prefix}
-            <motion.span>{rounded}</motion.span>
+            <span ref={numberRef}>0</span>
             {suffix}
         </span>
     );

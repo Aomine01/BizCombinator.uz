@@ -52,13 +52,13 @@ export default function ScrollShowcase() {
                             </div>
                         </Globe3DErrorBoundary>
                     </div>
-                    <div className="grid gap-8 max-w-2xl mx-auto">
+                    <div className="space-y-16">
                         {slides.map((slide, index) => (
-                            <div key={index} className="glass rounded-2xl border border-white/10 p-6">
-                                <h3 className={`text-3xl font-heading font-bold mb-3 bg-gradient-to-r ${slide.color} bg-clip-text text-transparent`}>
+                            <div key={index} className="glass rounded-2xl border border-white/10 p-6 text-center">
+                                <h3 className={`text-3xl font-heading font-bold mb-3 bg-gradient-to-r ${slide.color} bg-clip-text text-transparent mx-auto max-w-2xl`}>
                                     {slide.title}
                                 </h3>
-                                <p className="text-slate-300 leading-relaxed">
+                                <p className="text-slate-300 leading-relaxed mx-auto max-w-xl">
                                     {slide.description}
                                 </p>
                             </div>

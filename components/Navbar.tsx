@@ -154,7 +154,10 @@ export default function Navbar() {
                                 ))}
                             </div>
 
-                            <ShinyButton onClick={scrollToApply} className="px-8 py-4 text-lg">
+                            <ShinyButton
+                                onClick={scrollToApply}
+                                className="px-8 py-4 text-lg bg-primary hover:bg-orange-600 shadow-[0_0_20px_rgba(255,102,0,0.4)] hover:shadow-[0_0_30px_rgba(255,102,0,0.6)]"
+                            >
                                 {t.nav.apply}
                             </ShinyButton>
                         </motion.div>
