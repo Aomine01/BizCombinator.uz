@@ -6,13 +6,10 @@ import { useLanguage } from "@/context/LanguageContext";
 
 function TimelineStep({ step, index }: { step: { title: string; desc: string }; index: number }) {
     const ref = useRef<HTMLDivElement>(null);
-    // Trigger when the element is active (roughly when it crosses into bottom part of view)
     const isInView = useInView(ref, { margin: "-50% 0px -50% 0px", once: true });
 
-    // We want it to trigger exactly when the line hits it. 
-    // The line grows from top (0%) to bottom (100%) based on container scroll.
-    // However, simplest visual match is 'whileInView' with an offset or just tracking if it's been passed.
-    // 'once: true' ensures it stays lit after the line passes.
+    // Odd indices (1, 3, 5) = right side, Even indices (0, 2, 4) = left side
+    const isRight = index % 2 === 1;
 
     return (
         <motion.div
@@ -21,13 +18,25 @@ function TimelineStep({ step, index }: { step: { title: string; desc: string }; 
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="relative grid grid-cols-[40px_1fr] md:grid-cols-[1fr_40px_1fr] gap-x-10 gap-y-4 items-start"
+            className="relative grid grid-cols-[40px_1fr] md:grid-cols-[1fr_40px_1fr] gap-x-6 md:gap-x-10 gap-y-4 items-start"
         >
-            {/* Left column (desktop number) */}
-            <div className="hidden md:block">
-                <span className={`text-8xl font-bold font-heading select-none transition-all duration-500 ${isInView ? "text-primary/20 scale-110" : "text-slate-900 opacity-50"}`}>
-                    0{index + 1}
-                </span>
+            {/* Desktop: Left content (for even indices) */}
+            <div className={`hidden md:block ${isRight ? 'md:text-right' : ''}`}>
+                {!isRight && (
+                    <>
+                        <h3 className={`text-2xl md:text-3xl font-bold mb-4 font-heading transition-colors duration-500 ${isInView ? "text-primary" : "text-white"}`}>
+                            {step.title}
+                        </h3>
+                        <p className={`leading-relaxed text-lg transition-colors duration-500 ${isInView ? "text-slate-300" : "text-slate-500"}`}>
+                            {step.desc}
+                        </p>
+                    </>
+                )}
+                {isRight && (
+                    <span className={`text-8xl font-bold font-heading select-none transition-all duration-500 ${isInView ? "text-primary/20 scale-110" : "text-slate-900 opacity-50"}`}>
+                        0{index + 1}
+                    </span>
+                )}
             </div>
 
             {/* Center column dot */}
@@ -37,23 +46,42 @@ function TimelineStep({ step, index }: { step: { title: string; desc: string }; 
                 </div>
             </div>
 
-            {/* Right column (content) */}
-            <div>
-                <h3 className={`text-2xl md:text-3xl font-bold mb-4 font-heading transition-colors duration-500 ${isInView ? "text-primary" : "text-white"}`}>
-                    {step.title}
-                </h3>
-                <p className={`leading-relaxed text-lg transition-colors duration-500 ${isInView ? "text-slate-300" : "text-slate-500"}`}>
-                    {step.desc}
-                </p>
+            {/* Desktop: Right content (for odd indices) / Mobile: Always right */}
+            <div className={isRight ? '' : 'md:text-left'}>
+                {/* Mobile: Always show content here */}
+                <div className="md:hidden">
+                    <h3 className={`text-2xl font-bold mb-4 font-heading transition-colors duration-500 ${isInView ? "text-primary" : "text-white"}`}>
+                        {step.title}
+                    </h3>
+                    <p className={`leading-relaxed text-lg transition-colors duration-500 ${isInView ? "text-slate-300" : "text-slate-500"}`}>
+                        {step.desc}
+                    </p>
+                    {/* Mobile number watermark */}
+                    <div className="mt-6">
+                        <span className={`text-6xl font-bold font-heading select-none transition-all duration-500 ${isInView ? "text-primary/20" : "text-slate-900 opacity-50"}`}>
+                            0{index + 1}
+                        </span>
+                    </div>
+                </div>
 
-                {/* Mobile number watermark */}
-                <div className="md:hidden mt-6">
-                    <span className={`text-6xl font-bold font-heading select-none transition-all duration-500 ${isInView ? "text-primary/20" : "text-slate-900 opacity-50"}`}>
-                        0{index + 1}
-                    </span>
+                {/* Desktop: Content for odd indices, Number for even indices */}
+                <div className="hidden md:block">
+                    {isRight ? (
+                        <>
+                            <h3 className={`text-2xl md:text-3xl font-bold mb-4 font-heading transition-colors duration-500 ${isInView ? "text-primary" : "text-white"}`}>
+                                {step.title}
+                            </h3>
+                            <p className={`leading-relaxed text-lg transition-colors duration-500 ${isInView ? "text-slate-300" : "text-slate-500"}`}>
+                                {step.desc}
+                            </p>
+                        </>
+                    ) : (
+                        <span className={`text-8xl font-bold font-heading select-none transition-all duration-500 ${isInView ? "text-primary/20 scale-110" : "text-slate-900 opacity-50"}`}>
+                            0{index + 1}
+                        </span>
+                    )}
                 </div>
             </div>
-
         </motion.div>
     );
 }
