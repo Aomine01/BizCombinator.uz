@@ -8,8 +8,11 @@ export default function MentorsGrid() {
     const reduceMotion = useReducedMotion();
     const sectionRef = useRef<HTMLElement>(null);
     const carouselRef = useRef<HTMLDivElement>(null);
+    const dragRef = useRef<HTMLDivElement>(null);
     const inView = useInView(sectionRef, { margin: "-10% 0px -10% 0px" });
     const [width, setWidth] = useState(0);
+    const [isHovering, setIsHovering] = useState(false);
+    const [isDragging, setIsDragging] = useState(false);
 
     // Calculate drag constraints
     useEffect(() => {
@@ -19,6 +22,9 @@ export default function MentorsGrid() {
             setWidth(scrollWidth - offsetWidth);
         }
     }, [t.mentors.items]);
+
+    // Auto-scroll animation
+    const shouldAutoScroll = inView && !reduceMotion && !isHovering && !isDragging;
 
     return (
         <section ref={sectionRef} id="mentors" className="py-24 relative overflow-hidden">
@@ -49,8 +55,11 @@ export default function MentorsGrid() {
                     <motion.div
                         ref={carouselRef}
                         className="cursor-grab active:cursor-grabbing overflow-hidden px-4 md:px-0"
+                        onMouseEnter={() => setIsHovering(true)}
+                        onMouseLeave={() => setIsHovering(false)}
                     >
                         <motion.div
+                            ref={dragRef}
                             drag="x"
                             dragConstraints={{ right: 0, left: -width }}
                             dragElastic={0.1}
@@ -61,6 +70,17 @@ export default function MentorsGrid() {
                                 bounceStiffness: 400,
                                 bounceDamping: 25,
                             }}
+                            onDragStart={() => setIsDragging(true)}
+                            onDragEnd={() => setIsDragging(false)}
+                            animate={shouldAutoScroll ? { x: [-width, 0] } : {}}
+                            transition={shouldAutoScroll ? {
+                                x: {
+                                    duration: 30,
+                                    repeat: Infinity,
+                                    repeatType: "loop",
+                                    ease: "linear",
+                                },
+                            } : {}}
                             className="flex gap-6"
                             style={{ willChange: "transform", touchAction: "pan-y" }}
                         >
