@@ -1,127 +1,152 @@
-import { motion, useInView, useReducedMotion } from "framer-motion";
+"use client";
+
+import { useRef } from "react";
 import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
-import { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 export default function MentorsGrid() {
     const { t } = useLanguage();
-    const reduceMotion = useReducedMotion();
-    const sectionRef = useRef<HTMLElement>(null);
-    const carouselRef = useRef<HTMLDivElement>(null);
-    const dragRef = useRef<HTMLDivElement>(null);
-    const inView = useInView(sectionRef, { margin: "-10% 0px -10% 0px" });
-    const [width, setWidth] = useState(0);
-    const [isHovering, setIsHovering] = useState(false);
-    const [isDragging, setIsDragging] = useState(false);
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-    // Calculate drag constraints
-    useEffect(() => {
-        if (carouselRef.current) {
-            const scrollWidth = carouselRef.current.scrollWidth;
-            const offsetWidth = carouselRef.current.offsetWidth;
-            setWidth(scrollWidth - offsetWidth);
+    const scrollLeft = () => {
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollBy({
+                left: -280,
+                behavior: "smooth"
+            });
         }
-    }, [t.mentors.items]);
+    };
 
-    // Auto-scroll animation
-    const shouldAutoScroll = inView && !reduceMotion && !isHovering && !isDragging;
+    const scrollRight = () => {
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollBy({
+                left: 280,
+                behavior: "smooth"
+            });
+        }
+    };
 
     return (
-        <section ref={sectionRef} id="mentors" className="py-24 relative overflow-hidden">
-            {/* Decor */}
-            <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[128px] translate-x-1/2 translate-y-1/2" />
+        <section id="mentors" className="py-20 relative overflow-hidden" aria-label="Mentor profiles">
+            {/* Decorative Orb */}
+            <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[128px] translate-x-1/2 translate-y-1/2 pointer-events-none" />
 
-            <div className="container mx-auto px-4 z-10 relative">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-                    <div>
-                        <motion.h2
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="text-3xl md:text-5xl font-heading font-bold text-white mb-4"
-                        >
-                            {t.mentors.title}
-                        </motion.h2>
-                        <div className="h-1.5 w-24 bg-primary rounded-full" />
+            <div className="container mx-auto px-4 relative z-10">
+                {/* Section Header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6 }}
+                    className="text-center mb-16 max-w-3xl mx-auto"
+                >
+                    <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
+                        {t.mentors.title}
+                    </h2>
+                    <p className="text-xl text-gray-400">
+                        {t.mentors.subtitle}
+                    </p>
+                </motion.div>
+
+                {/* Swiper Container with Arrows */}
+                <div className="relative group">
+                    {/* Left Arrow (Desktop only) */}
+                    <button
+                        onClick={scrollLeft}
+                        aria-label="Previous mentor"
+                        className="hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20
+                            w-10 h-10 items-center justify-center rounded-full
+                            bg-white/5 hover:bg-white/10 
+                            opacity-0 group-hover:opacity-60 group-focus-within:opacity-60 hover:opacity-100
+                            transition-all duration-300
+                            focus:ring-2 focus:ring-primary/50 outline-none"
+                    >
+                        <ChevronLeft className="w-5 h-5 text-white" />
+                    </button>
+
+                    {/* Swiper Container */}
+                    <div
+                        ref={scrollContainerRef}
+                        role="region"
+                        aria-roledescription="carousel"
+                        className="flex overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory overscroll-x-contain
+                            gap-4 md:gap-5 lg:gap-6
+                            pb-6"
+                        style={{ scrollSnapType: "x mandatory" }}
+                    >
+                        {t.mentors.items.map((mentor, index) => (
+                            <motion.div
+                                key={mentor.id}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: "-50px" }}
+                                transition={{
+                                    delay: index * 0.08,
+                                    duration: 0.5,
+                                    ease: "easeOut"
+                                }}
+                                className="flex-shrink-0 w-[280px] h-[420px] 
+                                    snap-center md:snap-start
+                                    glass-card rounded-2xl overflow-hidden
+                                    border border-white/5 hover:border-primary/20
+                                    transition-all duration-300"
+                            >
+                                {/* Portrait Image */}
+                                <div className="relative h-[60%] overflow-hidden">
+                                    <Image
+                                        src={mentor.image}
+                                        alt={`${mentor.name} - ${mentor.role}`}
+                                        width={280}
+                                        height={252}
+                                        loading={index < 3 ? "eager" : "lazy"}
+                                        priority={index === 0}
+                                        className="w-full h-full object-cover object-top"
+                                    />
+                                    {/* Subtle bottom gradient */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                                </div>
+
+                                {/* Text Container */}
+                                <div className="bg-black/60 px-6 py-5 h-[40%] flex flex-col justify-center">
+                                    <h3 className="text-xl font-semibold text-white leading-tight mb-1.5">
+                                        {mentor.name}
+                                    </h3>
+                                    <p className="text-sm text-gray-400 mb-1">
+                                        {mentor.role}
+                                    </p>
+                                    <p className="text-xs text-gray-500 line-clamp-2">
+                                        {mentor.credibility}
+                                    </p>
+                                </div>
+                            </motion.div>
+                        ))}
                     </div>
+
+                    {/* Right Arrow (Desktop only) */}
+                    <button
+                        onClick={scrollRight}
+                        aria-label="Next mentor"
+                        className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20
+                            w-10 h-10 items-center justify-center rounded-full
+                            bg-white/5 hover:bg-white/10
+                            opacity-0 group-hover:opacity-60 group-focus-within:opacity-60 hover:opacity-100
+                            transition-all duration-300
+                            focus:ring-2 focus:ring-primary/50 outline-none"
+                    >
+                        <ChevronRight className="w-5 h-5 text-white" />
+                    </button>
                 </div>
 
-                {/* Manual Scroll Container */}
-                <div className="relative -mx-4 md:mx-0">
-                    {/* Gradient Overlays */}
-                    <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-slate-950 to-transparent z-10 pointer-events-none" />
-                    <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-slate-950 to-transparent z-10 pointer-events-none" />
-
-                    <motion.div
-                        ref={carouselRef}
-                        className="cursor-grab active:cursor-grabbing overflow-hidden px-4 md:px-0"
-                        onMouseEnter={() => setIsHovering(true)}
-                        onMouseLeave={() => setIsHovering(false)}
-                    >
-                        <motion.div
-                            ref={dragRef}
-                            drag="x"
-                            dragConstraints={{ right: 0, left: -width }}
-                            dragElastic={0.1}
-                            dragMomentum={true}
-                            dragTransition={{
-                                power: 0.3,
-                                timeConstant: 200,
-                                bounceStiffness: 400,
-                                bounceDamping: 25,
-                            }}
-                            onDragStart={() => setIsDragging(true)}
-                            onDragEnd={() => setIsDragging(false)}
-                            animate={shouldAutoScroll ? { x: [-width, 0] } : {}}
-                            transition={shouldAutoScroll ? {
-                                x: {
-                                    duration: 30,
-                                    repeat: Infinity,
-                                    repeatType: "loop",
-                                    ease: "linear",
-                                },
-                            } : {}}
-                            className="flex gap-6"
-                            style={{ willChange: "transform", touchAction: "pan-y" }}
-                        >
-                            {t.mentors.items.map((mentor, index) => (
-                                <div
-                                    key={mentor.id}
-                                    className="mentor-card min-w-[280px] md:min-w-[320px] glass-card rounded-3xl p-6 relative group/card overflow-hidden hover:border-primary/50 transition-colors select-none"
-                                >
-                                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500" />
-
-                                    {/* Avatar */}
-                                    <div className="relative z-10 flex flex-col items-center mb-6">
-                                        <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-primary/30 mb-4 group-hover/card:border-primary transition-colors">
-                                            <Image
-                                                src={mentor.image}
-                                                alt={mentor.name}
-                                                width={96}
-                                                height={96}
-                                                className="object-cover w-full h-full"
-                                            />
-                                        </div>
-
-                                        {/* Badge */}
-                                        <span className="px-3 py-1 text-xs font-medium text-primary bg-primary/10 rounded-full border border-primary/20">
-                                            {mentor.role}
-                                        </span>
-                                    </div>
-
-                                    {/* Content */}
-                                    <div className="relative z-10 text-center">
-                                        <h3 className="text-xl font-heading font-bold text-white mb-2">
-                                            {mentor.name}
-                                        </h3>
-                                        <p className="text-sm text-slate-400 leading-relaxed">
-                                            {mentor.expertise}
-                                        </p>
-                                    </div>
-                                </div>
-                            ))}
-                        </motion.div>
-                    </motion.div>
+                {/* Dot Indicators (Mobile only - optional, can be CSS-only or state-driven) */}
+                <div className="flex lg:hidden justify-center gap-2 mt-6">
+                    {t.mentors.items.map((mentor) => (
+                        <div
+                            key={`dot-${mentor.id}`}
+                            className="w-2 h-2 rounded-full bg-gray-600"
+                        />
+                    ))}
                 </div>
             </div>
         </section>

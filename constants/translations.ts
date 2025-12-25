@@ -46,48 +46,49 @@ export const translations = {
         },
         mentors: {
             title: "Experienced Mentors",
+            subtitle: "Professionals who built real businesses in Uzbekistan and abroad — their practical experience is your roadmap",
             items: [
                 {
                     id: 1,
-                    name: "Sarah Chen",
-                    role: "Marketing Systems Specialist",
-                    expertise: "Branding & Digital Marketing",
-                    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200",
+                    name: "Akmal Payziev",
+                    role: "Marketing System",
+                    credibility: "15+ years experience, 200+ companies",
+                    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400"
                 },
                 {
                     id: 2,
-                    name: "Marcus Rodriguez",
-                    role: "Finance & Management",
-                    expertise: "Cash Flow & Financial Planning",
-                    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
+                    name: "Dilshod Rahimov",
+                    role: "Sales System",
+                    credibility: "Implemented sales systems, 40% revenue growth",
+                    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400"
                 },
                 {
                     id: 3,
-                    name: "Elena Kim",
-                    role: "Sales Systems Expert",
-                    expertise: "B2B Sales & Customer Relations",
-                    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200",
+                    name: "Nargiza Yusupova",
+                    role: "Financial Control",
+                    credibility: "Built finance systems for 100+ businesses",
+                    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=400"
                 },
                 {
                     id: 4,
-                    name: "David Park",
-                    role: "Operational Systems",
-                    expertise: "Processes & Scaling",
-                    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
+                    name: "Farruh Ismoilov",
+                    role: "Operations Management",
+                    credibility: "Scaled production from 2 to 12 facilities",
+                    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400"
                 },
                 {
                     id: 5,
-                    name: "Priya Patel",
-                    role: "HR & Team Management",
-                    expertise: "Talent Systems & Corporate Culture",
-                    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200",
+                    name: "Malika Karimova",
+                    role: "HR & Team Systems",
+                    credibility: "Built HR systems for 500+ employee companies",
+                    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400"
                 },
                 {
                     id: 6,
-                    name: "James Wilson",
+                    name: "Sardor Alimov",
                     role: "Export & International Markets",
-                    expertise: "Export Preparation & Certification",
-                    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200",
+                    credibility: "Helped 50+ businesses enter export markets",
+                    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400"
                 }
             ]
         },
@@ -290,48 +291,49 @@ export const translations = {
         },
         mentors: {
             title: "Опытные менторы",
+            subtitle: "Специалисты, которые построили реальный бизнес в Узбекистане и за рубежом — их практический опыт — ваша дорожная карта",
             items: [
                 {
                     id: 1,
-                    name: "Sarah Chen",
-                    role: "Специалист по маркетинговым системам",
-                    expertise: "Брендинг и цифровой маркетинг",
-                    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200",
+                    name: "Акмал Паизиев",
+                    role: "Маркетинговая система",
+                    credibility: "15+ лет опыта, 200+ компаний",
+                    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400"
                 },
                 {
                     id: 2,
-                    name: "Marcus Rodriguez",
-                    role: "Финансы и управление",
-                    expertise: "Cash flow и финансовое планирование",
-                    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
+                    name: "Дилшод Рахимов",
+                    role: "Система продаж",
+                    credibility: "Внедрил систему продаж, рост выручки 40%",
+                    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400"
                 },
                 {
                     id: 3,
-                    name: "Elena Kim",
-                    role: "Эксперт по системам продаж",
-                    expertise: "B2B продажи и работа с клиентами",
-                    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200",
+                    name: "Наргиза Юсупова",
+                    role: "Финансовый контроль",
+                    credibility: "Построила финансовые системы для 100+ бизнесов",
+                    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=400"
                 },
                 {
                     id: 4,
-                    name: "David Park",
-                    role: "Операционные системы",
-                    expertise: "Процессы и масштабирование",
-                    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
+                    name: "Фаррух Исмоилов",
+                    role: "Операционное управление",
+                    credibility: "Масштабировал производство с 2 до 12 объектов",
+                    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400"
                 },
                 {
                     id: 5,
-                    name: "Priya Patel",
-                    role: "HR и управление командой",
-                    expertise: "Системы управления талантами и корпоративная культура",
-                    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200",
+                    name: "Малика Каримова",
+                    role: "HR и командные системы",
+                    credibility: "Построила HR системы для компаний с 500+ сотрудниками",
+                    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400"
                 },
                 {
                     id: 6,
-                    name: "James Wilson",
+                    name: "Сардор Алимов",
                     role: "Экспорт и международные рынки",
-                    expertise: "Подготовка к экспорту и сертификация",
-                    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200",
+                    credibility: "Помог 50+ бизнесам выйти на экспортные рынки",
+                    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400"
                 }
             ]
         },
@@ -534,48 +536,49 @@ export const translations = {
         },
         mentors: {
             title: "Tajribali mentorlar",
+            subtitle: "O'zbekistonda va xorijda real biznes qurgan mutaxassislar — ularning amaliy tajribasi sizning yo'lxaritangiz",
             items: [
                 {
                     id: 1,
-                    name: "Sarah Chen",
-                    role: "Marketing tizimi mutaxassisi",
-                    expertise: "Brendlash va raqamli marketing",
-                    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200",
+                    name: "Akmal Payziev",
+                    role: "Marketing tizimi",
+                    credibility: "15+ yillik tajriba, 200+ kompaniyalar",
+                    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400"
                 },
                 {
                     id: 2,
-                    name: "Marcus Rodriguez",
-                    role: "Moliya va boshqaruv",
-                    expertise: "Cash flow va moliyaviy rejalashtirish",
-                    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
+                    name: "Dilshod Rahimov",
+                    role: "Savdo tizimi",
+                    credibility: "Savdo tizimini joriy qilib, daromadni 40% oshirdi",
+                    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400"
                 },
                 {
                     id: 3,
-                    name: "Elena Kim",
-                    role: "Savdo tizimi bo'yicha ekspert",
-                    expertise: "B2B savdo va mijozlar bilan ishlash",
-                    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200",
+                    name: "Nargiza Yusupova",
+                    role: "Moliyaviy nazorat",
+                    credibility: "100+ bizneslar uchun moliyaviy tizimlar qurdi",
+                    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=400"
                 },
                 {
                     id: 4,
-                    name: "David Park",
-                    role: "Operatsion tizimlar",
-                    expertise: "Jarayonlar va masshtablash",
-                    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
+                    name: "Farruh Ismoilov",
+                    role: "Operatsion boshqaruv",
+                    credibility: "Ishlab chiqarishni 2 dan 12 filialga o'stirdi",
+                    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400"
                 },
                 {
                     id: 5,
-                    name: "Priya Patel",
-                    role: "HR va jamoani boshqarish",
-                    expertise: "Kadrlar tizimi va korporativ madaniyat",
-                    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200",
+                    name: "Malika Karimova",
+                    role: "HR va jamoa tizimi",
+                    credibility: "500+ xodimli kompaniyalar uchun HR tizimlar qurdi",
+                    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400"
                 },
                 {
                     id: 6,
-                    name: "James Wilson",
+                    name: "Sardor Alimov",
                     role: "Eksport va xalqaro bozorlar",
-                    expertise: "Eksport tayyorlash va sertifikatsiya",
-                    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200",
+                    credibility: "50+ biznesga eksport bozorlariga kirish uchun yordam berdi",
+                    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400"
                 }
             ]
         },
