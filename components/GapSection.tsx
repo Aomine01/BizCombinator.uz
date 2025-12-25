@@ -1,16 +1,34 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { Brain, Handshake, TrendingUp, Users, Rocket, CheckCircle2, XCircle, ChevronDown } from "lucide-react";
+import {
+    AlertTriangle,    // Problem: No systems
+    Shield,           // Problem: No strategy
+    TrendingDown,     // Problem: No mentorship
+    Globe,            // Problem: No export
+    BarChart3,        // Problem: No KPIs
+    Settings,         // Solution: 5 systems
+    Target,           // Solution: Diagnostics
+    Rocket,           // Solution: Practice-based
+    CheckCircle2,     // Solution: Export prep
+    TrendingUp,       // Solution: KPI monitoring
+    XCircle,          // Section header icon
+    ChevronDown
+} from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useState } from "react";
 
 const iconMap: Record<string, any> = {
-    Brain,
-    Handshake,
-    TrendingUp,
-    Users,
+    AlertTriangle,
+    Shield,
+    TrendingDown,
+    Globe,
+    BarChart3,
+    Settings,
+    Target,
     Rocket,
+    CheckCircle2,
+    TrendingUp,
 };
 
 export default function GapSection() {
@@ -18,8 +36,11 @@ export default function GapSection() {
     const [expandedProblemIndex, setExpandedProblemIndex] = useState<number | null>(null);
     const [expandedSolutionIndex, setExpandedSolutionIndex] = useState<number | null>(null);
 
-    const problemIcons = ["Brain", "Handshake", "TrendingUp"];
-    const solutionIcons = ["Users", "Brain", "Rocket"];
+    // 5 Problems icons (red)
+    const problemIcons = ["AlertTriangle", "Shield", "TrendingDown", "Globe", "BarChart3"];
+
+    // 5 Solutions icons (green)
+    const solutionIcons = ["Settings", "Target", "Rocket", "CheckCircle2", "TrendingUp"];
 
     const problemDetails = t.gap.problemDetails;
     const solutionDetails = t.gap.solutionDetails;
