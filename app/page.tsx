@@ -25,9 +25,9 @@ export default function Home() {
       <BusinessTypes />
       <MentorsGrid />
       <Timeline />
+      <QuickContact />
       <GlobalReach />
       <ScrollShowcase />
-      <QuickContact />
       <ApplyForm />
 
       <BizAiWidget />
