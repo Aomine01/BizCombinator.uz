@@ -1,39 +1,30 @@
 "use client";
 // Force rebuild: 2025-12-20 19:50
 
-import { motion, useInView, useSpring, useMotionValue, useTransform, useReducedMotion } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import Globe3D from "@/components/Globe3D";
 import { Globe3DErrorBoundary } from "@/components/Globe3DErrorBoundary";
+import { useSmoothCountUp } from "@/hooks/useSmoothCountUp";
 
 function Counter({ value, prefix = "", suffix = "" }: { value: number; prefix?: string; suffix?: string }) {
-    const ref = useRef<HTMLSpanElement>(null);
-    const numberRef = useRef<HTMLSpanElement>(null);
-    const inView = useInView(ref, { once: true, margin: "-100px" });
-    const motionValue = useMotionValue(0);
-    const springValue = useSpring(motionValue, { stiffness: 50, damping: 20 });
-
-    useEffect(() => {
-        // Direct DOM manipulation - no React re-renders
-        const unsubscribe = springValue.on("change", (latest) => {
-            if (numberRef.current) {
-                numberRef.current.textContent = Math.round(latest).toString();
-            }
-        });
-
-        if (inView) {
-            motionValue.set(value);
-        }
-
-        return unsubscribe;
-    }, [inView, motionValue, value, springValue]);
+    const { elementRef, numberRef } = useSmoothCountUp(value, 2000, {
+        prefix,
+        suffix,
+        decimals: 0,
+        startOnView: true
+    });
 
     return (
-        <span ref={ref} className="font-heading font-bold text-5xl md:text-7xl text-white block mb-2 tracking-tight">
-            {prefix}
+        <span
+            ref={elementRef}
+            className="font-heading font-bold text-5xl md:text-7xl text-white block mb-2 tracking-tight"
+            style={{
+                fontSize: 'clamp(2.5rem, 6vw + 1rem, 4.5rem)'
+            }}
+        >
             <span ref={numberRef}>0</span>
-            {suffix}
         </span>
     );
 }

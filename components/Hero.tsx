@@ -41,7 +41,13 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.1 }}
-                    className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-white mb-6 leading-tight"
+                    className="font-heading font-bold text-white mb-6 leading-[1.1]"
+                    style={{
+                        fontSize: 'clamp(2.5rem, 8vw + 1rem, 6rem)',
+                        textWrap: 'balance' as any,
+                        wordBreak: 'break-word',
+                        hyphens: 'auto'
+                    }}
                 >
                     {t.hero.titleLine1} <br />
                     <span className="text-gradient">{t.hero.titleLine2}</span>
