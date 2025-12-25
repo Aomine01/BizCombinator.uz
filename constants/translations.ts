@@ -13,35 +13,43 @@ export const translations = {
             apply: "Apply Now",
         },
         hero: {
-            titleLine1: "THE ACCELERATOR",
-            titleLine2: "OF THE FUTURE",
-            subtitle: "An international innovation program combining AI, mentorship, and global opportunities to transform ideas into empires.",
-            apply: "Apply Now",
-            learnMore: "Learn More",
-            badge: "APPLICATIONS NOW OPEN FOR BATCH 2026",
+            titleLine1: "ELEVATE UZBEKISTAN BUSINESS",
+            titleLine2: "TO WORLD STANDARDS",
+            subtitle: "Systemize your business in 6 months: marketing, sales, finance, HR, and management. Practical program for Uzbek entrepreneurs — get ready for export and growth.",
+            apply: "Submit Application",
+            learnMore: "Learn More About Program",
+            badge: "APPLICATIONS NOW OPEN FOR 2026",
         },
         gap: {
-            problemTitle: "The Gap Between Idea & Execution",
+            problemTitle: "Key Business Challenges",
             solutionTitle: "BizCombinator Solution",
             problems: [
-                "Lack of industry knowledge",
-                "No access to top-tier investors",
-                "Inefficient scaling strategies"
+                "No systems — marketing, sales, finance are disorganized",
+                "No clear growth strategy — where to go next?",
+                "Can't find quality mentorship and practical advice",
+                "No methodology for export",
+                "No KPIs to measure and manage business"
             ],
             solutions: [
-                "World-class mentorship",
-                "AI-driven market analysis",
-                "Investor-readiness program"
+                "5 core systems: Marketing, Sales, Finance, HR, Management",
+                "Individual diagnostics and custom solutions",
+                "Practice-based methodology",
+                "Export-oriented preparation",
+                "Weekly KPI monitoring and coaching"
             ],
             problemDetails: [
-                "First-time founders often struggle with navigating complex industry regulations and market dynamics.",
-                "Without a warm intro, getting in front of VCs and Angels is statistically near-impossible.",
-                "Premature scaling is the #1 reason startups fail. Knowing when to push is critical."
+                "Most businesses are busy with daily tasks — no strategy, processes, or systems. Everything depends on the owner.",
+                "You want to grow, but don't know where to start. Training and courses are expensive and not practical.",
+                "Internet and books have theory, but no concrete guidance for YOUR specific business.",
+                "You want to export, but certifications, standards, logistics — everything is unknown.",
+                "Is your business profitable? Which direction is working? Which employee is effective? No numbers, no data."
             ],
             solutionDetails: [
-                "Network with 500+ mentors from Fortune 500 companies who have been there.",
-                "Get personalized insights powered by our proprietary AI engine to validate your moves.",
-                "Structured roadmap to secure your Seed or Series A funding with metrics that matter."
+                "Month 1: Expert trainings in 5 core areas. Months 2-3: Individual business diagnostics. Develop custom solutions for each business.",
+                "Experienced mentors who built businesses in Uzbekistan and abroad. Their success is your roadmap.",
+                "Not theory, only practical results. Every lesson is a concrete tool you apply in your business.",
+                "Adapt to international standards, explain certification process, introduction to export markets.",
+                "Weekly KPI monitoring. If there's no result — we adjust strategy quickly. Result-oriented coaching."
             ]
         },
         features: {
@@ -253,35 +261,43 @@ export const translations = {
             apply: "Подать заявку",
         },
         hero: {
-            titleLine1: "АКСЕЛЕРАТОР",
-            titleLine2: "БУДУЩЕГО",
-            subtitle: "Международная инновационная программа, объединяющая ИИ, менторство и глобальные возможности для превращения идей в империи.",
+            titleLine1: "ПРОГРАММА, КОТОРАЯ ПОДНИМАЕТ",
+            titleLine2: "УЗБЕКСКИЙ БИЗНЕС НА МИРОВОЙ УРОВЕНЬ",
+            subtitle: "Систематизируйте бизнес за 6 месяцев: маркетинг, продажи, финансы, кадры и управление. Практическая программа для узбекских предпринимателей — готовность к экспорту и росту.",
             apply: "Подать заявку",
-            learnMore: "Узнать больше",
-            badge: "ОТКРЫТ ПРИЕМ ЗАЯВОК НА 2026 ГОД",
+            learnMore: "Подробнее о программе",
+            badge: "ПРИЕМ ЗАЯВОК НА 2026 ГОД",
         },
         gap: {
-            problemTitle: "Пропасть между идеей и реализацией",
+            problemTitle: "Ключевые проблемы бизнеса",
             solutionTitle: "Решение BizCombinator",
             problems: [
-                "Недостаток знаний об индустрии",
-                "Нет доступа к топовым инвесторам",
-                "Неэффективные стратегии масштабирования"
+                "Нет систем — маркетинг, продажи, финансы не организованы",
+                "Нет четкой стратегии роста — куда двигаться дальше?",
+                "Не найти качественное менторство и практические советы",
+                "Нет методологии для экспорта",
+                "Нет KPI для измерения и управления бизнесом"
             ],
             solutions: [
-                "Менторство мирового класса",
-                "Анализ рынка с помощью ИИ",
-                "Программа подготовки к инвестициям"
+                "5 основных систем: Маркетинг, Продажи, Финансы, HR, Управление",
+                "Индивидуальная диагностика и кастомные решения",
+                "Методология, основанная на практике",
+                "Подготовка с ориентацией на экспорт",
+                "Еженедельный KPI-мониторинг и коучинг"
             ],
             problemDetails: [
-                "Начинающим основателям сложно разобраться в регулировании и динамике рынка.",
-                "Без «тёплого» знакомства попасть к венчурным фондам и ангелам почти невозможно.",
-                "Преждевременное масштабирование — причина №1 провала стартапов. Важно знать, когда ускоряться."
+                "Большинство бизнесов заняты текущими задачами — нет стратегии, процессов, систем. Всё держится на владельце.",
+                "Хотите расти, но не знаете с чего начать. Обучение и курсы дорогие и непрактичные.",
+                "В интернете и книгах много теории, но нет конкретных указаний для ВАШЕГО бизнеса.",
+                "Хотите экспортировать, но сертификаты, стандарты, логистика — всё неизвестно.",
+                "Прибылен ли ваш бизнес? Какое направление работает? Какой сотрудник эффективен? Никаких цифр, никаких данных."
             ],
             solutionDetails: [
-                "Доступ к сети 500+ менторов из Fortune 500 и опытных основателей.",
-                "Персональные инсайты на базе нашего ИИ для проверки гипотез и следующих шагов.",
-                "Структурированная дорожная карта к Seed/Series A и метрики, которые ценят инвесторы."
+                "Месяц 1: Экспертные тренинги в 5 ключевых областях. Месяцы 2-3: Индивидуальная диагностика бизнеса. Разработка кастомных решений для каждого бизнеса.",
+                "Опытные менторы, которые строили бизнес в Узбекистане и за рубежом. Их успех — ваша дорожная карта.",
+                "Не теория, только практические результаты. Каждый урок — конкретный инструмент, который вы применяете в бизнесе.",
+                "Адаптация к международным стандартам, объяснение процесса сертификации, знакомство с экспортными рынками.",
+                "Еженедельный KPI-мониторинг. Если нет результата — быстро корректируем стратегию. Коучинг, ориентированный на результат."
             ]
         },
         features: {
@@ -493,35 +509,43 @@ export const translations = {
             apply: "Ariza topshirish",
         },
         hero: {
-            titleLine1: "KELAJAK",
-            titleLine2: "AKSELERATORI",
-            subtitle: "G'oyalarni imperiyalarga aylantirish uchun sun'iy intellekt, mentorlik va global imkoniyatlarni birlashtirgan xalqaro innovatsion dastur.",
+            titleLine1: "O'ZBEKISTON BIZNESINI",
+            titleLine2: "JAHON DARAJASIGA KO'TARUVCHI DASTUR",
+            subtitle: "6 oyda biznesingizni tizimlashtiring: marketing, savdo, moliya, kadrlar va boshqaruv. O'zbek tadbirkorlari uchun amaliy dastur — eksport va o'sishga tayyor bo'ling.",
             apply: "Ariza topshirish",
-            learnMore: "Batafsil",
-            badge: "2026 YIL UCHUN QABUL OCHIK",
+            learnMore: "Dastur haqida ko'proq",
+            badge: "2026-YIL UCHUN ARIZALAR QABUL QILINMOQDA",
         },
         gap: {
-            problemTitle: "G'oya va Ijro o'rtasidagi bo'shliq",
-            solutionTitle: "BizCombinator yechimi",
+            problemTitle: "Biznesning Asosiy Muammolari",
+            solutionTitle: "BizCombinator Yechimi",
             problems: [
-                "Sanoat bilimlarining yetishmasligi",
-                "Top investorlarga chiqish imkoniyati yo'qligi",
-                "Samarasiz masshtablash strategiyalari"
+                "Tizimlar yo'q — marketing, savdo, moliya tartibsiz",
+                "O'sish strategiyasi aniq emas — qayerga borish kerak?",
+                "Sifatli murabbiylik va amaliy maslahat topib bo'lmaydi",
+                "Eksport qilish uchun metodologiya yo'q",
+                "Biznesni o'lchash uchun KPI yo'q"
             ],
             solutions: [
-                "Jahon darajasidagi mentorlik",
-                "AI yordamida bozor tahlili",
-                "Investorlarga tayyorlash dasturi"
+                "5 ta asosiy tizim: Marketing, Savdo, Moliya, Kadrlar, Boshqaruv",
+                "Shaxsiy diagnostika va maxsus yechimlar",
+                "Amaliyotga asoslangan metodologiya",
+                "Eksportga yo'naltirilgan tayyorlov",
+                "Haftalik KPI monitoring va murabbiylik"
             ],
             problemDetails: [
-                "Yangi asoschilar ko'pincha bozor va tartibga solish tizimlarini tushunishda qiynalishadi.",
-                "Tanish-bilishsiz VC va angel investorlarga chiqish deyarli imkonsiz.",
-                "Erta masshtablash startaplar muvaffaqiyatsizligining №1 sababi. Qachon tezlashishni bilish muhim."
+                "Ko'pchilik bizneslar kundalik ishlar bilan band — strategiya, jarayon va tizimlar yo'q. Hammasi eganing boshida.",
+                "O'sishni xohlaysiz, lekin qayerdan boshlashni bilmaysiz. Har gal o'rgatish yoki kurslar qimmat va amaliy emas.",
+                "Internet va kitoblarda nazariya ko'p, lekin sizning biznesingiz uchun konkret yo'l-yo'riq yo'q.",
+                "Eksport qilish istaysiz, lekin sertifikatlar, standartlar, logistika — hammasi noma'lum.",
+                "Biznesingiz daromad keltiryaptimi? Qaysi yo'nalish ishlayapti? Qaysi xodim samarali? Hech qanday raqamlar yo'q."
             ],
             solutionDetails: [
-                "Fortune 500 va tajribali asoschilardan 500+ mentorlar tarmog'iga ulanasiz.",
-                "AI yordamida shaxsiy tahlillar va keyingi qadamlarga tavsiyalar olasiz.",
-                "Seed/Series A uchun tayyorlaydigan yo'l xaritasi va investorlar qadrlaydigan metrikalar."
+                "1-oyda 5 ta asosiy sohada ekspert treninglar. 2-3-oylarda shaxsiy biznes diagnostikasi. Har bir biznes uchun maxsus yechimlar ishlab chiqish.",
+                "O'zbekistonda va xorijda biznes qurgan tajribali mentorlar. Ularning muvaffaqiyatlari — sizning yo'lxaritangiz.",
+                "Nazariya emas, faqat amaliy natijalar. Har bir dars — biznesingizda qo'llanadigan konkret vosita.",
+                "Xalqaro standartlarga moslashish, sertifikatsiya jarayonini tushuntirish, eksport bozorlari bilan tanishish.",
+                "Haftalik KPI monitoring. Agar natija yo'q bo'lsa — strategiyani tezda o'zgartiramiz. Natijaga yo'naltirilgan murabbiylik."
             ]
         },
         features: {
