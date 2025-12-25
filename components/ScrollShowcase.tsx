@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion, useScroll, useTransform, useInView } from "framer-motion";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef } from "react";
 import Globe3D from "@/components/Globe3D";
 import { Globe3DErrorBoundary } from "@/components/Globe3DErrorBoundary";
 import { useLanguage } from "@/context/LanguageContext";
@@ -13,17 +13,7 @@ export default function ScrollShowcase() {
     const containerRef = useRef<HTMLDivElement>(null);
     const globeRef = useRef<HTMLDivElement>(null);
     const reduceMotion = useReducedMotion();
-    const [isMobile, setIsMobile] = useState(false);
-    const [isClient, setIsClient] = useState(false);
     const isGlobeVisible = useInView(globeRef, { margin: "0px 0px -20% 0px" });
-
-    useEffect(() => {
-        setIsClient(true);
-        const update = () => setIsMobile(window.innerWidth < 768);
-        update();
-        window.addEventListener("resize", update, { passive: true });
-        return () => window.removeEventListener("resize", update);
-    }, []);
 
     const slides = useMemo(
         () => t.showcase.slides.map((s, i) => ({ ...s, color: SLIDE_COLORS[i] ?? "from-primary to-orange-400" })),
@@ -35,74 +25,68 @@ export default function ScrollShowcase() {
         offset: ["start start", "end end"]
     });
 
-    // Transform helix appearance based on scroll
-    const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1.2, 1.5]); // Increase scale at end for explosion
+    // Transform for desktop 3D version
+    const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1.2, 1.5]);
     const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
-    const opacity = useTransform(scrollYProgress, [0, 0.1, 0.8], [0, 1, 1]); // Keep visible at end
+    const opacity = useTransform(scrollYProgress, [0, 0.1, 0.8], [0, 1, 1]);
 
-    // Don't render until client-side to prevent hydration mismatch
-    if (!isClient) {
-        return null;
-    }
+    // Mobile version component
+    const mobileVersion = (
+        <section ref={containerRef} className="py-24 relative overflow-hidden min-h-screen">
+            {/* Background Gradient */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#050505_70%)] pointer-events-none z-0" />
 
-    // Mobile / reduced-motion version: Scroll-animated globe background matching desktop
-    if (isMobile || reduceMotion) {
-        return (
-            <section ref={containerRef} className="py-24 relative overflow-hidden min-h-screen">
-                {/* Background Gradient */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#050505_70%)] pointer-events-none z-0" />
+            {/* Scroll-Animated Globe Background - Matching Desktop */}
+            <div ref={globeRef} className="sticky top-0 h-screen flex items-center justify-center overflow-hidden pointer-events-none">
+                <motion.div
+                    style={{
+                        scale: useTransform(scrollYProgress, [0, 0.5, 1], [0.6, 1, 1.3]),
+                        rotate: useTransform(scrollYProgress, [0, 1], [0, 180]),
+                        opacity: useTransform(scrollYProgress, [0, 0.1, 0.8], [0, 0.3, 0.3])
+                    }}
+                    className="w-[280px] h-[280px]"
+                >
+                    <Globe3DErrorBoundary fallback={null}>
+                        <Globe3D
+                            quality="low"
+                            scrollProgress={scrollYProgress}
+                            paused={!isGlobeVisible}
+                        />
+                    </Globe3DErrorBoundary>
+                </motion.div>
+            </div>
 
-                {/* Scroll-Animated Globe Background - Matching Desktop */}
-                <div ref={globeRef} className="sticky top-0 h-screen flex items-center justify-center overflow-hidden pointer-events-none">
-                    <motion.div
-                        style={{
-                            scale: useTransform(scrollYProgress, [0, 0.5, 1], [0.6, 1, 1.3]),
-                            rotate: useTransform(scrollYProgress, [0, 1], [0, 180]),
-                            opacity: useTransform(scrollYProgress, [0, 0.1, 0.8], [0, 0.3, 0.3])
-                        }}
-                        className="w-[280px] h-[280px]"
-                    >
-                        <Globe3DErrorBoundary fallback={null}>
-                            <Globe3D
-                                quality="low"
-                                scrollProgress={scrollYProgress}
-                                paused={!isGlobeVisible}
-                            />
-                        </Globe3DErrorBoundary>
-                    </motion.div>
+            {/* Content Layer - Cards appear one by one */}
+            <div className="container mx-auto px-4 relative z-10 -mt-[100vh]">
+                <div className="space-y-16">
+                    {slides.map((slide, index) => (
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-10%" }}
+                            transition={{
+                                duration: 0.5,
+                                delay: index * 0.15,
+                                ease: [0.25, 0.46, 0.45, 0.94]
+                            }}
+                            className="glass rounded-2xl border border-white/10 p-6 text-center backdrop-blur-md bg-black/40"
+                        >
+                            <h3 className={`text-3xl font-heading font-bold mb-3 bg-gradient-to-r ${slide.color} bg-clip-text text-transparent mx-auto max-w-2xl`}>
+                                {slide.title}
+                            </h3>
+                            <p className="text-slate-300 leading-relaxed mx-auto max-w-xl">
+                                {slide.description}
+                            </p>
+                        </motion.div>
+                    ))}
                 </div>
+            </div>
+        </section>
+    );
 
-                {/* Content Layer - Cards appear one by one */}
-                <div className="container mx-auto px-4 relative z-10 -mt-[100vh]">
-                    <div className="space-y-16">
-                        {slides.map((slide, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, scale: 0.8, y: 50 }}
-                                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                                viewport={{ once: true, margin: "-10%" }}
-                                transition={{
-                                    duration: 0.5,
-                                    delay: index * 0.15,
-                                    ease: [0.25, 0.46, 0.45, 0.94]
-                                }}
-                                className="glass rounded-2xl border border-white/10 p-6 text-center backdrop-blur-md bg-black/40"
-                            >
-                                <h3 className={`text-3xl font-heading font-bold mb-3 bg-gradient-to-r ${slide.color} bg-clip-text text-transparent mx-auto max-w-2xl`}>
-                                    {slide.title}
-                                </h3>
-                                <p className="text-slate-300 leading-relaxed mx-auto max-w-xl">
-                                    {slide.description}
-                                </p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-        );
-    }
-
-    return (
+    // Desktop version - full 3D scroll experience
+    const desktopVersion = (
         <section ref={containerRef} className="relative h-[300vh]">
             {/* Sticky 3D Background */}
             <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
@@ -122,7 +106,7 @@ export default function ScrollShowcase() {
                     }>
                         <Globe3D
                             scrollProgress={scrollYProgress}
-                            quality={isMobile ? "low" : "high"}
+                            quality="high"
                         />
                     </Globe3DErrorBoundary>
                 </motion.div>
@@ -153,5 +137,20 @@ export default function ScrollShowcase() {
                 ))}
             </div>
         </section>
+    );
+
+    // Render both versions, use CSS to show/hide
+    return (
+        <>
+            {/* Mobile: show on < md breakpoint */}
+            <div className="block md:hidden">
+                {mobileVersion}
+            </div>
+
+            {/* Desktop: show on >= md breakpoint */}
+            <div className="hidden md:block">
+                {desktopVersion}
+            </div>
+        </>
     );
 }
