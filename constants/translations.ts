@@ -21,35 +21,18 @@ export const translations = {
             badge: "APPLICATIONS NOW OPEN FOR 2026",
         },
         gap: {
-            problemTitle: "Key Business Challenges",
-            solutionTitle: "BizCombinator Solution",
-            problems: [
-                "No systems — marketing, sales, finance are disorganized",
-                "No clear growth strategy — where to go next?",
-                "Can't find quality mentorship and practical advice",
-                "No methodology for export",
-                "No KPIs to measure and manage business"
+            title: "What Your Business Will Have After the Program",
+            subtitle: "Systems built over 6 months and measurable results",
+            benefits: [
+                { id: 1, title: "Marketing System", desc: "New clients come consistently — not guesswork, a system" },
+                { id: 2, title: "Sales System", desc: "Every salesperson knows exactly what to do — results grow steadily" },
+                { id: 3, title: "Financial Control", desc: "Every week, clear numbers — where money is, where problems are" },
+                { id: 4, title: "HR Management", desc: "Your team works independently, you focus on strategy" },
+                { id: 5, title: "Management System", desc: "Business runs even when you're not there" }
             ],
-            solutions: [
-                "5 core systems: Marketing, Sales, Finance, HR, Management",
-                "Individual diagnostics and custom solutions",
-                "Practice-based methodology",
-                "Export-oriented preparation",
-                "Weekly KPI monitoring and coaching"
-            ],
-            problemDetails: [
-                "Most businesses are busy with daily tasks — no strategy, processes, or systems. Everything depends on the owner.",
-                "You want to grow, but don't know where to start. Training and courses are expensive and not practical.",
-                "Internet and books have theory, but no concrete guidance for YOUR specific business.",
-                "You want to export, but certifications, standards, logistics — everything is unknown.",
-                "Is your business profitable? Which direction is working? Which employee is effective? No numbers, no data."
-            ],
-            solutionDetails: [
-                "Month 1: Expert trainings in 5 core areas. Months 2-3: Individual business diagnostics. Develop custom solutions for each business.",
-                "Experienced mentors who built businesses in Uzbekistan and abroad. Their success is your roadmap.",
-                "Not theory, only practical results. Every lesson is a concrete tool you apply in your business.",
-                "Adapt to international standards, explain certification process, introduction to export markets.",
-                "Weekly KPI monitoring. If there's no result — we adjust strategy quickly. Result-oriented coaching."
+            bonuses: [
+                { id: 6, title: "Export Readiness", desc: "Roadmap for entering international markets" },
+                { id: 7, title: "Weekly Mentorship", desc: "Guidance for strategic decisions" }
             ]
         },
         features: {
@@ -282,35 +265,18 @@ export const translations = {
             badge: "ПРИЕМ ЗАЯВОК НА 2026 ГОД",
         },
         gap: {
-            problemTitle: "Ключевые проблемы бизнеса",
-            solutionTitle: "Решение BizCombinator",
-            problems: [
-                "Нет систем — маркетинг, продажи, финансы не организованы",
-                "Нет четкой стратегии роста — куда двигаться дальше?",
-                "Не найти качественное менторство и практические советы",
-                "Нет методологии для экспорта",
-                "Нет KPI для измерения и управления бизнесом"
+            title: "Что будет в вашем бизнесе после программы",
+            subtitle: "Системы, построенные за 6 месяцев, и измеримые результаты",
+            benefits: [
+                { id: 1, title: "Маркетинговая система", desc: "Новые клиенты приходят постоянно — не догадки, а система" },
+                { id: 2, title: "Система продаж", desc: "Каждый продавец точно знает, что делать — результаты стабильно растут" },
+                { id: 3, title: "Финансовый контроль", desc: "Каждую неделю точные цифры — где деньги, где проблемы" },
+                { id: 4, title: "Управление персоналом", desc: "Ваша команда работает самостоятельно, вы фокусируетесь на стратегии" },
+                { id: 5, title: "Система управления", desc: "Бизнес работает, даже когда вас нет" }
             ],
-            solutions: [
-                "5 основных систем: Маркетинг, Продажи, Финансы, HR, Управление",
-                "Индивидуальная диагностика и кастомные решения",
-                "Методология, основанная на практике",
-                "Подготовка с ориентацией на экспорт",
-                "Еженедельный KPI-мониторинг и коучинг"
-            ],
-            problemDetails: [
-                "Большинство бизнесов заняты текущими задачами — нет стратегии, процессов, систем. Всё держится на владельце.",
-                "Хотите расти, но не знаете с чего начать. Обучение и курсы дорогие и непрактичные.",
-                "В интернете и книгах много теории, но нет конкретных указаний для ВАШЕГО бизнеса.",
-                "Хотите экспортировать, но сертификаты, стандарты, логистика — всё неизвестно.",
-                "Прибылен ли ваш бизнес? Какое направление работает? Какой сотрудник эффективен? Никаких цифр, никаких данных."
-            ],
-            solutionDetails: [
-                "Месяц 1: Экспертные тренинги в 5 ключевых областях. Месяцы 2-3: Индивидуальная диагностика бизнеса. Разработка кастомных решений для каждого бизнеса.",
-                "Опытные менторы, которые строили бизнес в Узбекистане и за рубежом. Их успех — ваша дорожная карта.",
-                "Не теория, только практические результаты. Каждый урок — конкретный инструмент, который вы применяете в бизнесе.",
-                "Адаптация к международным стандартам, объяснение процесса сертификации, знакомство с экспортными рынками.",
-                "Еженедельный KPI-мониторинг. Если нет результата — быстро корректируем стратегию. Коучинг, ориентированный на результат."
+            bonuses: [
+                { id: 6, title: "Готовность к экспорту", desc: "Дорожная карта для выхода на международные рынки" },
+                { id: 7, title: "Еженедельное менторство", desc: "Руководство для стратегических решений" }
             ]
         },
         features: {
@@ -543,35 +509,18 @@ export const translations = {
             badge: "2026-YIL UCHUN ARIZALAR QABUL QILINMOQDA",
         },
         gap: {
-            problemTitle: "Biznesning Asosiy Muammolari",
-            solutionTitle: "BizCombinator Yechimi",
-            problems: [
-                "Tizimlar yo'q — marketing, savdo, moliya tartibsiz",
-                "O'sish strategiyasi aniq emas — qayerga borish kerak?",
-                "Sifatli murabbiylik va amaliy maslahat topib bo'lmaydi",
-                "Eksport qilish uchun metodologiya yo'q",
-                "Biznesni o'lchash uchun KPI yo'q"
+            title: "Dastur tugagach, biznesingizda mavjud bo'ladi",
+            subtitle: "6 oy davomida qurilgan tizimlar va o'lchanadigan natijalar",
+            benefits: [
+                { id: 1, title: "Marketing tizimi", desc: "Yangi mijozlar doimiy keladi — taxmin emas, tizim" },
+                { id: 2, title: "Savdo tizimi", desc: "Har bir sotuvchi nima qilishini aniq biladi — natija barqaror o'sadi" },
+                { id: 3, title: "Moliyaviy nazorat", desc: "Har hafta aniq raqamlar — qayerda pul, qayerda muammo" },
+                { id: 4, title: "Kadrlar boshqaruvi", desc: "Jamoangiz mustaqil ishlaydi, siz strategiyaga e'tibor berasiz" },
+                { id: 5, title: "Boshqaruv tizimi", desc: "Biznes siz yo'qligingizda ham ishlaydi" }
             ],
-            solutions: [
-                "5 ta asosiy tizim: Marketing, Savdo, Moliya, Kadrlar, Boshqaruv",
-                "Shaxsiy diagnostika va maxsus yechimlar",
-                "Amaliyotga asoslangan metodologiya",
-                "Eksportga yo'naltirilgan tayyorlov",
-                "Haftalik KPI monitoring va murabbiylik"
-            ],
-            problemDetails: [
-                "Ko'pchilik bizneslar kundalik ishlar bilan band — strategiya, jarayon va tizimlar yo'q. Hammasi eganing boshida.",
-                "O'sishni xohlaysiz, lekin qayerdan boshlashni bilmaysiz. Har gal o'rgatish yoki kurslar qimmat va amaliy emas.",
-                "Internet va kitoblarda nazariya ko'p, lekin sizning biznesingiz uchun konkret yo'l-yo'riq yo'q.",
-                "Eksport qilish istaysiz, lekin sertifikatlar, standartlar, logistika — hammasi noma'lum.",
-                "Biznesingiz daromad keltiryaptimi? Qaysi yo'nalish ishlayapti? Qaysi xodim samarali? Hech qanday raqamlar yo'q."
-            ],
-            solutionDetails: [
-                "1-oyda 5 ta asosiy sohada ekspert treninglar. 2-3-oylarda shaxsiy biznes diagnostikasi. Har bir biznes uchun maxsus yechimlar ishlab chiqish.",
-                "O'zbekistonda va xorijda biznes qurgan tajribali mentorlar. Ularning muvaffaqiyatlari — sizning yo'lxaritangiz.",
-                "Nazariya emas, faqat amaliy natijalar. Har bir dars — biznesingizda qo'llanadigan konkret vosita.",
-                "Xalqaro standartlarga moslashish, sertifikatsiya jarayonini tushuntirish, eksport bozorlari bilan tanishish.",
-                "Haftalik KPI monitoring. Agar natija yo'q bo'lsa — strategiyani tezda o'zgartiramiz. Natijaga yo'naltirilgan murabbiylik."
+            bonuses: [
+                { id: 6, title: "Eksport tayyorligi", desc: "Xalqaro bozorlarga kirish yo'lxaritasi" },
+                { id: 7, title: "Haftalik murabbiylik", desc: "Strategik qarorlar uchun yo'l-yo'riq" }
             ]
         },
         features: {
