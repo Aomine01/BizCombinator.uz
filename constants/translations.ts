@@ -100,7 +100,8 @@ export const translations = {
                     credibility: "25+ years leadership, International coaching credentials",
                     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=400",
                     telegram: "",
-                    instagram: "https://gulnarakholmatova.com"
+                    instagram: "",
+                    website: "https://gulnarakholmatova.com"
                 }
             ]
         },
@@ -357,7 +358,8 @@ export const translations = {
                     credibility: "25+ лет руководства, международный коучинг",
                     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=400",
                     telegram: "",
-                    instagram: "https://gulnarakholmatova.com"
+                    instagram: "",
+                    website: "https://gulnarakholmatova.com"
                 }
             ]
         },
@@ -614,7 +616,8 @@ export const translations = {
                     credibility: "25+ yillik rahbarlik, xalqaro kouching",
                     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=400",
                     telegram: "",
-                    instagram: "https://gulnarakholmatova.com"
+                    instagram: "",
+                    website: "https://gulnarakholmatova.com"
                 }
             ]
         },
