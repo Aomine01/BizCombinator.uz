@@ -50,45 +50,57 @@ export const translations = {
             items: [
                 {
                     id: 1,
-                    name: "Akmal Payziev",
+                    name: "Farkhod Kamilov",
                     role: "Marketing System",
-                    credibility: "15+ years experience, 200+ companies",
-                    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400"
+                    credibility: "CEO inMarketing & Futurum Academy",
+                    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400",
+                    telegram: "https://t.me/farhodkamilov_uz",
+                    instagram: ""
                 },
                 {
                     id: 2,
-                    name: "Dilshod Rahimov",
+                    name: "Nodirbek Kuzdekov",
                     role: "Sales System",
-                    credibility: "Implemented sales systems, 40% revenue growth",
-                    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400"
+                    credibility: "Business trainer in sales, strategy & management",
+                    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400",
+                    telegram: "https://t.me/KuzdekovChannel",
+                    instagram: ""
                 },
                 {
                     id: 3,
-                    name: "Nargiza Yusupova",
+                    name: "Otabek Umarov",
                     role: "Financial Control",
-                    credibility: "Built finance systems for 100+ businesses",
-                    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=400"
+                    credibility: "CFO, finance & business automation expert",
+                    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400",
+                    telegram: "https://t.me/CFOOtabek",
+                    instagram: ""
                 },
                 {
                     id: 4,
-                    name: "Farruh Ismoilov",
+                    name: "Doniyorjon Norsidiq",
                     role: "Operations Management",
-                    credibility: "Scaled production from 2 to 12 facilities",
-                    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400"
+                    credibility: "20+ years HR, worked at Uzbekneftegaz, Central Bank",
+                    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400",
+                    telegram: "https://t.me/Doniyorjon_Norsidiq",
+                    instagram: ""
                 },
                 {
                     id: 5,
-                    name: "Malika Karimova",
+                    name: "Jonibek Ortiq",
                     role: "HR & Team Systems",
-                    credibility: "Built HR systems for 500+ employee companies",
-                    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400"
+                    credibility: "HR expert for Russia & Central Asia",
+                    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400",
+                    telegram: "https://t.me/HRJonibek",
+                    instagram: ""
                 },
                 {
                     id: 6,
-                    name: "Sardor Alimov",
-                    role: "Export & International Markets",
-                    credibility: "Helped 50+ businesses enter export markets",
-                    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400"
+                    name: "Gulnara Kholmatova",
+                    role: "Management System",
+                    credibility: "25+ years leadership, International coaching credentials",
+                    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=400",
+                    telegram: "",
+                    instagram: "https://gulnarakholmatova.com"
                 }
             ]
         },
@@ -295,45 +307,57 @@ export const translations = {
             items: [
                 {
                     id: 1,
-                    name: "Акмал Паизиев",
+                    name: "Фарход Камилов",
                     role: "Маркетинговая система",
-                    credibility: "15+ лет опыта, 200+ компаний",
-                    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400"
+                    credibility: "CEO inMarketing & Futurum Academy",
+                    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400",
+                    telegram: "https://t.me/farhodkamilov_uz",
+                    instagram: ""
                 },
                 {
                     id: 2,
-                    name: "Дилшод Рахимов",
+                    name: "Нодирбек Куздеков",
                     role: "Система продаж",
-                    credibility: "Внедрил систему продаж, рост выручки 40%",
-                    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400"
+                    credibility: "Бизнес-тренер по продажам и стратегии",
+                    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400",
+                    telegram: "https://t.me/KuzdekovChannel",
+                    instagram: ""
                 },
                 {
                     id: 3,
-                    name: "Наргиза Юсупова",
+                    name: "Отабек Умаров",
                     role: "Финансовый контроль",
-                    credibility: "Построила финансовые системы для 100+ бизнесов",
-                    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=400"
+                    credibility: "CFO, финансы и автоматизация бизнеса",
+                    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400",
+                    telegram: "https://t.me/CFOOtabek",
+                    instagram: ""
                 },
                 {
                     id: 4,
-                    name: "Фаррух Исмоилов",
+                    name: "Дониёржон Норсидиқ",
                     role: "Операционное управление",
-                    credibility: "Масштабировал производство с 2 до 12 объектов",
-                    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400"
+                    credibility: "20+ лет HR, Uzbekneftegaz, Центральный банк",
+                    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400",
+                    telegram: "https://t.me/Doniyorjon_Norsidiq",
+                    instagram: ""
                 },
                 {
                     id: 5,
-                    name: "Малика Каримова",
+                    name: "Джонибек Ортиқ",
                     role: "HR и командные системы",
-                    credibility: "Построила HR системы для компаний с 500+ сотрудниками",
-                    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400"
+                    credibility: "HR эксперт для России и Центральной Азии",
+                    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400",
+                    telegram: "https://t.me/HRJonibek",
+                    instagram: ""
                 },
                 {
                     id: 6,
-                    name: "Сардор Алимов",
-                    role: "Экспорт и международные рынки",
-                    credibility: "Помог 50+ бизнесам выйти на экспортные рынки",
-                    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400"
+                    name: "Гульнара Холматова",
+                    role: "Система управления",
+                    credibility: "25+ лет руководства, международный коучинг",
+                    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=400",
+                    telegram: "",
+                    instagram: "https://gulnarakholmatova.com"
                 }
             ]
         },
@@ -540,45 +564,57 @@ export const translations = {
             items: [
                 {
                     id: 1,
-                    name: "Akmal Payziev",
+                    name: "Farxod Kamilov",
                     role: "Marketing tizimi",
-                    credibility: "15+ yillik tajriba, 200+ kompaniyalar",
-                    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400"
+                    credibility: "CEO inMarketing & Futurum Academy",
+                    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400",
+                    telegram: "https://t.me/farhodkamilov_uz",
+                    instagram: ""
                 },
                 {
                     id: 2,
-                    name: "Dilshod Rahimov",
+                    name: "Nodirbek Quzdekov",
                     role: "Savdo tizimi",
-                    credibility: "Savdo tizimini joriy qilib, daromadni 40% oshirdi",
-                    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400"
+                    credibility: "Savdo va strategiya bo'yicha biznes-trener",
+                    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400",
+                    telegram: "https://t.me/KuzdekovChannel",
+                    instagram: ""
                 },
                 {
                     id: 3,
-                    name: "Nargiza Yusupova",
+                    name: "Otabek Umarov",
                     role: "Moliyaviy nazorat",
-                    credibility: "100+ bizneslar uchun moliyaviy tizimlar qurdi",
-                    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=400"
+                    credibility: "CFO, moliya va biznes avtomatlashtiruvi",
+                    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400",
+                    telegram: "https://t.me/CFOOtabek",
+                    instagram: ""
                 },
                 {
                     id: 4,
-                    name: "Farruh Ismoilov",
+                    name: "Doniyorjon Norsidiq",
                     role: "Operatsion boshqaruv",
-                    credibility: "Ishlab chiqarishni 2 dan 12 filialga o'stirdi",
-                    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400"
+                    credibility: "20+ yillik HR, O'zbekneftegaz, Markaziy bank",
+                    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400",
+                    telegram: "https://t.me/Doniyorjon_Norsidiq",
+                    instagram: ""
                 },
                 {
                     id: 5,
-                    name: "Malika Karimova",
+                    name: "Jonibek Ortiq",
                     role: "HR va jamoa tizimi",
-                    credibility: "500+ xodimli kompaniyalar uchun HR tizimlar qurdi",
-                    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400"
+                    credibility: "Rossiya va Markaziy Osiyo uchun HR eksperti",
+                    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400",
+                    telegram: "https://t.me/HRJonibek",
+                    instagram: ""
                 },
                 {
                     id: 6,
-                    name: "Sardor Alimov",
-                    role: "Eksport va xalqaro bozorlar",
-                    credibility: "50+ biznesga eksport bozorlariga kirish uchun yordam berdi",
-                    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400"
+                    name: "Gulnara Xolmatova",
+                    role: "Boshqaruv tizimi",
+                    credibility: "25+ yillik rahbarlik, xalqaro kouching",
+                    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=400",
+                    telegram: "",
+                    instagram: "https://gulnarakholmatova.com"
                 }
             ]
         },
