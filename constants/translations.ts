@@ -62,62 +62,62 @@ export const translations = {
             ]
         },
         mentors: {
-            title: "World-Class Mentors",
+            title: "Experienced Mentors",
             items: [
                 {
                     id: 1,
                     name: "Sarah Chen",
-                    role: "Tech Executive",
-                    expertise: "Expert in AI & Growth",
+                    role: "Marketing Systems Specialist",
+                    expertise: "Branding & Digital Marketing",
                     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200",
                 },
                 {
                     id: 2,
                     name: "Marcus Rodriguez",
-                    role: "Venture Capitalist",
-                    expertise: "HealthTech & FinTech",
+                    role: "Finance & Management",
+                    expertise: "Cash Flow & Financial Planning",
                     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
                 },
                 {
                     id: 3,
                     name: "Elena Kim",
-                    role: "Product Director",
-                    expertise: "SaaS & B2B Strategy",
+                    role: "Sales Systems Expert",
+                    expertise: "B2B Sales & Customer Relations",
                     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200",
                 },
                 {
                     id: 4,
                     name: "David Park",
-                    role: "Startup Founder",
-                    expertise: "Scaling & Operations",
+                    role: "Operational Systems",
+                    expertise: "Processes & Scaling",
                     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
                 },
                 {
                     id: 5,
                     name: "Priya Patel",
-                    role: "Marketing Leader",
-                    expertise: "Brand Building & PR",
+                    role: "HR & Team Management",
+                    expertise: "Talent Systems & Corporate Culture",
                     image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200",
                 },
                 {
                     id: 6,
                     name: "James Wilson",
-                    role: "AI Researcher",
-                    expertise: "Deep Tech & Innovation",
+                    role: "Export & International Markets",
+                    expertise: "Export Preparation & Certification",
                     image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200",
                 }
             ]
         },
         timeline: {
-            title: "The Journey",
-            subtitle: "The Process",
+            title: "6-Month Program Structure",
+            subtitle: "Step-by-step development process",
             steps: [
-                { title: "Application", desc: "Submit your pitch and join the waitlist." },
-                { title: "Selection", desc: "Top 5% of startups are selected for the cohort." },
-                { title: "Intensive Learning", desc: "6 weeks of deep dive into business fundamentals." },
-                { title: "Mentorship & AI", desc: "Work with mentors and leverage AI tools." },
-                { title: "Pitch Day", desc: "Present your startup to global investors." },
-                { title: "Scale", desc: "Launch and expand into new markets." }
+                { title: "Application & Acceptance", desc: "Submit application, interview. Top 30 businesses selected." },
+                { title: "Month 1: Expert Training", desc: "Intensive training in Marketing, Sales, Finance, HR, Management. 4 days per week." },
+                { title: "Months 2-3: Diagnostics", desc: "Deep business analysis. Set KPIs. Develop custom solutions." },
+                { title: "Months 4-5: Implementation", desc: "Apply systems in practice. Weekly coaching. Adjust strategy." },
+                { title: "Month 6: Results & Continuation", desc: "Final KPI analysis. Export plan. Strategy for next 12 months." },
+                { title: "Post-Program Support", desc: "Alumni network. Consultation opportunities. Ongoing development resources." }
             ]
         },
         global: {
@@ -173,32 +173,32 @@ export const translations = {
             }
         },
         business: {
-            title: "Who We Work With",
-            subtitle: "Empowering innovators across every stage of growth.",
+            title: "Who Is This For?",
+            subtitle: "Program designed specifically for Uzbekistan business owners",
             cards: [
                 {
-                    title: "Early-Stage Startups",
-                    desc: "From napkin sketch to MVP. We help structure your chaotic vision into a fundable business."
+                    title: "Service Businesses",
+                    desc: "Consulting, agencies, clinics, training centers, legal services"
                 },
                 {
-                    title: "Technical Founders",
-                    desc: "Turning brilliant code into a viable product. We bridge the gap between engineering and sales."
+                    title: "Manufacturing",
+                    desc: "Small and medium enterprises, local manufacturers, industrial businesses"
                 },
                 {
-                    title: "Traditional Businesses",
-                    desc: "Digital transformation for brick-and-mortar champions ready to scale online."
+                    title: "Trade Companies",
+                    desc: "Wholesale, retail, distributors, import-export businesses"
                 },
                 {
-                    title: "E-Commerce & Retail",
-                    desc: "Optimizing supply chains and customer scaling for the next generation of retail giants."
+                    title: "Education Centers",
+                    desc: "Training centers, schools, courses, professional development programs"
                 },
                 {
-                    title: "Service Providers",
-                    desc: "Agencies and consultancies looking to productize their services and break linear growth ceilings."
+                    title: "Cafes & Restaurants",
+                    desc: "Hospitality businesses, kitchens, fast-food, catering services"
                 },
                 {
-                    title: "Enterprise Innovation",
-                    desc: "Intrapreneurship programs for large organizations seeking startup agility."
+                    title: "Family Businesses",
+                    desc: "Multi-generational businesses, preparing for new management"
                 }
             ]
         },
@@ -310,62 +310,62 @@ export const translations = {
             ]
         },
         mentors: {
-            title: "Менторы мирового класса",
+            title: "Опытные менторы",
             items: [
                 {
                     id: 1,
                     name: "Sarah Chen",
-                    role: "Тех-руководитель",
-                    expertise: "ИИ и рост",
+                    role: "Специалист по маркетинговым системам",
+                    expertise: "Брендинг и цифровой маркетинг",
                     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200",
                 },
                 {
                     id: 2,
                     name: "Marcus Rodriguez",
-                    role: "Венчурный инвестор",
-                    expertise: "HealthTech и FinTech",
+                    role: "Финансы и управление",
+                    expertise: "Cash flow и финансовое планирование",
                     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
                 },
                 {
                     id: 3,
                     name: "Elena Kim",
-                    role: "Директор по продукту",
-                    expertise: "SaaS и B2B стратегия",
+                    role: "Эксперт по системам продаж",
+                    expertise: "B2B продажи и работа с клиентами",
                     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200",
                 },
                 {
                     id: 4,
                     name: "David Park",
-                    role: "Основатель стартапа",
-                    expertise: "Масштабирование и операции",
+                    role: "Операционные системы",
+                    expertise: "Процессы и масштабирование",
                     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
                 },
                 {
                     id: 5,
                     name: "Priya Patel",
-                    role: "Маркетинг-лидер",
-                    expertise: "Бренд и PR",
+                    role: "HR и управление командой",
+                    expertise: "Системы управления талантами и корпоративная культура",
                     image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200",
                 },
                 {
                     id: 6,
                     name: "James Wilson",
-                    role: "Исследователь ИИ",
-                    expertise: "DeepTech и инновации",
+                    role: "Экспорт и международные рынки",
+                    expertise: "Подготовка к экспорту и сертификация",
                     image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200",
                 }
             ]
         },
         timeline: {
-            title: "Путь к успеху",
-            subtitle: "Процесс",
+            title: "Структура программы на 6 месяцев",
+            subtitle: "Пошаговый процесс развития",
             steps: [
-                { title: "Заявка", desc: "Отправьте свой питч и присоединяйтесь к списку ожидания." },
-                { title: "Отбор", desc: "Топ 5% стартапов отбираются для участия в потоке." },
-                { title: "Интенсивное обучение", desc: "6 недель глубокого погружения в бизнес-фундаментал." },
-                { title: "Менторство и ИИ", desc: "Работа с менторами и использование инструментов ИИ." },
-                { title: "День Питча", desc: "Презентуйте свой стартап глобальным инвесторам." },
-                { title: "Масштабирование", desc: "Запуск и выход на новые рынки." }
+                { title: "Заявка и прием", desc: "Подайте заявку, пройдите интервью. Отбираются 30 лучших бизнесов." },
+                { title: "Месяц 1: Экспертное обучение", desc: "Интенсивное обучение по маркетингу, продажам, финансам, HR, управлению. 4 дня в неделю." },
+                { title: "Месяцы 2-3: Диагностика", desc: "Глубокий анализ бизнеса. Установка KPI. Разработка индивидуальных решений." },
+                { title: "Месяцы 4-5: Внедрение", desc: "Применение систем на практике. Еженедельный коучинг. Корректировка стратегии." },
+                { title: "Месяц 6: Результаты и продолжение", desc: "Финальный анализ KPI. План экспорта. Стратегия на следующие 12 месяцев." },
+                { title: "Поддержка после программы", desc: "Сеть выпускников. Консультации. Ресурсы для постоянного развития." }
             ]
         },
         global: {
@@ -421,32 +421,32 @@ export const translations = {
             }
         },
         business: {
-            title: "С кем мы работаем",
-            subtitle: "Помогаем инноваторам на каждом этапе роста.",
+            title: "Для кого эта программа?",
+            subtitle: "Программа разработана специально для владельцев бизнеса в Узбекистане",
             cards: [
                 {
-                    title: "Стартапы на ранней стадии",
-                    desc: "От идеи на салфетке до MVP. Помогаем упаковать видение в понятную и инвестиционную модель."
+                    title: "Сервисный бизнес",
+                    desc: "Консалтинг, агентства, клиники, учебные центры, юридические услуги"
                 },
                 {
-                    title: "Технические основатели",
-                    desc: "Превращаем сильный код в продукт. Помогаем связать разработку с продажами и рынком."
+                    title: "Производство",
+                    desc: "Малые и средние предприятия, местные производители, промышленные предприятия"
                 },
                 {
-                    title: "Традиционный бизнес",
-                    desc: "Цифровая трансформация для компаний офлайн, готовых масштабироваться онлайн."
+                    title: "Торговые компании",
+                    desc: "Оптовая, розничная торговля, дистрибуторы, импортно-экспортный бизнес"
                 },
                 {
-                    title: "E-commerce и ритейл",
-                    desc: "Оптимизация цепочек поставок и рост клиентов для следующего поколения лидеров рынка."
+                    title: "Образовательные центры",
+                    desc: "Учебные центры, школы, курсы, программы профессионального развития"
                 },
                 {
-                    title: "Сервисные компании",
-                    desc: "Агентства и консалтинг, которые хотят продуктировать услуги и уйти от линейного роста."
+                    title: "Кафе и рестораны",
+                    desc: "Гостиничный бизнес, кухни, фаст-фуд, кейтеринг"
                 },
                 {
-                    title: "Корпоративные инновации",
-                    desc: "Программы интрапренёрства для крупных компаний, которым нужна скорость стартапа."
+                    title: "Семейный бизнес",
+                    desc: "Многопоколенный бизнес, подготовка к смене управления"
                 }
             ]
         },
