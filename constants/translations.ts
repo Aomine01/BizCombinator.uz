@@ -131,33 +131,33 @@ export const translations = {
             }
         },
         form: {
-            title: "Ready to Transform?",
-            subtitle: "Join the next cohort of world-changing startups.",
+            title: "Ready to Systematize Your Business?",
+            subtitle: "Join the next cohort of SME owners building world-class systems.",
             name: "Full Name",
             email: "Email Address",
             phone: "Phone Number",
-            startupName: "Startup Name",
-            stage: "Startup Stage",
+            startupName: "Business Name",
+            stage: "Business Stage",
             country: "Country",
-            description: "Project Description",
-            pitch: "Pitch Deck",
+            description: "Business Description",
+            pitch: "Business Materials",
             submit: "Submit Application",
             sending: "Sending...",
-            selectStage: "Select Stage",
+            selectStage: "Select Your Business Stage",
             stages: {
-                idea: "Idea Phase",
-                mvp: "MVP Built",
-                revenue: "Generating Revenue",
-                scale: "Scaling"
+                idea: "Planning to Start",
+                mvp: "Just Started (0-1 year)",
+                revenue: "Operating (1-3 years)",
+                scale: "Established (3+ years)"
             },
             dropText: "Click to upload or drag and drop",
             dropHint: "PDF, PPT, or DOC (Max 10MB)",
-            pitchNote: "* You can attach a pitch deck (optional).",
+            pitchNote: "* You can attach business presentation or documents (optional).",
             placeholders: {
                 name: "John Doe",
                 email: "john@example.com",
                 phone: "+998 90 123 45 67",
-                startup: "My Unicorn"
+                startup: "My Business LLC"
             },
             success: {
                 title: "Application Sent!",
@@ -379,33 +379,33 @@ export const translations = {
             }
         },
         form: {
-            title: "Готовы к трансформации?",
-            subtitle: "Присоединяйтесь к следующему потоку стартапов, меняющих мир.",
+            title: "Готовы систематизировать свой бизнес?",
+            subtitle: "Присоединяйтесь к следующему потоку владельцев СМБ, строящих системы мирового уровня.",
             name: "Полное имя",
             email: "Email адрес",
             phone: "Номер телефона",
-            startupName: "Название стартапа",
-            stage: "Стадия стартапа",
+            startupName: "Название бизнеса",
+            stage: "Стадия бизнеса",
             country: "Страна",
-            description: "Описание проекта",
-            pitch: "Питч-дек",
+            description: "Описание бизнеса",
+            pitch: "Документы о бизнесе",
             submit: "Отправить заявку",
             sending: "Отправка...",
-            selectStage: "Выберите стадию",
+            selectStage: "Выберите стадию бизнеса",
             stages: {
-                idea: "Идея",
-                mvp: "Есть MVP",
-                revenue: "Есть выручка",
-                scale: "Масштабирование"
+                idea: "Планирую начать",
+                mvp: "Только начал (0-1 год)",
+                revenue: "Работаю (1-3 года)",
+                scale: "Устоявшийся (3+ года)"
             },
             dropText: "Нажмите для загрузки или перетащите файл",
             dropHint: "PDF, PPT или DOC (Макс. 10МБ)",
-            pitchNote: "* Можно прикрепить питч-дек (необязательно).",
+            pitchNote: "* Можно прикрепить презентацию или документы о бизнесе (необязательно).",
             placeholders: {
                 name: "Иван Иванов",
                 email: "ivan@example.com",
                 phone: "+998 90 123 45 67",
-                startup: "My Unicorn"
+                startup: "Мой Бизнес OOO"
             },
             success: {
                 title: "Заявка отправлена!",
@@ -627,33 +627,33 @@ export const translations = {
             }
         },
         form: {
-            title: "O'zgarishga tayyormisiz?",
-            subtitle: "Dunyoniy o'zgartiruvchi startaplar qatoriga qo'shiling.",
+            title: "Biznesingizni tizimlashtirmoqchimisiz?",
+            subtitle: "Jahon darajasida tizimlar quruvchi KMB egalari qatoriga qo'shiling.",
             name: "To'liq ism",
             email: "Email manzili",
             phone: "Telefon raqami",
-            startupName: "Startap nomi",
-            stage: "Startap bosqichi",
+            startupName: "Biznes nomi",
+            stage: "Biznes bosqichi",
             country: "Mamlakat",
-            description: "Loyiha tavsifi",
-            pitch: "Pitch taqdimoti",
+            description: "Biznes tavsifi",
+            pitch: "Biznes hujjatlari",
             submit: "Ariza yuborish",
             sending: "Yuborilmoqda...",
-            selectStage: "Bosqichni tanlang",
+            selectStage: "Biznes bosqichini tanlang",
             stages: {
-                idea: "G'oya",
-                mvp: "MVP mavjud",
-                revenue: "Daromad mavjud",
-                scale: "Masshtablash"
+                idea: "Boshlashni rejalashtirmoqdaman",
+                mvp: "Endigina boshladim (0-1 yil)",
+                revenue: "Ishlab turibman (1-3 yil)",
+                scale: "Barqaror biznes (3+ yil)"
             },
             dropText: "Yuklash uchun bosing yoki faylni tashlang",
             dropHint: "PDF, PPT yoki DOC (Maks. 10MB)",
-            pitchNote: "* Pitch faylni biriktirish mumkin (ixtiyoriy).",
+            pitchNote: "* Biznes taqdimoti yoki hujjatlar ilova qilish mumkin (ixtiyoriy).",
             placeholders: {
                 name: "Ali Valiyev",
                 email: "ali@example.com",
                 phone: "+998 90 123 45 67",
-                startup: "My Unicorn"
+                startup: "Mening Biznesim MChJ"
             },
             success: {
                 title: "Ariza yuborildi!",
