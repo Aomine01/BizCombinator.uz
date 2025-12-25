@@ -15,7 +15,7 @@ export const translations = {
         hero: {
             titleLine1: "BUILD YOUR BRAND.",
             titleLine2: "SCALE YOUR BUSINESS.",
-            subtitle: "6-month accelerator for Uzbekistan SMEs. We help you create a strong brand identity and build scalable systems for sustainable growth.",
+            subtitle: "6-month accelerator for small and growing businesses in Uzbekistan. We help you create a strong brand identity and build scalable systems for sustainable growth.",
             apply: "Submit Application",
             learnMore: "Learn More About Program",
             badge: "APPLICATIONS NOW OPEN FOR 2026",
@@ -276,7 +276,7 @@ export const translations = {
         hero: {
             titleLine1: "СОЗДАЙТЕ БРЕНД.",
             titleLine2: "МАСШТАБИРУЙТЕ БИЗНЕС.",
-            subtitle: "6-месячный акселератор для СМБ Узбекистана. Мы помогаем создать сильный бренд и построить масштабируемые системы для устойчивого роста.",
+            subtitle: "6-месячный акселератор для малого и растущего бизнеса в Узбекистане. Мы помогаем создать сильный бренд и построить масштабируемые системы для устойчивого роста.",
             apply: "Подать заявку",
             learnMore: "Подробнее о программе",
             badge: "ПРИЕМ ЗАЯВОК НА 2026 ГОД",
@@ -537,7 +537,7 @@ export const translations = {
         hero: {
             titleLine1: "BRENDINGIZNI YARATING.",
             titleLine2: "BIZNESINGIZNI RIVOJLANTIRING.",
-            subtitle: "O'zbekiston KMB uchun 6 oylik akselerator. Biz kuchli brend identifikatsiyasi va barqaror o'sish uchun masshtablanadigan tizimlar qurishda yordam beramiz.",
+            subtitle: "O'zbekistondagi kichik va o'sayotgan bizneslar uchun 6 oylik akselerator. Biz kuchli brend identifikatsiyasi va barqaror o'sish uchun masshtablanadigan tizimlar qurishda yordam beramiz.",
             apply: "Ariza topshirish",
             learnMore: "Dastur haqida ko'proq",
             badge: "2026-YIL UCHUN ARIZALAR QABUL QILINMOQDA",
