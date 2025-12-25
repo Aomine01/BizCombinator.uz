@@ -10,13 +10,16 @@
 }
 
 :root {
-  --background: #050505;
+  /* Core Palette: Orange + Black Only */
+  --background: #000000;
+  /* Pure black */
   --foreground: #ffffff;
+  /* White text */
 
   --primary: #ff2200;
-  /* Red to match logo */
-  --secondary: #0ea5e9;
+  /* Orange - main brand color */
 
+  /* Font Variables */
   --font-inter: "Inter", sans-serif;
   --font-syne: "Syne", sans-serif;
 }
@@ -41,17 +44,20 @@ body {
   overflow-x: hidden;
 }
 
-/* Utilities extracted from reference */
+/* Utilities - Minimalist Glass Effects */
 /* Base glass styles - Desktop defaults */
 .glass {
-  background: rgba(20, 0, 0, 0.6);
-  border: 1px solid rgba(255, 34, 0, 0.08);
+  background: rgba(0, 0, 0, 0.7);
+  /* Pure black base */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* Subtle white border */
 }
 
 .glass-card {
-  background: rgba(20, 0, 0, 0.4);
-  border: 1px solid rgba(255, 34, 0, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px rgba(255, 34, 0, 0.05);
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 34, 0, 0.2);
+  /* Subtle orange border */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
@@ -73,18 +79,17 @@ body {
   .glass {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    background: rgba(10, 10, 10, 0.95);
-    /* Deep flat design */
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.95);
+    /* Pure black */
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .glass-card {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    background: rgba(15, 15, 15, 0.95);
-    /* Deep flat design */
-    border: 1px solid rgba(255, 34, 0, 0.15);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), inset 0 1px rgba(255, 34, 0, 0.08);
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid rgba(255, 34, 0, 0.2);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
   }
 }
 
@@ -103,16 +108,16 @@ body {
 }
 
 .glass-card:hover {
-  border-color: rgba(255, 34, 0, 0.3);
-  box-shadow: 0 12px 40px rgba(255, 34, 0, 0.15), inset 0 1px rgba(255, 255, 255, 0.08);
-  transform: translateY(-2px) scale(1.02);
+  border-color: rgba(255, 34, 0, 0.5);
+  /* Orange border on hover */
+  box-shadow: 0 12px 40px rgba(255, 34, 0, 0.2);
+  /* Orange glow */
+  transform: translateY(-2px);
 }
 
 .text-gradient {
-  -webkit-text-fill-color: transparent;
-  background: linear-gradient(135deg, #ff2200, #ff5533);
-  -webkit-background-clip: text;
-  background-clip: text;
+  /* Simplified: solid orange instead of gradient */
+  color: var(--primary);
 }
 
 .glow-orb {
