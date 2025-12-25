@@ -558,62 +558,62 @@ export const translations = {
             ]
         },
         mentors: {
-            title: "Jahon darajasidagi mentorlar",
+            title: "Tajribali mentorlar",
             items: [
                 {
                     id: 1,
                     name: "Sarah Chen",
-                    role: "Tex lider",
-                    expertise: "AI va Growth",
+                    role: "Marketing tizimi mutaxassisi",
+                    expertise: "Brendlash va raqamli marketing",
                     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200",
                 },
                 {
                     id: 2,
                     name: "Marcus Rodriguez",
-                    role: "Venchur investor",
-                    expertise: "HealthTech va FinTech",
+                    role: "Moliya va boshqaruv",
+                    expertise: "Cash flow va moliyaviy rejalashtirish",
                     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
                 },
                 {
                     id: 3,
                     name: "Elena Kim",
-                    role: "Product direktor",
-                    expertise: "SaaS va B2B strategiya",
+                    role: "Savdo tizimi bo'yicha ekspert",
+                    expertise: "B2B savdo va mijozlar bilan ishlash",
                     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200",
                 },
                 {
                     id: 4,
                     name: "David Park",
-                    role: "Startap asoschisi",
-                    expertise: "Masshtablash va operatsiyalar",
+                    role: "Operatsion tizimlar",
+                    expertise: "Jarayonlar va masshtablash",
                     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
                 },
                 {
                     id: 5,
                     name: "Priya Patel",
-                    role: "Marketing lider",
-                    expertise: "Brend va PR",
+                    role: "HR va jamoani boshqarish",
+                    expertise: "Kadrlar tizimi va korporativ madaniyat",
                     image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200",
                 },
                 {
                     id: 6,
                     name: "James Wilson",
-                    role: "AI tadqiqotchi",
-                    expertise: "DeepTech va innovatsiya",
+                    role: "Eksport va xalqaro bozorlar",
+                    expertise: "Eksport tayyorlash va sertifikatsiya",
                     image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200",
                 }
             ]
         },
         timeline: {
-            title: "Muvaffaqiyat yo'li",
-            subtitle: "Jarayon",
+            title: "6 Oylik Dastur Tuzilishi",
+            subtitle: "Qadamma-qadam rivojlanish jarayoni",
             steps: [
-                { title: "Ariza", desc: "Pinchingizni yuboring va kutish ro'yxatiga qo'shiling." },
-                { title: "Tanlov", desc: "Startaplarning eng yaxshi 5 foizi tanlab olinadi." },
-                { title: "Intensiv ta'lim", desc: "Biznes asoslarini chuqur o'rganish uchun 6 hafta." },
-                { title: "Mentorlik va AI", desc: "Mentorlar bilan ishlash va AI vositalaridan foydalanish." },
-                { title: "Pitch kuni", desc: "Startapingizni global investorlarga taqdim eting." },
-                { title: "Masshtablash", desc: "Ishga tushirish va yangi bozorlarga chiqish." }
+                { title: "Ariza va qabul", desc: "Ariza topshiring, intervyu o'tkazing. Eng mos 30 biznes tanlanadi." },
+                { title: "1-oy: Ekspert treninglar", desc: "Marketing, savdo, moliya, kadrlar va boshqaruv bo'yicha intensiv ta'lim. Haftada 4 kun." },
+                { title: "2-3-oylar: Diagnostika", desc: "Biznesingizni chuqur tahlil qilish. KPI'larni belgilash. Maxsus yechimlar ishlab chiqish." },
+                { title: "4-5-oylar: Joriy etish", desc: "Tizimlarni amalda qo'llash. Haftalik murabbiylik. Strategiyani sozlash." },
+                { title: "6-oy: Natijalar va davom etish", desc: "Yakuniy KPI tahlili. Eksport rejasi. Keyingi 12 oy uchun strategiya." },
+                { title: "Dasturdan keyingi qo'llab-quvvatlash", desc: "Alumni tarmog'i. Konsultatsiya imkoniyati. Davomiy rivojlanish resurslari." }
             ]
         },
         global: {
@@ -669,32 +669,32 @@ export const translations = {
             }
         },
         business: {
-            title: "Biz kimlar bilan ishlaymiz",
-            subtitle: "O'sishning har bir bosqichida innovatorlarni qo'llab-quvvatlaymiz.",
+            title: "Kimlar uchun?",
+            subtitle: "O'zbekiston biznes egalari uchun maxsus tuzilgan dastur",
             cards: [
                 {
-                    title: "Erta bosqich startaplar",
-                    desc: "G'oyadan MVPgacha. Vizyoningizni investorlarga tushunarli modelga aylantiramiz."
+                    title: "Xizmat ko'rsatish bizneslari",
+                    desc: "Konsalting, agentliklar, klinikalar, o'quv markazlari, huquqiy xizmatlar"
                 },
                 {
-                    title: "Texnik asoschilar",
-                    desc: "Kodni mahsulotga aylantiramiz. Engineering va savdo/bozor orasidagi ko'prik bo'lamiz."
+                    title: "Ishlab chiqarish",
+                    desc: "Kichik va o'rta korxonalar, mahalliy ishlab chiqaruvchilar, sanoat bizneslari"
                 },
                 {
-                    title: "An'anaviy biznes",
-                    desc: "Offline bizneslar uchun raqamli transformatsiya va onlayn masshtablash."
+                    title: "Savdo kompaniyalar",
+                    desc: "Optom, chakana savdo, distribyutorlar, import-eksport bizneslari"
                 },
                 {
-                    title: "E-commerce va retail",
-                    desc: "Ta'minot zanjiri va mijozlarni masshtablashni optimallashtirish."
+                    title: "Ta'lim muassasalari",
+                    desc: "O'quv markazlari, maktablar, kurslar, professional tayyorlov dasturlari"
                 },
                 {
-                    title: "Xizmat ko'rsatuvchilar",
-                    desc: "Agentlik va konsaltinglarni xizmatlarini produktga aylantirish va o'sishni tezlatish."
+                    title: "Cafe va restoranlar",
+                    desc: "Mehmondo'stlik bizneslari, oshxona, fast-food, katering xizmatlari"
                 },
                 {
-                    title: "Korporativ innovatsiya",
-                    desc: "Yirik kompaniyalar uchun startap tezligidagi intraprenyorlik dasturlari."
+                    title: "Oilaviy bizneslar",
+                    desc: "Avloddan-avlodga o'tayotgan bizneslar, yangi boshqaruvga tayyorlanish"
                 }
             ]
         },
