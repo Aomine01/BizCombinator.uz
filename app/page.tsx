@@ -9,6 +9,7 @@ import Timeline from "@/components/Timeline";
 import GlobalReach from "@/components/GlobalReach";
 import BusinessTypes from "@/components/BusinessTypes";
 import ApplyForm from "@/components/ApplyForm";
+import QuickContact from "@/components/QuickContact";
 import Navbar from "@/components/Navbar";
 import BizAiWidget from "@/components/BizAiWidget";
 import Footer from "@/components/Footer";
@@ -26,6 +27,7 @@ export default function Home() {
       <Timeline />
       <GlobalReach />
       <ScrollShowcase />
+      <QuickContact />
       <ApplyForm />
 
       <BizAiWidget />

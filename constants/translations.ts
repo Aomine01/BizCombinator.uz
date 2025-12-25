@@ -130,6 +130,19 @@ export const translations = {
                 growth: "Average Revenue Growth"
             }
         },
+        quickContact: {
+            title: "Get a Free Consultation",
+            subtitle: "Leave your contact info and we'll reach out within 24 hours",
+            namePlaceholder: "Your Name",
+            phonePlaceholder: "+998 90 123 45 67",
+            emailPlaceholder: "Email (optional)",
+            submit: "Send",
+            helperText: "By clicking Send, you agree to our privacy policy.",
+            success: {
+                title: "Request Sent!",
+                body: "We'll contact you within 24 hours to schedule a consultation."
+            }
+        },
         form: {
             title: "Ready to Systematize Your Business?",
             subtitle: "Join the next cohort of SME owners building world-class systems.",
@@ -378,6 +391,19 @@ export const translations = {
                 growth: "Средний рост выручки"
             }
         },
+        quickContact: {
+            title: "Получите бесплатную консультацию",
+            subtitle: "Оставьте свои контакты, и мы свяжемся с вами в течение 24 часов",
+            namePlaceholder: "Ваше имя",
+            phonePlaceholder: "+998 90 123 45 67",
+            emailPlaceholder: "Email (необязательно)",
+            submit: "Отправить",
+            helperText: "Нажимая Отправить, вы соглашаетесь с политикой конфиденциальности.",
+            success: {
+                title: "Запрос отправлен!",
+                body: "Мы свяжемся с вами в течение 24 часов для назначения консультации."
+            }
+        },
         form: {
             title: "Готовы систематизировать свой бизнес?",
             subtitle: "Присоединяйтесь к следующему потоку владельцев СМБ, строящих системы мирового уровня.",
@@ -624,6 +650,19 @@ export const translations = {
                 businesses: "Bizneslar ishtirok etdi",
                 mentors: "Ekspert mentorlar",
                 growth: "O'rtacha daromad o'sishi"
+            }
+        },
+        quickContact: {
+            title: "Bepul konsultatsiya oling",
+            subtitle: "Kontakt ma'lumotlaringizni qoldiring, 24 soat ichida aloqaga chiqamiz",
+            namePlaceholder: "Ismingiz",
+            phonePlaceholder: "+998 90 123 45 67",
+            emailPlaceholder: "Email (ixtiyoriy)",
+            submit: "Yuborish",
+            helperText: "Yuborish tugmasini bosish orqali maxfiylik siyosatiga rozilik bildirasiz.",
+            success: {
+                title: "So'rov yuborildi!",
+                body: "Konsultatsiya belgilash uchun 24 soat ichida siz bilan bog'lanamiz."
             }
         },
         form: {
