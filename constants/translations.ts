@@ -114,9 +114,9 @@ export const translations = {
             steps: [
                 { title: "Application & Acceptance", desc: "Submit application, interview. Top 30 businesses selected." },
                 { title: "Month 1: Expert Training", desc: "Intensive training in Marketing, Sales, Finance, HR, Management. 4 days per week." },
-                { title: "Months 2-3: Diagnostics", desc: "Deep business analysis. Set KPIs. Develop custom solutions." },
+                { title: "Months 2-3: Business Analysis", desc: "Deep business analysis. Set performance metrics. Develop custom solutions." },
                 { title: "Months 4-5: Implementation", desc: "Apply systems in practice. Weekly coaching. Adjust strategy." },
-                { title: "Month 6: Results & Continuation", desc: "Final KPI analysis. Export plan. Strategy for next 12 months." },
+                { title: "Month 6: Results & Next Steps", desc: "Final performance review. Export plan. Strategy for next 12 months." },
                 { title: "Post-Program Support", desc: "Alumni network. Consultation opportunities. Ongoing development resources." }
             ]
         },
@@ -375,9 +375,9 @@ export const translations = {
             steps: [
                 { title: "Заявка и прием", desc: "Подайте заявку, пройдите интервью. Отбираются 30 лучших бизнесов." },
                 { title: "Месяц 1: Экспертное обучение", desc: "Интенсивное обучение по маркетингу, продажам, финансам, HR, управлению. 4 дня в неделю." },
-                { title: "Месяцы 2-3: Диагностика", desc: "Глубокий анализ бизнеса. Установка KPI. Разработка индивидуальных решений." },
+                { title: "Месяцы 2-3: Анализ бизнеса", desc: "Глубокий анализ бизнеса. Установка показателей эффективности. Разработка индивидуальных решений." },
                 { title: "Месяцы 4-5: Внедрение", desc: "Применение систем на практике. Еженедельный коучинг. Корректировка стратегии." },
-                { title: "Месяц 6: Результаты и продолжение", desc: "Финальный анализ KPI. План экспорта. Стратегия на следующие 12 месяцев." },
+                { title: "Месяц 6: Результаты и следующие шаги", desc: "Финальное ревью результатов. План экспорта. Стратегия на следующие 12 месяцев." },
                 { title: "Поддержка после программы", desc: "Сеть выпускников. Консультации. Ресурсы для постоянного развития." }
             ]
         },
@@ -636,9 +636,9 @@ export const translations = {
             steps: [
                 { title: "Ariza va qabul", desc: "Ariza topshiring, intervyu o'tkazing. Eng mos 30 biznes tanlanadi." },
                 { title: "1-oy: Ekspert treninglar", desc: "Marketing, savdo, moliya, kadrlar va boshqaruv bo'yicha intensiv ta'lim. Haftada 4 kun." },
-                { title: "2-3-oylar: Diagnostika", desc: "Biznesingizni chuqur tahlil qilish. KPI'larni belgilash. Maxsus yechimlar ishlab chiqish." },
+                { title: "2-3-oylar: Biznes tahlili", desc: "Biznesingizni chuqur tahlil qilish. Samaradorlik ko'rsatkichlarini belgilash. Maxsus yechimlar ishlab chiqish." },
                 { title: "4-5-oylar: Joriy etish", desc: "Tizimlarni amalda qo'llash. Haftalik murabbiylik. Strategiyani sozlash." },
-                { title: "6-oy: Natijalar va davom etish", desc: "Yakuniy KPI tahlili. Eksport rejasi. Keyingi 12 oy uchun strategiya." },
+                { title: "6-oy: Natijalar va keyingi qadamlar", desc: "Yakuniy natijalarni ko'rib chiqish. Eksport rejasi. Keyingi 12 oy uchun strategiya." },
                 { title: "Dasturdan keyingi qo'llab-quvvatlash", desc: "Alumni tarmog'i. Konsultatsiya imkoniyati. Davomiy rivojlanish resurslari." }
             ]
         },
