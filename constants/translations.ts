@@ -121,8 +121,8 @@ export const translations = {
             ]
         },
         global: {
-            title: "Proven Results with SME Owners",
-            subtitle: "Real business owners achieving measurable growth through our systems-focused program in Uzbekistan.",
+            title: "Proven Results with Business Owners",
+            subtitle: "Real business owners achieving measurable growth through our program in Uzbekistan.",
             viewNetwork: "View Success Stories",
             stats: {
                 businesses: "Businesses Participated",
@@ -382,8 +382,8 @@ export const translations = {
             ]
         },
         global: {
-            title: "Доказанные результаты с владельцами СМБ",
-            subtitle: "Реальные владельцы бизнеса достигают измеримого роста через нашу программу систем в Узбекистане.",
+            title: "Доказанные результаты с владельцами бизнеса",
+            subtitle: "Реальные владельцы бизнеса достигают измеримого роста через нашу программу в Узбекистане.",
             viewNetwork: "Истории успеха",
             stats: {
                 businesses: "Бизнесов участвовало",
@@ -643,8 +643,8 @@ export const translations = {
             ]
         },
         global: {
-            title: "KMB egalari bilan isbotlangan natijalar",
-            subtitle: "Haqiqiy biznes egalari O'zbekistondagi tizimlar dasturimiz orqali o'lchanadigan o'sishga erishmoqda.",
+            title: "Biznes egalari bilan isbotlangan natijalar",
+            subtitle: "Haqiqiy biznes egalari O'zbekistondagi dasturimiz orqali o'lchanadigan o'sishga erishmoqda.",
             viewNetwork: "Muvaffaqiyat hikoyalari",
             stats: {
                 businesses: "Bizneslar ishtirok etdi",
