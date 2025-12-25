@@ -121,13 +121,13 @@ export const translations = {
             ]
         },
         global: {
-            title: "Global Impact, Local Roots",
-            subtitle: "A worldwide network of partners, mentors, and investors dedicated to your success.",
-            viewNetwork: "View Network",
+            title: "Proven Results with SME Owners",
+            subtitle: "Real business owners achieving measurable growth through our systems-focused program in Uzbekistan.",
+            viewNetwork: "View Success Stories",
             stats: {
-                projects: "Projects Supported",
-                partners: "Global Partners",
-                investment: "Investment Raised"
+                businesses: "Businesses Participated",
+                mentors: "Expert Mentors",
+                growth: "Average Revenue Growth"
             }
         },
         form: {
@@ -369,13 +369,13 @@ export const translations = {
             ]
         },
         global: {
-            title: "Глобальное влияние, Местные корни",
-            subtitle: "Всемирная сеть партнеров, менторов и инвесторов, призванная обеспечить ваш успех.",
-            viewNetwork: "Смотреть сеть",
+            title: "Доказанные результаты с владельцами СМБ",
+            subtitle: "Реальные владельцы бизнеса достигают измеримого роста через нашу программу систем в Узбекистане.",
+            viewNetwork: "Истории успеха",
             stats: {
-                projects: "Поддержанных проектов",
-                partners: "Глобальных партнеров",
-                investment: "Привлеченных инвестиций"
+                businesses: "Бизнесов участвовало",
+                mentors: "Экспертных менторов",
+                growth: "Средний рост выручки"
             }
         },
         form: {
@@ -617,13 +617,13 @@ export const translations = {
             ]
         },
         global: {
-            title: "Global ta'sir, Mahalliy ildizlar",
-            subtitle: "Sizning muvaffaqiyatingizga bag'ishlangan hamkorlar, mentorlar va investorlarning butun dunyo bo'ylab tarmog'i.",
-            viewNetwork: "Tarmoqni ko'rish",
+            title: "KMB egalari bilan isbotlangan natijalar",
+            subtitle: "Haqiqiy biznes egalari O'zbekistondagi tizimlar dasturimiz orqali o'lchanadigan o'sishga erishmoqda.",
+            viewNetwork: "Muvaffaqiyat hikoyalari",
             stats: {
-                projects: "Qo'llab-quvvatlangan loyihalar",
-                partners: "Global hamkorlar",
-                investment: "Jalb qilingan investitsiyalar"
+                businesses: "Bizneslar ishtirok etdi",
+                mentors: "Ekspert mentorlar",
+                growth: "O'rtacha daromad o'sishi"
             }
         },
         form: {

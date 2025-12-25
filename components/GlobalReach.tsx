@@ -62,21 +62,21 @@ export default function GlobalReach() {
 
                         <div className="grid grid-cols-2 gap-12 mb-12">
                             <div>
-                                <Counter value={50} suffix="+" />
+                                <Counter value={45} suffix="+" />
                                 <div className="text-slate-500 font-medium uppercase tracking-wider text-sm border-t border-slate-800 pt-4 mt-2">
-                                    {t.global.stats.projects}
+                                    {t.global.stats.businesses}
                                 </div>
                             </div>
                             <div>
-                                <Counter value={12} />
+                                <Counter value={15} suffix="+" />
                                 <div className="text-slate-500 font-medium uppercase tracking-wider text-sm border-t border-slate-800 pt-4 mt-2">
-                                    {t.global.stats.partners}
+                                    {t.global.stats.mentors}
                                 </div>
                             </div>
                             <div className="col-span-2">
-                                <Counter value={100} prefix="$" suffix="M+" />
+                                <Counter value={65} suffix="%" />
                                 <div className="text-slate-500 font-medium uppercase tracking-wider text-sm border-t border-slate-800 pt-4 mt-2">
-                                    {t.global.stats.investment}
+                                    {t.global.stats.growth}
                                 </div>
                             </div>
                         </div>
