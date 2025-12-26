@@ -5,33 +5,26 @@
 
 /**
  * Locks scroll - prevents any scrolling during hero reveal animation
- * iOS-safe implementation using position:fixed
+ * For hero reveal: Always locks at top (0) to prevent visual jump
  */
 export const lockScroll = (): void => {
-    const scrollY = window.scrollY || 0;
-
     // Set overflow hidden on both html and body
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
 
-    // CRITICAL: position:fixed prevents iOS rubber-banding and layout reflow
+    // CRITICAL: Lock at top:0 to prevent snap-back visual jump
     document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollY}px`;
+    document.body.style.top = '0';
     document.body.style.left = '0';
     document.body.style.right = '0';
     document.body.style.width = '100%';
-
-    // Store scroll position for precise restoration
-    document.body.dataset.revealScrollY = String(scrollY);
 };
 
 /**
  * Unlocks scroll - restores normal scrolling after animation completes
- * Precisely restores scroll position
+ * For hero reveal, always returns to top (0)
  */
 export const unlockScroll = (): void => {
-    const scrollY = Number(document.body.dataset.revealScrollY || 0);
-
     // Restore all styles
     document.body.style.position = '';
     document.body.style.top = '';
@@ -40,10 +33,4 @@ export const unlockScroll = (): void => {
     document.body.style.width = '';
     document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
-
-    // Cleanup data attribute
-    delete document.body.dataset.revealScrollY;
-
-    // Restore scroll position (or go to 0 for hero reveal)
-    window.scrollTo(0, scrollY);
 };

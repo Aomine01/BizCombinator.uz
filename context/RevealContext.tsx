@@ -2,7 +2,6 @@
 
 import { createContext, useContext, useState, useCallback, useEffect, useRef, ReactNode } from 'react';
 import { useReducedMotion } from 'framer-motion';
-import { lockScroll } from '@/utils/scrollLock';
 
 interface RevealContextType {
     isRevealed: boolean;
@@ -84,15 +83,11 @@ export function RevealProvider({ children }: { children: ReactNode }) {
             });
         }
 
-        // Debug log (remove in production)
-        console.log('[RevealIntent] Triggered - locking scroll');
+        // Debug log
+        console.log('[RevealIntent] Triggered - natural scroll');
 
-        // CRITICAL: Lock scroll FIRST (prevents visual jump)
-        lockScroll();
-
-        // Use rAF to ensure lock is applied before scroll reset
+        // Set revealed state (allow natural scrolling during reveal)
         requestAnimationFrame(() => {
-            window.scrollTo(0, 0);
             setIsRevealed(true);
         });
     }, [isRevealed, prefersReducedMotion]);

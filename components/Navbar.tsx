@@ -65,7 +65,7 @@ export default function Navbar() {
         >
             <div className="container mx-auto px-4 h-full flex items-center justify-between">
                 {/* Logo */}
-                <Link href="/" className="z-50 block">
+                <Link href="/" className="z-50 block focus:outline-none">
                     <div className="relative h-10 w-auto transition-transform hover:scale-105">
                         <Image
                             src="/logo-red.svg"

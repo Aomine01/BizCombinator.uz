@@ -5,12 +5,11 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { RevealContext } from "@/context/RevealContext";
-import { unlockScroll } from "@/utils/scrollLock";
 
 import { ShinyButton } from "@/components/ui/ShinyButton";
 import HeroBackground from "@/components/HeroBackground";
 
-const SCROLL_THRESHOLD = 8;
+const SCROLL_THRESHOLD = 5;
 const HYSTERESIS_TOP = { enter: 40, leave: 70 };
 
 export default function Hero() {
@@ -34,103 +33,30 @@ export default function Hero() {
         }
     }, [scrollY, atTop]);
 
-    // INTENT DETECTION: wheel, touch, keyboard (one-time trigger with preventDefault)
+    // SIMPLIFIED SCROLL DETECTION (no preventDefault - more reliable)
     useEffect(() => {
         if (isRevealed || prefersReducedMotion) return;
 
-        let touchStartY = 0;
-        const hasTriggered = { value: false };
-
-        // WHEEL handler - non-passive to call preventDefault
-        const onWheel = (e: WheelEvent) => {
-            if (hasTriggered.value) return;
-            if (e.deltaY <= 0) return; // only downward intent
-
-            // CRITICAL: prevent browser from moving viewport
-            e.preventDefault();
-            hasTriggered.value = true;
-            initRevealIntent();
-        };
-
-        // TOUCH handlers - record start position and detect downward swipe
-        const onTouchStart = (e: TouchEvent) => {
-            touchStartY = e.touches?.[0]?.clientY ?? 0;
-        };
-
-        const onTouchMove = (e: TouchEvent) => {
-            if (hasTriggered.value) return;
-            const currentY = e.touches?.[0]?.clientY ?? 0;
-            const dy = touchStartY - currentY; // positive if swiping down
-
-            if (dy > SCROLL_THRESHOLD) {
-                // CRITICAL: prevent browser from moving viewport
-                e.preventDefault();
-                hasTriggered.value = true;
+        const handleScroll = () => {
+            if (window.scrollY > SCROLL_THRESHOLD) {
+                // Trigger reveal immediately
                 initRevealIntent();
             }
         };
 
-        // KEYDOWN handler
-        const onKeyDown = (e: KeyboardEvent) => {
-            if (hasTriggered.value) return;
-            if (['ArrowDown', 'PageDown', ' '].includes(e.key)) {
-                e.preventDefault();
-                hasTriggered.value = true;
-                initRevealIntent();
-            }
-        };
-
-        // Attach listeners (wheel and touchmove must be non-passive for preventDefault)
-        window.addEventListener('wheel', onWheel, { passive: false });
-        window.addEventListener('touchstart', onTouchStart, { passive: true });
-        window.addEventListener('touchmove', onTouchMove, { passive: false });
-        window.addEventListener('keydown', onKeyDown);
+        // Use scroll event with passive listener
+        window.addEventListener('scroll', handleScroll, { passive: true });
 
         return () => {
-            window.removeEventListener('wheel', onWheel);
-            window.removeEventListener('touchstart', onTouchStart);
-            window.removeEventListener('touchmove', onTouchMove);
-            window.removeEventListener('keydown', onKeyDown);
+            window.removeEventListener('scroll', handleScroll);
         };
     }, [isRevealed, initRevealIntent, prefersReducedMotion]);
 
-    // Unlock when reveal animation finishes + focus management
-    useEffect(() => {
-        if (!isRevealed) return;
 
-        // For reduced motion, unlock immediately
-        if (prefersReducedMotion) {
-            unlockScroll();
-            return;
-        }
-
-        // SAFETY: Unlock after max 1 second even if animation doesn't complete
-        const safetyTimer = setTimeout(() => {
-            console.warn('[Hero] Safety unlock triggered - ensuring scroll is unlocked');
-            unlockScroll();
-
-            // Focus management
-            requestAnimationFrame(() => {
-                const firstNav = document.querySelector('nav a, nav button') as HTMLElement | null;
-                firstNav?.focus({ preventScroll: true });
-            });
-        }, 1000);
-
-        return () => clearTimeout(safetyTimer);
-    }, [isRevealed, prefersReducedMotion]);
 
     // Handle animation complete
     useEffect(() => {
         if (animationComplete && isRevealed) {
-            // Unlock scroll
-            unlockScroll();
-
-            // Focus management for keyboard users
-            requestAnimationFrame(() => {
-                const firstNav = document.querySelector('nav a, nav button') as HTMLElement | null;
-                firstNav?.focus({ preventScroll: true });
-            });
-
             // Analytics: reveal completed
             if (typeof window !== 'undefined' && (window as any).gtag) {
                 (window as any).gtag('event', 'reveal_completed', {
@@ -149,7 +75,7 @@ export default function Hero() {
         }
     };
 
-    // Luxury-grade timing (550ms, softer easing)
+    // Smooth luxury timing
     const transition = (prefersReducedMotion
         ? { duration: 0 }
         : { duration: 0.55, ease: [0.16, 1, 0.3, 1] }) as any;
@@ -185,7 +111,9 @@ export default function Hero() {
                 animate={{ opacity: showContent ? 1 : 0 }}
                 transition={transition}
                 onAnimationComplete={() => {
-                    if (isRevealed) setAnimationComplete(true);
+                    if (isRevealed && !atTop) {
+                        setAnimationComplete(true);
+                    }
                 }}
                 className="hero-content container mx-auto px-4 relative z-10 text-center"
                 style={{
