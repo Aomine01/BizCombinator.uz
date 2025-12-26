@@ -49,9 +49,9 @@ export default function Navbar() {
         { code: "uz", label: "O'zbek" }
     ];
 
-    const transition = prefersReducedMotion
+    const transition = (prefersReducedMotion
         ? { duration: 0 }
-        : { duration: 0.4 };
+        : { duration: 0.45, ease: [0.22, 1, 0.36, 1] }) as any; // easeOutCubic bezier curve
 
     return (
         <motion.nav

@@ -9,17 +9,32 @@ import { useReveal } from "@/context/RevealContext";
 import { ShinyButton } from "@/components/ui/ShinyButton";
 import HeroBackground from "@/components/HeroBackground";
 
+const SCROLL_THRESHOLD = 8; // Avoids iOS address bar & trackpad noise
+
 export default function Hero() {
     const { t } = useLanguage();
     const { isRevealed, setIsRevealed } = useReveal();
     const prefersReducedMotion = useReducedMotion();
 
-    // Robust scroll detection (works on ALL devices)
+    // Reset on mount - ensures reveal happens on refresh & back navigation
     useEffect(() => {
-        if (isRevealed) return;
+        setIsRevealed(false);
+        window.scrollTo(0, 0);
+    }, [setIsRevealed]);
+
+    // Instant reveal for reduced motion users
+    useEffect(() => {
+        if (prefersReducedMotion) {
+            setIsRevealed(true);
+        }
+    }, [prefersReducedMotion, setIsRevealed]);
+
+    // Scroll detection with threshold (production-grade)
+    useEffect(() => {
+        if (isRevealed || prefersReducedMotion) return;
 
         const onScroll = () => {
-            if (window.scrollY > 0) {
+            if (window.scrollY > SCROLL_THRESHOLD) {
                 // Reset scroll immediately
                 window.scrollTo(0, 0);
                 // Trigger reveal
@@ -29,23 +44,25 @@ export default function Hero() {
 
         window.addEventListener('scroll', onScroll, { passive: true });
         return () => window.removeEventListener('scroll', onScroll);
-    }, [isRevealed, setIsRevealed]);
+    }, [isRevealed, prefersReducedMotion, setIsRevealed]);
 
-    // Temporary scroll lock during animation (400ms)
+    // Scroll lock during animation (450ms)
     useEffect(() => {
-        if (!isRevealed) return;
+        if (!isRevealed || prefersReducedMotion) return;
 
         document.body.style.overflow = 'hidden';
 
         const timer = setTimeout(() => {
             document.body.style.overflow = '';
-        }, 400);
+            // Enforce final position
+            window.scrollTo({ top: 0, behavior: 'auto' });
+        }, 450);
 
         return () => {
             clearTimeout(timer);
             document.body.style.overflow = '';
         };
-    }, [isRevealed]);
+    }, [isRevealed, prefersReducedMotion]);
 
     const handleScrollTo = (id: string) => {
         const element = document.getElementById(id);
@@ -54,9 +71,9 @@ export default function Hero() {
         }
     };
 
-    const transition = prefersReducedMotion
+    const transition = (prefersReducedMotion
         ? { duration: 0 }
-        : { duration: 0.4 };
+        : { duration: 0.45, ease: [0.22, 1, 0.36, 1] }) as any; // easeOutCubic bezier curve
 
     return (
         <section className="relative min-h-screen min-h-[100dvh] flex items-center justify-center overflow-hidden pt-20">

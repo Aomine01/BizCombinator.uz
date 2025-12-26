@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
 
 interface RevealContextType {
     isRevealed: boolean;
@@ -17,17 +17,8 @@ export const useReveal = () => useContext(RevealContext);
 export function RevealProvider({ children }: { children: ReactNode }) {
     const [isRevealed, setIsRevealed] = useState(false);
 
-    // Session persistence - prevent re-trigger on refresh
-    useEffect(() => {
-        const saved = sessionStorage.getItem('heroRevealed');
-        if (saved === 'true') setIsRevealed(true);
-    }, []);
-
-    useEffect(() => {
-        if (isRevealed) {
-            sessionStorage.setItem('heroRevealed', 'true');
-        }
-    }, [isRevealed]);
+    // NO session persistence - reveal happens on EVERY page load
+    // This ensures refresh and back navigation always show the reveal
 
     return (
         <RevealContext.Provider value={{ isRevealed, setIsRevealed }}>
