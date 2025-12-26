@@ -1,68 +1,98 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useReveal } from "@/context/RevealContext";
+import { unlockScroll } from "@/utils/scrollLock";
 
 import { ShinyButton } from "@/components/ui/ShinyButton";
 import HeroBackground from "@/components/HeroBackground";
 
-const SCROLL_THRESHOLD = 8; // Avoids iOS address bar & trackpad noise
+const SCROLL_THRESHOLD = 8; // Avoids iOS address bar & trackpad micro-scroll
 
 export default function Hero() {
     const { t } = useLanguage();
-    const { isRevealed, setIsRevealed } = useReveal();
+    const { initRevealIntent, isRevealed, scrollY } = useReveal();
     const prefersReducedMotion = useReducedMotion();
 
-    // Reset on mount - ensures reveal happens on refresh & back navigation
-    useEffect(() => {
-        setIsRevealed(false);
-        window.scrollTo(0, 0);
-    }, [setIsRevealed]);
+    const [atTop, setAtTop] = useState(true);
+    const [animationUnlocked, setAnimationUnlocked] = useState(false);
 
-    // Instant reveal for reduced motion users
+    // Hysteresis for "atTop" detection (prevents flicker on scroll bounce)
     useEffect(() => {
-        if (prefersReducedMotion) {
-            setIsRevealed(true);
+        if (scrollY < 40 && !atTop) {
+            setAtTop(true);
         }
-    }, [prefersReducedMotion, setIsRevealed]);
+        if (scrollY > 70 && atTop) {
+            setAtTop(false);
+        }
+    }, [scrollY, atTop]);
 
-    // Scroll detection with threshold (production-grade)
+    // Intent detection: wheel, touch, keyboard, scroll
     useEffect(() => {
         if (isRevealed || prefersReducedMotion) return;
 
-        const onScroll = () => {
-            if (window.scrollY > SCROLL_THRESHOLD) {
-                // Reset scroll immediately
-                window.scrollTo(0, 0);
-                // Trigger reveal
-                setIsRevealed(true);
+        const handleIntent = (e: Event) => {
+            // Keyboard: only specific keys trigger reveal
+            if (e instanceof KeyboardEvent) {
+                const key = e.key;
+                if (!['ArrowDown', 'PageDown', ' '].includes(key)) return;
             }
+
+            // Scroll: must exceed threshold
+            if (e.type === 'scroll' && window.scrollY <= SCROLL_THRESHOLD) {
+                return;
+            }
+
+            // Trigger centralized reveal
+            initRevealIntent();
         };
 
-        window.addEventListener('scroll', onScroll, { passive: true });
-        return () => window.removeEventListener('scroll', onScroll);
-    }, [isRevealed, prefersReducedMotion, setIsRevealed]);
-
-    // Scroll lock during animation (450ms)
-    useEffect(() => {
-        if (!isRevealed || prefersReducedMotion) return;
-
-        document.body.style.overflow = 'hidden';
-
-        const timer = setTimeout(() => {
-            document.body.style.overflow = '';
-            // Enforce final position
-            window.scrollTo({ top: 0, behavior: 'auto' });
-        }, 450);
+        // Attach minimal listeners
+        window.addEventListener('wheel', handleIntent, { passive: true });
+        window.addEventListener('touchstart', handleIntent, { passive: true });
+        window.addEventListener('keydown', handleIntent);
+        window.addEventListener('scroll', handleIntent, { passive: true });
 
         return () => {
-            clearTimeout(timer);
-            document.body.style.overflow = '';
+            window.removeEventListener('wheel', handleIntent);
+            window.removeEventListener('touchstart', handleIntent);
+            window.removeEventListener('keydown', handleIntent);
+            window.removeEventListener('scroll', handleIntent);
         };
-    }, [isRevealed, prefersReducedMotion]);
+    }, [isRevealed, prefersReducedMotion, initRevealIntent]);
+
+    // Handle animation completion - unlock scroll and manage focus
+    const handleAnimationComplete = () => {
+        if (isRevealed && !animationUnlocked) {
+            setAnimationUnlocked(true);
+
+            // Debug log
+            console.log('[Hero] Animation complete - unlocking scroll');
+
+            // Unlock scroll
+            unlockScroll();
+
+            // Focus management for keyboard users
+            requestAnimationFrame(() => {
+                const firstNav = document.querySelector('nav a, nav button') as HTMLElement;
+                if (firstNav) {
+                    firstNav.focus({ preventScroll: true });
+                }
+            });
+
+            // Analytics: reveal completed
+            if (typeof window !== 'undefined' && (window as any).gtag) {
+                (window as any).gtag('event', 'reveal_completed', {
+                    event_category: 'engagement',
+                    event_label: 'hero_reveal',
+                    value: Math.round(performance.now())
+                });
+            }
+        }
+    };
 
     const handleScrollTo = (id: string) => {
         const element = document.getElementById(id);
@@ -71,9 +101,13 @@ export default function Hero() {
         }
     };
 
+    // Luxury-grade timing and easing
     const transition = (prefersReducedMotion
         ? { duration: 0 }
-        : { duration: 0.45, ease: [0.22, 1, 0.36, 1] }) as any; // easeOutCubic bezier curve
+        : { duration: 0.55, ease: [0.16, 1, 0.3, 1] }) as any; // 550ms, softer easing
+
+    const showTitleCard = atTop;
+    const showContent = isRevealed && !atTop;
 
     return (
         <section className="relative min-h-screen min-h-[100dvh] flex items-center justify-center overflow-hidden pt-20">
@@ -83,13 +117,16 @@ export default function Hero() {
             {/* Grid Pattern */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
 
-            {/* CENTERED TITLE (Initial State - Title Card) */}
+            {/* CENTERED TITLE CARD (Initial State) */}
             <motion.h1
                 initial={{ opacity: 1 }}
-                animate={{ opacity: isRevealed ? 0 : 1 }}
+                animate={{ opacity: showTitleCard ? 1 : 0 }}
                 transition={transition}
-                className="absolute inset-0 flex items-center justify-center text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-white z-50 pointer-events-none px-4"
-                style={{ letterSpacing: '-0.02em' }}
+                className="title-card absolute inset-0 flex items-center justify-center text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-white z-50 pointer-events-none px-4"
+                style={{
+                    letterSpacing: '-0.02em',
+                    willChange: showTitleCard ? 'opacity' : 'auto'
+                }}
             >
                 BizCombinator
             </motion.h1>
@@ -97,9 +134,13 @@ export default function Hero() {
             {/* HERO CONTENT (Revealed State) */}
             <motion.div
                 initial={{ opacity: 0 }}
-                animate={{ opacity: isRevealed ? 1 : 0 }}
+                animate={{ opacity: showContent ? 1 : 0 }}
                 transition={transition}
-                className="container mx-auto px-4 relative z-10 text-center"
+                onAnimationComplete={handleAnimationComplete}
+                className="hero-content container mx-auto px-4 relative z-10 text-center"
+                style={{
+                    willChange: showContent ? 'opacity' : 'auto'
+                }}
             >
                 <motion.h1
                     className="mobile-hero-title font-heading font-bold text-white mb-6 leading-[1.1] text-4xl md:text-5xl lg:text-6xl"

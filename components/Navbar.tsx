@@ -15,19 +15,14 @@ import { ShinyButton } from "@/components/ui/ShinyButton";
 
 export default function Navbar() {
     const { t, language, setLanguage } = useLanguage();
-    const { isRevealed } = useReveal();
+    const { isRevealed, scrollY } = useReveal();
     const prefersReducedMotion = useReducedMotion();
     const [isOpen, setIsOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
     const [langMenuOpen, setLangMenuOpen] = useState(false);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
-        };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    // Scroll-aware visibility (hide when back at top)
+    const showNavbar = isRevealed && scrollY > 50;
+    const scrolled = scrollY > 20;
 
     const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
         e.preventDefault();
@@ -49,18 +44,22 @@ export default function Navbar() {
         { code: "uz", label: "O'zbek" }
     ];
 
+    // Luxury-grade timing (550ms, softer easing)
     const transition = (prefersReducedMotion
         ? { duration: 0 }
-        : { duration: 0.45, ease: [0.22, 1, 0.36, 1] }) as any; // easeOutCubic bezier curve
+        : { duration: 0.55, ease: [0.16, 1, 0.3, 1] }) as any;
 
     return (
         <motion.nav
             initial={{ opacity: 0 }}
-            animate={{ opacity: isRevealed ? 1 : 0 }}
+            animate={{ opacity: showNavbar ? 1 : 0 }}
             transition={transition}
             className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? "glass h-20" : "bg-transparent h-24 border-none shadow-none"
-                } ${isRevealed ? 'pointer-events-auto' : 'pointer-events-none'
+                } ${showNavbar ? 'pointer-events-auto' : 'pointer-events-none'
                 }`}
+            style={{
+                willChange: showNavbar ? 'opacity' : 'auto'
+            }}
         >
             <div className="container mx-auto px-4 h-full flex items-center justify-between">
                 {/* Logo */}
