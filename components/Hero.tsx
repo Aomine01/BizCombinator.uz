@@ -94,6 +94,29 @@ export default function Hero() {
         }
     };
 
+    // SAFETY: Unlock scroll after max 1 second (prevents stuck state)
+    useEffect(() => {
+        if (!isRevealed) return;
+
+        // For reduced motion, unlock immediately
+        if (prefersReducedMotion && !animationUnlocked) {
+            setAnimationUnlocked(true);
+            unlockScroll();
+            return;
+        }
+
+        // Safety timeout: unlock after 1 second even if animation doesn't complete
+        const safetyTimer = setTimeout(() => {
+            if (!animationUnlocked) {
+                console.warn('[Hero] Safety unlock triggered - animation may not have completed');
+                setAnimationUnlocked(true);
+                unlockScroll();
+            }
+        }, 1000);
+
+        return () => clearTimeout(safetyTimer);
+    }, [isRevealed, animationUnlocked, prefersReducedMotion]);
+
     const handleScrollTo = (id: string) => {
         const element = document.getElementById(id);
         if (element) {
