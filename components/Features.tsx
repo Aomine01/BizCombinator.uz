@@ -44,7 +44,7 @@ export default function Features() {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="mobile-section-title text-4xl md:text-6xl font-heading font-black mb-6 text-white tracking-tight"
+                        className="mobile-section-title text-4xl md:text-5xl font-heading font-bold mb-6 text-white"
                     >
                         {t.features.title}
                     </motion.h2>
@@ -53,7 +53,7 @@ export default function Features() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="mobile-section-subtitle text-lg md:text-xl text-slate-300 max-w-3xl mx-auto font-medium"
+                        className="mobile-section-subtitle text-lg md:text-xl text-slate-400 max-w-3xl mx-auto"
                     >
                         {t.features.subtitle}
                     </motion.p>
@@ -73,17 +73,17 @@ export default function Features() {
                             <motion.div
                                 key={index}
                                 variants={item}
-                                className="glass-card p-10 rounded-2xl group cursor-pointer border-2 border-transparent hover:border-primary/20 transition-all duration-300"
+                                className="glass-card p-8 rounded-2xl group cursor-pointer hover:border-primary/10 transition-all duration-300"
                             >
-                                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center mb-8 text-primary group-hover:scale-110 group-hover:from-primary/20 group-hover:to-primary/10 transition-all duration-300 border border-primary/20">
-                                    <Icon className="w-10 h-10" />
+                                <div className="w-16 h-16 rounded-xl bg-primary/5 flex items-center justify-center mb-6 text-primary group-hover:scale-105 transition-all duration-300 border border-primary/10">
+                                    <Icon className="w-8 h-8" />
                                 </div>
 
-                                <h3 className="mobile-card-title text-xl md:text-2xl font-black text-white mb-5 font-heading group-hover:text-primary transition-colors tracking-tight">
+                                <h3 className="mobile-card-title text-lg md:text-xl font-bold text-white mb-4 font-heading group-hover:text-primary transition-colors">
                                     {feature.title}
                                 </h3>
 
-                                <p className="mobile-body-text text-base md:text-lg text-slate-300 leading-relaxed font-medium">
+                                <p className="mobile-body-text text-sm md:text-base text-slate-400 leading-relaxed">
                                     {feature.desc}
                                 </p>
                             </motion.div>

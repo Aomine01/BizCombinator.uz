@@ -36,12 +36,12 @@ export const translations = {
             ]
         },
         features: {
-            title: "Not Just For Startups",
-            subtitle: "We help established SMEs in Uzbekistan transform their operations through structured, proven business systems.",
+            title: "Biznesingizni tizimga solamiz",
+            subtitle: "O'zbekistondagi mavjud bizneslar uchun aniq tizimlar.",
             items: [
-                { title: "Digital Business Systems", desc: "Replace old processes with modern automation. CRM, inventory management, financial tracking — working systems, not just theory. Built specifically for your industry and team." },
-                { title: "Operational Excellence via Process", desc: "Systematize sales, marketing, and operations. Each employee knows their role. Results become predictable. You gain time to focus on strategy, not daily firefighting." },
-                { title: "International Market Readiness", desc: "Build export-ready business structure. Documentation, compliance, pricing models for global markets. Connect with international partners and distribution channels via our network." }
+                { title: "Raqamlashtirish", desc: "Eski jarayonlarni yangi dasturlar bilan almashtiramiz. CRM mijozlar uchun, ombor uchun dastur, moliya nazorati. Sizning biznesingiz uchun." },
+                { title: "Aniq jarayonlar", desc: "Savdo, marketing, operatsiyalarni tartibga solamiz. Har kim nimani qilishini biladi. Natijalar ko'rinadi. Kerakli joyga vaqt ajratasiz." },
+                { title: "Eksport tayyorligi", desc: "Xorijiy bozorga chiqish uchun hujjatlar va narxlar tayyorlaymiz. Dunyo bozoridagi hamkorlar bilan bog'laymiz." }
             ]
         },
         mentors: {
@@ -299,12 +299,12 @@ export const translations = {
             ]
         },
         features: {
-            title: "Не только для стартапов",
-            subtitle: "Мы помогаем устоявшимся МСБ в Узбекистане трансформировать операции через структурированные, проверенные бизнес-системы.",
+            title: "Бизнесингизни тизимга соламиз",
+            subtitle: "Узбекистондаги мавжуд бизнеслар учун аник тизимлар.",
             items: [
-                { title: "Цифровые бизнес-системы", desc: "Заменяем старые процессы на современную автоматизацию. CRM, управление складом, финансовый учёт — работающие системы, не просто теория. Под вашу отрасль и команду." },
-                { title: "Операционное превосходство через процессы", desc: "Систематизируем продажи, маркетинг и операции. Каждый сотрудник знает свою роль. Результаты становятся предсказуемыми. Вы получаете время на стратегию, а не тушение пожаров." },
-                { title: "Готовность к международным рынкам", desc: "Строим бизнес-структуру для экспорта. Документация, соответствие требованиям, ценовые модели для глобальных рынков. Связываем с партнёрами и каналами дистрибуции через нашу сеть." }
+                { title: "Рақамлаштириш", desc: "Эски жараёнларни янги дастурлар билан алмаштирамиз. CRM мижозлар учун, омбор учун дастур, молия назорати. Сизнинг бизнесингиз учун." },
+                { title: "Аник жараёнлар", desc: "Савдо, маркетинг, операцияларни тартибга соламиз. Хар ким нимани килишини билади. Натижалар куринади. Керакли жойга вакт ажратасиз." },
+                { title: "Экспорт тайёрлиги", desc: "Хорижий бозорга чикиш учун хужжатлар ва нархлар тайёрлаймиз. Дунё бозоридаги хамкорлар билан боғламиз." }
             ]
         },
         mentors: {
