@@ -37,11 +37,11 @@ export const translations = {
         },
         features: {
             title: "Not Just For Startups",
-            subtitle: "We empower established businesses to innovate like unicorns.",
+            subtitle: "We help established SMEs in Uzbekistan transform their operations through structured, proven business systems.",
             items: [
-                { title: "Digital Transformation", desc: "Transform legacy systems into modern, scalable digital solutions." },
-                { title: "Operational AI", desc: "Streamline workflows and increase efficiency with AI integration." },
-                { title: "Market Expansion", desc: "Unlock global markets and scale your business internationally." }
+                { title: "Digital Business Systems", desc: "Replace old processes with modern automation. CRM, inventory management, financial tracking — working systems, not just theory. Built specifically for your industry and team." },
+                { title: "Operational Excellence via Process", desc: "Systematize sales, marketing, and operations. Each employee knows their role. Results become predictable. You gain time to focus on strategy, not daily firefighting." },
+                { title: "International Market Readiness", desc: "Build export-ready business structure. Documentation, compliance, pricing models for global markets. Connect with international partners and distribution channels via our network." }
             ]
         },
         mentors: {
@@ -300,11 +300,11 @@ export const translations = {
         },
         features: {
             title: "Не только для стартапов",
-            subtitle: "Мы помогаем устоявшимся бизнесам внедрять инновации как единороги.",
+            subtitle: "Мы помогаем устоявшимся МСБ в Узбекистане трансформировать операции через структурированные, проверенные бизнес-системы.",
             items: [
-                { title: "Цифровая трансформация", desc: "Превратите устаревшие системы в современные масштабируемые цифровые решения." },
-                { title: "Операционный ИИ", desc: "Оптимизируйте рабочие процессы и повысьте эффективность с помощью интеграции ИИ." },
-                { title: "Расширение рынка", desc: "Откройте глобальные рынки и масштабируйте свой бизнес на международном уровне." }
+                { title: "Цифровые бизнес-системы", desc: "Заменяем старые процессы на современную автоматизацию. CRM, управление складом, финансовый учёт — работающие системы, не просто теория. Под вашу отрасль и команду." },
+                { title: "Операционное превосходство через процессы", desc: "Систематизируем продажи, маркетинг и операции. Каждый сотрудник знает свою роль. Результаты становятся предсказуемыми. Вы получаете время на стратегию, а не тушение пожаров." },
+                { title: "Готовность к международным рынкам", desc: "Строим бизнес-структуру для экспорта. Документация, соответствие требованиям, ценовые модели для глобальных рынков. Связываем с партнёрами и каналами дистрибуции через нашу сеть." }
             ]
         },
         mentors: {
@@ -503,7 +503,7 @@ export const translations = {
             cannedResponse: "Звучит интересно! Подайте заявку, чтобы наши менторы могли детально рассмотреть вашу идею."
         },
         footer: {
-            tagline: "Акселератор будущего. Превращаем амбициозные идеи в глобальные компании через финансирование, менторство и рост с помощью ИИ.",
+            tagline: "Акселератор будущего. Превращаем амбициозные идеи в глобальные компании через финансирование, менторство и AI.",
             columns: {
                 program: "Программа",
                 company: "Компания",
@@ -563,11 +563,11 @@ export const translations = {
         },
         features: {
             title: "Faqat startaplar uchun emas",
-            subtitle: "Biz mavjud bizneslarga yakkashoxlar kabi innovatsiya qilishga yordam beramiz.",
+            subtitle: "Biz O'zbekistondagi barqaror KO'B larga tizimli, isbotlangan biznes tizimlari orqali operatsiyalarni o'zgartirishda yordam beramiz.",
             items: [
-                { title: "Raqamli transformatsiya", desc: "Eski tizimlarni zamonaviy, masshtablashtiriladigan raqamli yechimlarga aylantirish." },
-                { title: "Operatsion AI", desc: "AI integratsiyasi orqali ish jarayonlarini optimallashtirish va samaradorlikni oshirish." },
-                { title: "Bozorni kengaytirish", desc: "Global bozorlarni ochish va biznesingizni xalqaro miqyosda kengaytirish." }
+                { title: "Raqamli biznes tizimlari", desc: "Eski jarayonlarni zamonaviy avtomatlashtirish bilan almashtiramiz. CRM, ombor boshqaruvi, moliyaviy nazorat — nazariya emas, ishlaydigan tizimlar. Sizning sohangiz va jamoangiz uchun maxsus." },
+                { title: "Jarayonlar orqali operatsion mukammallik", desc: "Savdo, marketing va operatsiyalarni tizimga solamiz. Har bir xodim o'z vazifasini biladi. Natijalar bashorat qilinadigan bo'ladi. Kundalik o't o'chirish o'rniga strategiyaga vaqt ajratasiz." },
+                { title: "Xalqaro bozorlar uchun tayyorgarlik", desc: "Eksport uchun biznes strukturasini quram iz. Hujjatlashtirish, me'yorlarga muvofiqlik, global bozorlar uchun narxlash modellari. Bizning tarmog'imiz orqali xalqaro hamkorlar va tarqatish kanallari bilan bog'laymiz." }
             ]
         },
         mentors: {
