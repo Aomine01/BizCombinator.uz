@@ -36,12 +36,12 @@ export const translations = {
             ]
         },
         features: {
-            title: "Biznesingizni tizimga solamiz",
-            subtitle: "O'zbekistondagi mavjud bizneslar uchun aniq tizimlar.",
+            title: "We Systematize Your Business",
+            subtitle: "Clear systems for established businesses in Uzbekistan.",
             items: [
-                { title: "Raqamlashtirish", desc: "Eski jarayonlarni yangi dasturlar bilan almashtiramiz. CRM mijozlar uchun, ombor uchun dastur, moliya nazorati. Sizning biznesingiz uchun." },
-                { title: "Aniq jarayonlar", desc: "Savdo, marketing, operatsiyalarni tartibga solamiz. Har kim nimani qilishini biladi. Natijalar ko'rinadi. Kerakli joyga vaqt ajratasiz." },
-                { title: "Eksport tayyorligi", desc: "Xorijiy bozorga chiqish uchun hujjatlar va narxlar tayyorlaymiz. Dunyo bozoridagi hamkorlar bilan bog'laymiz." }
+                { title: "Digitalization", desc: "Replace old processes with new software. CRM for clients, warehouse software, financial control. Built for your business." },
+                { title: "Clear Processes", desc: "Organize sales, marketing, and operations. Everyone knows what to do. Results are visible. You focus on what matters." },
+                { title: "Export Readiness", desc: "Prepare documents and pricing for foreign markets. Connect with international partners." }
             ]
         },
         mentors: {
