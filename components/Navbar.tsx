@@ -53,14 +53,14 @@ export default function Navbar() {
         >
             <div className="container mx-auto px-4 h-full flex items-center justify-between">
                 {/* Logo */}
-                {/* Logo */}
                 <Link href="/" className="z-50 block">
-                    <div className="relative w-48 h-10 transition-transform hover:scale-105">
+                    <div className="relative h-10 w-auto transition-transform hover:scale-105">
                         <Image
-                            src="/images/logo-full-red.png"
+                            src="/biz logo qizil.svg"
                             alt="BizCombinator"
-                            fill
-                            className="object-contain object-left"
+                            width={67}
+                            height={67}
+                            className="h-10 w-auto"
                             priority
                         />
                     </div>

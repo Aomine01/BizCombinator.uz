@@ -18,12 +18,13 @@ export default function Footer() {
                     {/* Brand Column */}
                     <div>
                         <Link href="/" className="block mb-6 w-fit">
-                            <div className="relative w-48 h-12">
+                            <div className="relative h-12 w-auto">
                                 <Image
-                                    src="/images/logo-full-red.png"
+                                    src="/biz logo qizil.svg"
                                     alt="BizCombinator"
-                                    fill
-                                    className="object-contain object-left"
+                                    width={67}
+                                    height={67}
+                                    className="h-12 w-auto"
                                 />
                             </div>
                         </Link>
