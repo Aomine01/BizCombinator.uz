@@ -92,9 +92,14 @@ export default function GlobalReach() {
 
                     </motion.div>
 
-                    {/* Connected Globe Visual */}
-                    <div className="relative h-[400px] md:h-[600px] flex items-center justify-center">
-                        <div ref={globeWrapRef} className="absolute inset-0 flex items-center justify-center">
+                    {/* Connected Globe Visual - Desktop Only */}
+                    <div className="hidden md:block relative h-[400px] md:h-[600px] flex items-center justify-center">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            className="absolute inset-0 flex items-center justify-center"
+                        >
                             <Globe3DErrorBoundary fallback={
                                 <div className="w-full h-full max-w-[600px] max-h-[600px] flex items-center justify-center">
                                     <div className="text-center text-slate-400">
@@ -107,12 +112,12 @@ export default function GlobalReach() {
                             }>
                                 <div className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[520px] md:h-[520px] rounded-full overflow-hidden">
                                     <Globe3D
-                                        quality={isMobile ? "low" : "high"}
-                                        paused={reduceMotion || !globeInView}
+                                        quality="high"
+                                        paused={reduceMotion || !globeInView} // Keep existing paused logic
                                     />
                                 </div>
                             </Globe3DErrorBoundary>
-                        </div>
+                        </motion.div>
                     </div>
 
                 </div>
