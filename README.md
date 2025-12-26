@@ -257,4 +257,4 @@ This project is proprietary and confidential.
 
 ---
 
-**Built with ❤️ by the BizCombinator Team**
+**Built with ❤️ by Sharofiddin/Aomine01 for BizCombinator** 
