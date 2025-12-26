@@ -44,7 +44,7 @@ export default function Features() {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-3xl md:text-5xl font-heading font-bold mb-6 text-white"
+                        className="mobile-section-title text-3xl md:text-5xl font-heading font-bold mb-6 text-white"
                     >
                         {t.features.title}
                     </motion.h2>
@@ -53,7 +53,7 @@ export default function Features() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-slate-400 max-w-2xl mx-auto text-lg"
+                        className="mobile-section-subtitle text-base md:text-lg text-slate-400 max-w-2xl mx-auto"
                     >
                         {t.features.subtitle}
                     </motion.p>
@@ -79,11 +79,11 @@ export default function Features() {
                                     <Icon className="w-8 h-8" />
                                 </div>
 
-                                <h3 className="text-xl font-bold text-white mb-4 font-heading group-hover:text-primary transition-colors">
+                                <h3 className="mobile-card-title text-lg md:text-xl font-bold text-white mb-4 font-heading group-hover:text-primary transition-colors">
                                     {feature.title}
                                 </h3>
 
-                                <p className="text-slate-400 leading-relaxed">
+                                <p className="mobile-body-text text-sm md:text-base text-slate-400 leading-relaxed">
                                     {feature.desc}
                                 </p>
                             </motion.div>

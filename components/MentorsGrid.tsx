@@ -40,12 +40,12 @@ export default function MentorsGrid() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-16 max-w-3xl mx-auto"
+                    className="text-center mb-12 max-w-3xl mx-auto"
                 >
-                    <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
+                    <h2 className="mobile-section-title text-4xl md:text-5xl font-heading font-bold text-white mb-4">
                         {t.mentors.title}
                     </h2>
-                    <p className="text-xl text-gray-400">
+                    <p className="mobile-section-subtitle text-base md:text-xl text-gray-400">
                         {t.mentors.subtitle}
                     </p>
                 </motion.div>

@@ -21,10 +21,10 @@ export default function GapSection() {
                     transition={{ duration: 0.6 }}
                     className="text-center mb-16 max-w-3xl mx-auto"
                 >
-                    <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
+                    <h2 className="mobile-section-title text-4xl md:text-5xl font-heading font-bold text-white mb-4">
                         {t.gap.title}
                     </h2>
-                    <p className="text-xl text-gray-400">
+                    <p className="mobile-section-subtitle text-base md:text-xl text-gray-400">
                         {t.gap.subtitle}
                     </p>
                 </motion.div>
@@ -53,11 +53,11 @@ export default function GapSection() {
                                     </span>
                                 </div>
 
-                                <div className="flex-1 pt-1">
-                                    <h3 className="text-lg font-semibold text-white mb-2">
+                                <div className="flex-1">
+                                    <h3 className="mobile-card-title text-lg font-semibold text-white mb-2">
                                         {benefit.title}
                                     </h3>
-                                    <p className="text-gray-400 text-base leading-relaxed">
+                                    <p className="mobile-body-text text-sm text-gray-400 leading-relaxed">
                                         {benefit.desc}
                                     </p>
                                 </div>
