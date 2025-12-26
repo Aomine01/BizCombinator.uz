@@ -53,10 +53,10 @@ export default function GlobalReach() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 leading-tight">
+                        <h2 className="mobile-section-title text-4xl md:text-6xl font-heading font-bold text-white mb-6 leading-tight">
                             {t.global.title}
                         </h2>
-                        <p className="text-slate-400 text-lg mb-12 leading-relaxed max-w-lg">
+                        <p className="mobile-section-subtitle text-base md:text-lg text-slate-400 mb-12 leading-relaxed max-w-lg">
                             {t.global.subtitle}
                         </p>
 

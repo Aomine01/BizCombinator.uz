@@ -72,10 +72,10 @@ export default function BusinessTypes() {
                     viewport={{ once: true }}
                     className="mb-12 flex flex-col items-start text-left"
                 >
-                    <h2 className="text-3xl md:text-5xl font-heading font-bold text-white mb-4 text-left">
+                    <h2 className="mobile-section-title text-3xl md:text-5xl font-heading font-bold text-white mb-4 text-left">
                         {t.business.title}
                     </h2>
-                    <p className="text-slate-400 text-lg m-0 p-0 text-left">
+                    <p className="mobile-section-subtitle text-base md:text-lg text-slate-400 m-0 p-0 text-left">
                         {t.business.subtitle}
                     </p>
                 </motion.div>

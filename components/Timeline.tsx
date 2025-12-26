@@ -24,10 +24,10 @@ function TimelineStep({ step, index }: { step: { title: string; desc: string }; 
             <div className={`hidden md:block ${isRight ? 'md:text-right' : ''}`}>
                 {!isRight && (
                     <>
-                        <h3 className={`text-2xl md:text-3xl font-bold mb-4 font-heading transition-colors duration-500 ${isInView ? "text-primary" : "text-white"}`}>
+                        <h3 className={`mobile-card-title text-xl md:text-2xl font-bold mb-4 font-heading transition-colors duration-500 ${isInView ? "text-primary" : "text-white"}`}>
                             {step.title}
                         </h3>
-                        <p className={`leading-relaxed text-lg transition-colors duration-500 ${isInView ? "text-slate-300" : "text-slate-500"}`}>
+                        <p className={`mobile-body-text leading-relaxed text-base md:text-lg transition-colors duration-500 ${isInView ? "text-slate-300" : "text-slate-500"}`}>
                             {step.desc}
                         </p>
                     </>
@@ -101,8 +101,8 @@ export default function Timeline() {
         <section id="the-journey" className="py-24 relative overflow-hidden">
             <div className="container mx-auto px-4 relative z-10">
                 <div className="text-center mb-24">
-                    <span className="text-primary font-medium tracking-wider text-sm uppercase mb-3 block">{t.timeline.subtitle}</span>
-                    <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6">{t.timeline.title}</h2>
+                    <span className="mobile-hero-badge text-primary font-medium tracking-wider text-sm uppercase mb-3 block">{t.timeline.subtitle}</span>
+                    <h2 className="mobile-section-title text-4xl md:text-6xl font-heading font-bold text-white mb-6">{t.timeline.title}</h2>
                 </div>
 
                 <div ref={containerRef} className="relative max-w-5xl mx-auto">
