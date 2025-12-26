@@ -93,7 +93,7 @@ export default function GlobalReach() {
                     </motion.div>
 
                     {/* Connected Globe Visual - Desktop Only */}
-                    <div className="hidden md:block relative h-[400px] md:h-[600px] flex items-center justify-center">
+                    <div className="hidden md:flex relative h-[400px] md:h-[600px] items-center justify-center">
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
                             whileInView={{ opacity: 1, scale: 1 }}
