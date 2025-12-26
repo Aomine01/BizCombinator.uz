@@ -36,28 +36,8 @@ export default function ScrollShowcase() {
             {/* Background Gradient */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#050505_70%)] pointer-events-none z-0" />
 
-            {/* Scroll-Animated Globe Background - Matching Desktop */}
-            <div ref={globeRef} className="sticky top-0 h-screen flex items-center justify-center overflow-hidden pointer-events-none">
-                <motion.div
-                    style={{
-                        scale: useTransform(scrollYProgress, [0, 0.5, 1], [0.6, 1, 1.3]),
-                        rotate: useTransform(scrollYProgress, [0, 1], [0, 180]),
-                        opacity: useTransform(scrollYProgress, [0, 0.1, 0.8], [0, 0.3, 0.3])
-                    }}
-                    className="w-[280px] h-[280px]"
-                >
-                    <Globe3DErrorBoundary fallback={null}>
-                        <Globe3D
-                            quality="low"
-                            scrollProgress={scrollYProgress}
-                            paused={!isGlobeVisible}
-                        />
-                    </Globe3DErrorBoundary>
-                </motion.div>
-            </div>
-
             {/* Content Layer - Cards appear one by one */}
-            <div className="container mx-auto px-4 relative z-10 -mt-[100vh]">
+            <div className="container mx-auto px-4 relative z-10">
                 <div className="space-y-16">
                     {slides.map((slide, index) => (
                         <motion.div
