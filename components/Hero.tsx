@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
@@ -17,18 +17,48 @@ export default function Hero() {
     const { initRevealIntent, isRevealed, scrollY } = useReveal();
     const prefersReducedMotion = useReducedMotion();
 
-    const [atTop, setAtTop] = useState(true);
+    const [showTitleCard, setShowTitleCard] = useState(true);
     const [animationUnlocked, setAnimationUnlocked] = useState(false);
+    const lastScrollYRef = useRef(0); // Use ref instead of state to avoid infinite loop
 
-    // Hysteresis for "atTop" detection (prevents flicker on scroll bounce)
+    // Refined scroll-back detection: show title ONLY when at top AND trying to scroll up
     useEffect(() => {
-        if (scrollY < 40 && !atTop) {
-            setAtTop(true);
+        // If not revealed yet, always show title card
+        if (!isRevealed) {
+            setShowTitleCard(true);
+            return;
         }
-        if (scrollY > 70 && atTop) {
-            setAtTop(false);
+
+        // User scrolled away from top - hide title card
+        if (scrollY > 50) {
+            setShowTitleCard(false);
         }
-    }, [scrollY, atTop]);
+
+        // User is at absolute top (scrollY = 0) AND trying to scroll up (over-scroll intent)
+        // Detect by checking if we're at 0 and last position was also 0 or very small
+        if (scrollY === 0 && lastScrollYRef.current <= 5 && lastScrollYRef.current < scrollY + 1) {
+            // At the edge - one more scroll up will show title
+            // We detect wheel/touch intent in the scroll listener below
+        }
+
+        // Update ref (doesn't trigger re-render)
+        lastScrollYRef.current = scrollY;
+    }, [scrollY, isRevealed]); // Removed lastScrollY from dependencies
+
+    // Over-scroll detection at top edge
+    useEffect(() => {
+        if (!isRevealed || scrollY > 0) return;
+
+        const handleOverScroll = (e: WheelEvent) => {
+            // At top (scrollY = 0) and trying to scroll up (deltaY < 0)
+            if (scrollY === 0 && e.deltaY < 0) {
+                setShowTitleCard(true);
+            }
+        };
+
+        window.addEventListener('wheel', handleOverScroll, { passive: true });
+        return () => window.removeEventListener('wheel', handleOverScroll);
+    }, [scrollY, isRevealed]);
 
     // Intent detection: wheel, touch, keyboard, scroll
     useEffect(() => {
@@ -124,13 +154,12 @@ export default function Hero() {
         }
     };
 
-    // Luxury-grade timing and easing
+    // Ultra-smooth luxury timing
     const transition = (prefersReducedMotion
         ? { duration: 0 }
-        : { duration: 0.55, ease: [0.16, 1, 0.3, 1] }) as any; // 550ms, softer easing
+        : { duration: 0.7, ease: [0.16, 1, 0.3, 1] }) as any; // 700ms - even smoother
 
-    const showTitleCard = atTop;
-    const showContent = isRevealed && !atTop;
+    const showContent = isRevealed && !showTitleCard;
 
     return (
         <section className="relative min-h-screen min-h-[100dvh] flex items-center justify-center overflow-hidden pt-20">

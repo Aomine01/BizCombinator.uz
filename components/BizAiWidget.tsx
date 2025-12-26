@@ -5,9 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import { Sparkles, X, Send } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { useReveal } from "@/context/RevealContext";
 
 export default function BizAiWidget() {
     const { t } = useLanguage();
+    const { scrollY } = useReveal();
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<{ type: "bot" | "user"; text: string }[]>([
         { type: "bot", text: t.widget.hello }
@@ -15,6 +17,10 @@ export default function BizAiWidget() {
     const [inputValue, setInputValue] = useState("");
     const [isTyping, setIsTyping] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
+
+    // Hide chatbot during hero reveal (only show after scrolling past hero)
+    const HERO_HEIGHT = typeof window !== 'undefined' ? window.innerHeight : 900;
+    const showChatbot = scrollY > HERO_HEIGHT + 100;
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -55,8 +61,16 @@ export default function BizAiWidget() {
         if (e.key === "Enter") handleSend();
     };
 
+    // Don't render at all if not visible (prevents DOM pollution during hero)
+    if (!showChatbot) return null;
+
     return (
-        <div className="fixed bottom-6 right-6 z-50">
+        <motion.div
+            className="fixed bottom-6 right-6 z-50"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        >
             {/* Chat Window */}
             <AnimatePresence>
                 {isOpen && (
@@ -84,8 +98,8 @@ export default function BizAiWidget() {
                             {messages.map((msg, i) => (
                                 <div key={i} className={`flex ${msg.type === "user" ? "justify-end" : "justify-start"}`}>
                                     <div className={`max-w-[80%] p-3 rounded-2xl text-sm leading-relaxed ${msg.type === "user"
-                                            ? "bg-primary text-white rounded-br-none"
-                                            : "bg-slate-800 text-slate-200 rounded-bl-none border border-slate-700"
+                                        ? "bg-primary text-white rounded-br-none"
+                                        : "bg-slate-800 text-slate-200 rounded-bl-none border border-slate-700"
                                         }`}>
                                         {msg.text}
                                     </div>
@@ -135,6 +149,6 @@ export default function BizAiWidget() {
             >
                 {isOpen ? <X className="w-6 h-6" /> : <Sparkles className="w-6 h-6" />}
             </motion.button>
-        </div>
+        </motion.div>
     );
 }

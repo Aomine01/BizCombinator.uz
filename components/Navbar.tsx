@@ -44,10 +44,10 @@ export default function Navbar() {
         { code: "uz", label: "O'zbek" }
     ];
 
-    // Luxury-grade timing (550ms, softer easing)
+    // Ultra-smooth luxury timing (matches Hero)
     const transition = (prefersReducedMotion
         ? { duration: 0 }
-        : { duration: 0.55, ease: [0.16, 1, 0.3, 1] }) as any;
+        : { duration: 0.7, ease: [0.16, 1, 0.3, 1] }) as any; // 700ms - even smoother
 
     return (
         <motion.nav
