@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Syne } from "next/font/google";
 import { LanguageProvider } from "@/context/LanguageContext";
+import { RevealProvider } from "@/context/RevealContext";
 import "./globals.css";
 
 const inter = Inter({
@@ -85,7 +86,9 @@ export default function RootLayout({
         className={`font-sans antialiased`}
       >
         <LanguageProvider>
-          {children}
+          <RevealProvider>
+            {children}
+          </RevealProvider>
         </LanguageProvider>
       </body>
     </html>

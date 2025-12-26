@@ -18,7 +18,6 @@ export const translations = {
             subtitle: "Marketing, sales, finance — complete systems accelerator.",
             apply: "Apply Now",
             learnMore: "Learn More",
-            badge: "6-Month Accelerator"
         },
         gap: {
             title: "What Your Business Will Have After the Program",
@@ -281,7 +280,6 @@ export const translations = {
             subtitle: "Маркетинг, продажи, финансы — полный системный акселератор.",
             apply: "Подать Заявку",
             learnMore: "Подробнее",
-            badge: "6-Месячный Акселератор"
         },
         gap: {
             title: "Что будет в вашем бизнесе после программы",
