@@ -13,12 +13,12 @@ export const translations = {
             apply: "Apply Now",
         },
         hero: {
-            titleLine1: "BUILD YOUR BRAND.",
-            titleLine2: "SCALE YOUR BUSINESS.",
-            subtitle: "6-month accelerator for small and growing businesses in Uzbekistan. We help you create a strong brand identity and build scalable systems for sustainable growth.",
-            apply: "Submit Application",
-            learnMore: "Learn More About Program",
-            badge: "APPLICATIONS NOW OPEN FOR 2026",
+            titleLine1: "Build Business Systems",
+            titleLine2: "With BizCombinator",
+            subtitle: "Marketing, sales, finance — complete systems accelerator.",
+            apply: "Apply Now",
+            learnMore: "Learn More",
+            badge: "6-Month Accelerator"
         },
         gap: {
             title: "What Your Business Will Have After the Program",
@@ -271,12 +271,12 @@ export const translations = {
             apply: "Подать заявку",
         },
         hero: {
-            titleLine1: "СОЗДАЙТЕ БРЕНД.",
-            titleLine2: "МАСШТАБИРУЙТЕ БИЗНЕС.",
-            subtitle: "6-месячный акселератор для малого и растущего бизнеса в Узбекистане. Мы помогаем создать сильный бренд и построить масштабируемые системы для устойчивого роста.",
-            apply: "Подать заявку",
-            learnMore: "Подробнее о программе",
-            badge: "ПРИЕМ ЗАЯВОК НА 2026 ГОД",
+            titleLine1: "Постройте Системы Бизнеса",
+            titleLine2: "С BizCombinator",
+            subtitle: "Маркетинг, продажи, финансы — полный системный акселератор.",
+            apply: "Подать Заявку",
+            learnMore: "Подробнее",
+            badge: "6-Месячный Акселератор"
         },
         gap: {
             title: "Что будет в вашем бизнесе после программы",
@@ -529,12 +529,12 @@ export const translations = {
             apply: "Ariza topshirish",
         },
         hero: {
-            titleLine1: "BRENDINGIZNI YARATING.",
-            titleLine2: "BIZNESINGIZNI RIVOJLANTIRING.",
-            subtitle: "O'zbekistondagi kichik va o'sayotgan bizneslar uchun 6 oylik akselerator. Biz kuchli brend identifikatsiyasi va barqaror o'sish uchun masshtablanadigan tizimlar qurishda yordam beramiz.",
-            apply: "Ariza topshirish",
-            learnMore: "Dastur haqida ko'proq",
-            badge: "2026-YIL UCHUN ARIZALAR QABUL QILINMOQDA",
+            titleLine1: "Biznes Tizimlarini Quring",
+            titleLine2: "BizCombinator Bilan",
+            subtitle: "Marketing, savdo, moliya — to'liq tizimli akselerator.",
+            apply: "Ariza Topshiring",
+            learnMore: "Batafsil",
+            badge: "6 Oylik Akselerator"
         },
         gap: {
             title: "Dastur tugagach, biznesingizda mavjud bo'ladi",

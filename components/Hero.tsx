@@ -32,7 +32,7 @@ export default function Hero() {
                     transition={{ duration: 0.8 }}
                     className="inline-block px-4 py-2 rounded-full glass mb-8"
                 >
-                    <span className="text-primary font-medium tracking-wide text-sm bg-clip-text text-transparent bg-gradient-to-r from-primary to-orange-400">
+                    <span className="mobile-hero-badge text-primary font-medium tracking-wide text-sm">
                         {t.hero.badge}
                     </span>
                 </motion.div>
@@ -41,23 +41,17 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.1 }}
-                    className="font-heading font-bold text-white mb-6 leading-[1.1]"
-                    style={{
-                        fontSize: 'clamp(2.5rem, 8vw + 1rem, 6rem)',
-                        textWrap: 'balance' as any,
-                        wordBreak: 'break-word',
-                        hyphens: 'auto'
-                    }}
+                    className="mobile-hero-title font-heading font-bold text-white mb-6 leading-[1.1] text-4xl md:text-5xl lg:text-6xl"
                 >
                     {t.hero.titleLine1} <br />
-                    <span className="text-gradient">{t.hero.titleLine2}</span>
+                    <span className="text-primary">{t.hero.titleLine2}</span>
                 </motion.h1>
 
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed"
+                    className="mobile-hero-subtitle text-base md:text-lg text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed"
                 >
                     {t.hero.subtitle}
                 </motion.p>

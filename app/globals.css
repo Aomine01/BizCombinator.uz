@@ -169,5 +169,90 @@ body {
   }
 }
 
+/* ═══════════════════════════════════════════════════════════
+   Mobile Typography Optimization (Inspired by bsnss.uz)
+   ═══════════════════════════════════════════════════════════ */
 
-/* Swiper overrides if needed, but handled in component */
+@media (max-width: 768px) {
+
+  /* Hero Section - Ultra compact for mobile */
+  .mobile-hero-title {
+    font-size: 2rem !important;
+    /* 32px - down from 40-96px */
+    line-height: 1.1 !important;
+    letter-spacing: -0.02em;
+  }
+
+  .mobile-hero-subtitle {
+    font-size: 0.875rem !important;
+    /* 14px - down from 18-20px */
+    line-height: 1.6 !important;
+  }
+
+  .mobile-hero-badge {
+    font-size: 0.75rem !important;
+    /* 12px - down from 14px */
+  }
+
+  /* Section Titles - Aggressive reduction */
+  .mobile-section-title {
+    font-size: 1.5rem !important;
+    /* 24px - down from 36-48px */
+    line-height: 1.2 !important;
+  }
+
+  .mobile-section-subtitle {
+    font-size: 0.875rem !important;
+    /* 14px */
+    line-height: 1.6 !important;
+  }
+
+  /* Body Text */
+  .mobile-body-text {
+    font-size: 0.875rem !important;
+    /* 14px */
+    line-height: 1.6 !important;
+  }
+
+  .mobile-body-text-sm {
+    font-size: 0.8125rem !important;
+    /* 13px */
+    line-height: 1.5 !important;
+  }
+
+  /* Card Components */
+  .mobile-card-title {
+    font-size: 1rem !important;
+    /* 16px - down from 18-20px */
+  }
+
+  .mobile-card-subtitle {
+    font-size: 0.8125rem !important;
+    /* 13px */
+  }
+
+  .mobile-card-text {
+    font-size: 0.75rem !important;
+    /* 12px */
+    line-height: 1.5 !important;
+  }
+
+  /* Spacing Adjustments for Mobile */
+  .mobile-compact-spacing {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+}
+
+/* Tablet Breakpoint - Intermediate scaling */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .tablet-section-title {
+    font-size: 2rem !important;
+    /* 32px */
+  }
+
+  .tablet-body-text {
+    font-size: 1rem !important;
+    /* 16px */
+  }
+}
