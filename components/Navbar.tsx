@@ -1,12 +1,11 @@
-
 "use client";
 
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 import Link from "next/link";
 import { Menu, X, Globe, ChevronDown } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
-import { useReveal } from "@/context/RevealContext";
+import { RevealContext } from "@/context/RevealContext";
 import { Language } from "@/constants/translations";
 
 import Image from "next/image";
@@ -15,10 +14,13 @@ import { ShinyButton } from "@/components/ui/ShinyButton";
 
 export default function Navbar() {
     const { t, language, setLanguage } = useLanguage();
-    const { isRevealed, scrollY } = useReveal();
+    const ctx = useContext(RevealContext);
     const prefersReducedMotion = useReducedMotion();
     const [isOpen, setIsOpen] = useState(false);
     const [langMenuOpen, setLangMenuOpen] = useState(false);
+
+    if (!ctx) return null;
+    const { isRevealed, scrollY } = ctx;
 
     // Scroll-aware visibility (hide when back at top)
     const showNavbar = isRevealed && scrollY > 50;
@@ -44,10 +46,10 @@ export default function Navbar() {
         { code: "uz", label: "O'zbek" }
     ];
 
-    // Ultra-smooth luxury timing (matches Hero)
+    // Luxury-grade timing (550ms to match Hero)
     const transition = (prefersReducedMotion
         ? { duration: 0 }
-        : { duration: 0.7, ease: [0.16, 1, 0.3, 1] }) as any; // 700ms - even smoother
+        : { duration: 0.55, ease: [0.16, 1, 0.3, 1] }) as any;
 
     return (
         <motion.nav

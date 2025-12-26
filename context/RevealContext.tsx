@@ -11,7 +11,7 @@ interface RevealContextType {
     initRevealIntent: () => void;
 }
 
-const RevealContext = createContext<RevealContextType>({
+export const RevealContext = createContext<RevealContextType>({
     isRevealed: false,
     setIsRevealed: () => { },
     scrollY: 0,

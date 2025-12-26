@@ -1,116 +1,134 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useContext } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
-import { useReveal } from "@/context/RevealContext";
+import { RevealContext } from "@/context/RevealContext";
 import { unlockScroll } from "@/utils/scrollLock";
 
 import { ShinyButton } from "@/components/ui/ShinyButton";
 import HeroBackground from "@/components/HeroBackground";
 
-const SCROLL_THRESHOLD = 8; // Avoids iOS address bar & trackpad micro-scroll
+const SCROLL_THRESHOLD = 8;
+const HYSTERESIS_TOP = { enter: 40, leave: 70 };
 
 export default function Hero() {
     const { t } = useLanguage();
-    const { initRevealIntent, isRevealed, scrollY } = useReveal();
+    const ctx = useContext(RevealContext);
+    if (!ctx) throw new Error('RevealContext not found');
+
+    const { isRevealed, scrollY, initRevealIntent } = ctx;
     const prefersReducedMotion = useReducedMotion();
 
-    const [showTitleCard, setShowTitleCard] = useState(true);
-    const [animationUnlocked, setAnimationUnlocked] = useState(false);
-    const lastScrollYRef = useRef(0); // Use ref instead of state to avoid infinite loop
+    const [atTop, setAtTop] = useState(true);
+    const [animationComplete, setAnimationComplete] = useState(false);
 
-    // Refined scroll-back detection: show title ONLY when at top AND trying to scroll up
+    // HYSTERESIS for atTop (prevents flicker on scroll bounce)
     useEffect(() => {
-        // If not revealed yet, always show title card
-        if (!isRevealed) {
-            setShowTitleCard(true);
-            return;
+        if (scrollY < HYSTERESIS_TOP.enter && !atTop) {
+            setAtTop(true);
         }
-
-        // User scrolled away from top - hide title card
-        if (scrollY > 50) {
-            setShowTitleCard(false);
+        if (scrollY > HYSTERESIS_TOP.leave && atTop) {
+            setAtTop(false);
         }
+    }, [scrollY, atTop]);
 
-        // User is at absolute top (scrollY = 0) AND trying to scroll up (over-scroll intent)
-        // Detect by checking if we're at 0 and last position was also 0 or very small
-        if (scrollY === 0 && lastScrollYRef.current <= 5 && lastScrollYRef.current < scrollY + 1) {
-            // At the edge - one more scroll up will show title
-            // We detect wheel/touch intent in the scroll listener below
-        }
-
-        // Update ref (doesn't trigger re-render)
-        lastScrollYRef.current = scrollY;
-    }, [scrollY, isRevealed]); // Removed lastScrollY from dependencies
-
-    // Over-scroll detection at top edge
-    useEffect(() => {
-        if (!isRevealed || scrollY > 0) return;
-
-        const handleOverScroll = (e: WheelEvent) => {
-            // At top (scrollY = 0) and trying to scroll up (deltaY < 0)
-            if (scrollY === 0 && e.deltaY < 0) {
-                setShowTitleCard(true);
-            }
-        };
-
-        window.addEventListener('wheel', handleOverScroll, { passive: true });
-        return () => window.removeEventListener('wheel', handleOverScroll);
-    }, [scrollY, isRevealed]);
-
-    // Intent detection: wheel, touch, keyboard, scroll
+    // INTENT DETECTION: wheel, touch, keyboard (one-time trigger with preventDefault)
     useEffect(() => {
         if (isRevealed || prefersReducedMotion) return;
 
-        const handleIntent = (e: Event) => {
-            // Keyboard: only specific keys trigger reveal
-            if (e instanceof KeyboardEvent) {
-                const key = e.key;
-                if (!['ArrowDown', 'PageDown', ' '].includes(key)) return;
-            }
+        let touchStartY = 0;
+        const hasTriggered = { value: false };
 
-            // Scroll: must exceed threshold
-            if (e.type === 'scroll' && window.scrollY <= SCROLL_THRESHOLD) {
-                return;
-            }
+        // WHEEL handler - non-passive to call preventDefault
+        const onWheel = (e: WheelEvent) => {
+            if (hasTriggered.value) return;
+            if (e.deltaY <= 0) return; // only downward intent
 
-            // Trigger centralized reveal
+            // CRITICAL: prevent browser from moving viewport
+            e.preventDefault();
+            hasTriggered.value = true;
             initRevealIntent();
         };
 
-        // Attach minimal listeners
-        window.addEventListener('wheel', handleIntent, { passive: true });
-        window.addEventListener('touchstart', handleIntent, { passive: true });
-        window.addEventListener('keydown', handleIntent);
-        window.addEventListener('scroll', handleIntent, { passive: true });
+        // TOUCH handlers - record start position and detect downward swipe
+        const onTouchStart = (e: TouchEvent) => {
+            touchStartY = e.touches?.[0]?.clientY ?? 0;
+        };
+
+        const onTouchMove = (e: TouchEvent) => {
+            if (hasTriggered.value) return;
+            const currentY = e.touches?.[0]?.clientY ?? 0;
+            const dy = touchStartY - currentY; // positive if swiping down
+
+            if (dy > SCROLL_THRESHOLD) {
+                // CRITICAL: prevent browser from moving viewport
+                e.preventDefault();
+                hasTriggered.value = true;
+                initRevealIntent();
+            }
+        };
+
+        // KEYDOWN handler
+        const onKeyDown = (e: KeyboardEvent) => {
+            if (hasTriggered.value) return;
+            if (['ArrowDown', 'PageDown', ' '].includes(e.key)) {
+                e.preventDefault();
+                hasTriggered.value = true;
+                initRevealIntent();
+            }
+        };
+
+        // Attach listeners (wheel and touchmove must be non-passive for preventDefault)
+        window.addEventListener('wheel', onWheel, { passive: false });
+        window.addEventListener('touchstart', onTouchStart, { passive: true });
+        window.addEventListener('touchmove', onTouchMove, { passive: false });
+        window.addEventListener('keydown', onKeyDown);
 
         return () => {
-            window.removeEventListener('wheel', handleIntent);
-            window.removeEventListener('touchstart', handleIntent);
-            window.removeEventListener('keydown', handleIntent);
-            window.removeEventListener('scroll', handleIntent);
+            window.removeEventListener('wheel', onWheel);
+            window.removeEventListener('touchstart', onTouchStart);
+            window.removeEventListener('touchmove', onTouchMove);
+            window.removeEventListener('keydown', onKeyDown);
         };
-    }, [isRevealed, prefersReducedMotion, initRevealIntent]);
+    }, [isRevealed, initRevealIntent, prefersReducedMotion]);
 
-    // Handle animation completion - unlock scroll and manage focus
-    const handleAnimationComplete = () => {
-        if (isRevealed && !animationUnlocked) {
-            setAnimationUnlocked(true);
+    // Unlock when reveal animation finishes + focus management
+    useEffect(() => {
+        if (!isRevealed) return;
 
-            // Debug log
-            console.log('[Hero] Animation complete - unlocking scroll');
+        // For reduced motion, unlock immediately
+        if (prefersReducedMotion) {
+            unlockScroll();
+            return;
+        }
 
+        // SAFETY: Unlock after max 1 second even if animation doesn't complete
+        const safetyTimer = setTimeout(() => {
+            console.warn('[Hero] Safety unlock triggered - ensuring scroll is unlocked');
+            unlockScroll();
+
+            // Focus management
+            requestAnimationFrame(() => {
+                const firstNav = document.querySelector('nav a, nav button') as HTMLElement | null;
+                firstNav?.focus({ preventScroll: true });
+            });
+        }, 1000);
+
+        return () => clearTimeout(safetyTimer);
+    }, [isRevealed, prefersReducedMotion]);
+
+    // Handle animation complete
+    useEffect(() => {
+        if (animationComplete && isRevealed) {
             // Unlock scroll
             unlockScroll();
 
             // Focus management for keyboard users
             requestAnimationFrame(() => {
-                const firstNav = document.querySelector('nav a, nav button') as HTMLElement;
-                if (firstNav) {
-                    firstNav.focus({ preventScroll: true });
-                }
+                const firstNav = document.querySelector('nav a, nav button') as HTMLElement | null;
+                firstNav?.focus({ preventScroll: true });
             });
 
             // Analytics: reveal completed
@@ -122,30 +140,7 @@ export default function Hero() {
                 });
             }
         }
-    };
-
-    // SAFETY: Unlock scroll after max 1 second (prevents stuck state)
-    useEffect(() => {
-        if (!isRevealed) return;
-
-        // For reduced motion, unlock immediately
-        if (prefersReducedMotion && !animationUnlocked) {
-            setAnimationUnlocked(true);
-            unlockScroll();
-            return;
-        }
-
-        // Safety timeout: unlock after 1 second even if animation doesn't complete
-        const safetyTimer = setTimeout(() => {
-            if (!animationUnlocked) {
-                console.warn('[Hero] Safety unlock triggered - animation may not have completed');
-                setAnimationUnlocked(true);
-                unlockScroll();
-            }
-        }, 1000);
-
-        return () => clearTimeout(safetyTimer);
-    }, [isRevealed, animationUnlocked, prefersReducedMotion]);
+    }, [animationComplete, isRevealed]);
 
     const handleScrollTo = (id: string) => {
         const element = document.getElementById(id);
@@ -154,12 +149,13 @@ export default function Hero() {
         }
     };
 
-    // Ultra-smooth luxury timing
+    // Luxury-grade timing (550ms, softer easing)
     const transition = (prefersReducedMotion
         ? { duration: 0 }
-        : { duration: 0.7, ease: [0.16, 1, 0.3, 1] }) as any; // 700ms - even smoother
+        : { duration: 0.55, ease: [0.16, 1, 0.3, 1] }) as any;
 
-    const showContent = isRevealed && !showTitleCard;
+    const showTitleCard = atTop;
+    const showContent = isRevealed && !atTop;
 
     return (
         <section className="relative min-h-screen min-h-[100dvh] flex items-center justify-center overflow-hidden pt-20">
@@ -188,7 +184,9 @@ export default function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: showContent ? 1 : 0 }}
                 transition={transition}
-                onAnimationComplete={handleAnimationComplete}
+                onAnimationComplete={() => {
+                    if (isRevealed) setAnimationComplete(true);
+                }}
                 className="hero-content container mx-auto px-4 relative z-10 text-center"
                 style={{
                     willChange: showContent ? 'opacity' : 'auto'

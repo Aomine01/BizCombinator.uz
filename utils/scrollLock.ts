@@ -10,14 +10,16 @@
 export const lockScroll = (): void => {
     const scrollY = window.scrollY || 0;
 
-    // Lock overflow on both html and body
+    // Set overflow hidden on both html and body
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
 
     // CRITICAL: position:fixed prevents iOS rubber-banding and layout reflow
     document.body.style.position = 'fixed';
     document.body.style.top = `-${scrollY}px`;
-    document.body.style.width = '100%'; // Prevent horizontal shift
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
 
     // Store scroll position for precise restoration
     document.body.dataset.revealScrollY = String(scrollY);
@@ -33,6 +35,8 @@ export const unlockScroll = (): void => {
     // Restore all styles
     document.body.style.position = '';
     document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
     document.body.style.width = '';
     document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
