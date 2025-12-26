@@ -100,6 +100,8 @@ export default function MentorsGrid() {
                                         alt={`${mentor.name} - ${mentor.role}`}
                                         width={280}
                                         height={252}
+                                        sizes="(max-width: 768px) 90vw, (max-width: 1024px) 45vw, 280px"
+                                        quality={85}
                                         loading={index < 3 ? "eager" : "lazy"}
                                         priority={index === 0}
                                         className="w-full h-full object-cover object-top"

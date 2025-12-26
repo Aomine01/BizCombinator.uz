@@ -53,52 +53,57 @@ export const translations = {
                     name: "Farkhod Kamilov",
                     role: "Marketing System",
                     credibility: "CEO inMarketing & Futurum Academy",
-                    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400",
+                    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?fm=webp&fit=crop&q=85&w=400&h=500",
                     telegram: "https://t.me/farhodkamilov_uz",
-                    instagram: ""
+                    instagram: "",
+                    website: ""
                 },
                 {
                     id: 2,
                     name: "Nodirbek Kuzdekov",
                     role: "Sales System",
                     credibility: "Business trainer in sales, strategy & management",
-                    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400",
+                    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?fm=webp&fit=crop&q=85&w=400&h=500",
                     telegram: "https://t.me/KuzdekovChannel",
-                    instagram: ""
+                    instagram: "",
+                    website: ""
                 },
                 {
                     id: 3,
                     name: "Otabek Umarov",
                     role: "Financial Control",
                     credibility: "CFO, finance & business automation expert",
-                    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400",
+                    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?fm=webp&fit=crop&q=85&w=400&h=500",
                     telegram: "https://t.me/CFOOtabek",
-                    instagram: ""
+                    instagram: "",
+                    website: ""
                 },
                 {
                     id: 4,
                     name: "Doniyorjon Norsidiq",
                     role: "Operations Management",
                     credibility: "20+ years HR, worked at Uzbekneftegaz, Central Bank",
-                    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400",
+                    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?fm=webp&fit=crop&q=85&w=400&h=500",
                     telegram: "https://t.me/Doniyorjon_Norsidiq",
-                    instagram: ""
+                    instagram: "",
+                    website: ""
                 },
                 {
                     id: 5,
                     name: "Jonibek Ortiq",
                     role: "HR & Team Systems",
                     credibility: "HR expert for Russia & Central Asia",
-                    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400",
+                    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fm=webp&fit=crop&q=85&w=400&h=500",
                     telegram: "https://t.me/HRJonibek",
-                    instagram: ""
+                    instagram: "",
+                    website: ""
                 },
                 {
                     id: 6,
                     name: "Gulnara Kholmatova",
                     role: "Management System",
                     credibility: "25+ years leadership, International coaching credentials",
-                    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=400",
+                    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?fm=webp&fit=crop&q=85&w=400&h=500",
                     telegram: "",
                     instagram: "",
                     website: "https://gulnarakholmatova.com"
@@ -311,52 +316,57 @@ export const translations = {
                     name: "Фарход Камилов",
                     role: "Маркетинговая система",
                     credibility: "CEO inMarketing & Futurum Academy",
-                    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400",
+                    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?fm=webp&fit=crop&q=85&w=400&h=500",
                     telegram: "https://t.me/farhodkamilov_uz",
-                    instagram: ""
+                    instagram: "",
+                    website: ""
                 },
                 {
                     id: 2,
                     name: "Нодирбек Куздеков",
                     role: "Система продаж",
                     credibility: "Бизнес-тренер по продажам и стратегии",
-                    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400",
+                    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?fm=webp&fit=crop&q=85&w=400&h=500",
                     telegram: "https://t.me/KuzdekovChannel",
-                    instagram: ""
+                    instagram: "",
+                    website: ""
                 },
                 {
                     id: 3,
                     name: "Отабек Умаров",
                     role: "Финансовый контроль",
                     credibility: "CFO, финансы и автоматизация бизнеса",
-                    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400",
+                    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?fm=webp&fit=crop&q=85&w=400&h=500",
                     telegram: "https://t.me/CFOOtabek",
-                    instagram: ""
+                    instagram: "",
+                    website: ""
                 },
                 {
                     id: 4,
                     name: "Дониёржон Норсидиқ",
                     role: "Операционное управление",
                     credibility: "20+ лет HR, Uzbekneftegaz, Центральный банк",
-                    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400",
+                    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?fm=webp&fit=crop&q=85&w=400&h=500",
                     telegram: "https://t.me/Doniyorjon_Norsidiq",
-                    instagram: ""
+                    instagram: "",
+                    website: ""
                 },
                 {
                     id: 5,
                     name: "Джонибек Ортиқ",
                     role: "HR и командные системы",
                     credibility: "HR эксперт для России и Центральной Азии",
-                    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400",
+                    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fm=webp&fit=crop&q=85&w=400&h=500",
                     telegram: "https://t.me/HRJonibek",
-                    instagram: ""
+                    instagram: "",
+                    website: ""
                 },
                 {
                     id: 6,
                     name: "Гульнара Холматова",
                     role: "Система управления",
                     credibility: "25+ лет руководства, международный коучинг",
-                    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=400",
+                    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?fm=webp&fit=crop&q=85&w=400&h=500",
                     telegram: "",
                     instagram: "",
                     website: "https://gulnarakholmatova.com"
@@ -569,52 +579,57 @@ export const translations = {
                     name: "Farxod Kamilov",
                     role: "Marketing tizimi",
                     credibility: "CEO inMarketing & Futurum Academy",
-                    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400",
+                    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?fm=webp&fit=crop&q=85&w=400&h=500",
                     telegram: "https://t.me/farhodkamilov_uz",
-                    instagram: ""
+                    instagram: "",
+                    website: ""
                 },
                 {
                     id: 2,
                     name: "Nodirbek Quzdekov",
                     role: "Savdo tizimi",
                     credibility: "Savdo va strategiya bo'yicha biznes-trener",
-                    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400",
+                    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?fm=webp&fit=crop&q=85&w=400&h=500",
                     telegram: "https://t.me/KuzdekovChannel",
-                    instagram: ""
+                    instagram: "",
+                    website: ""
                 },
                 {
                     id: 3,
                     name: "Otabek Umarov",
                     role: "Moliyaviy nazorat",
                     credibility: "CFO, moliya va biznes avtomatlashtiruvi",
-                    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400",
+                    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?fm=webp&fit=crop&q=85&w=400&h=500",
                     telegram: "https://t.me/CFOOtabek",
-                    instagram: ""
+                    instagram: "",
+                    website: ""
                 },
                 {
                     id: 4,
                     name: "Doniyorjon Norsidiq",
                     role: "Operatsion boshqaruv",
                     credibility: "20+ yillik HR, O'zbekneftegaz, Markaziy bank",
-                    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400",
+                    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?fm=webp&fit=crop&q=85&w=400&h=500",
                     telegram: "https://t.me/Doniyorjon_Norsidiq",
-                    instagram: ""
+                    instagram: "",
+                    website: ""
                 },
                 {
                     id: 5,
                     name: "Jonibek Ortiq",
                     role: "HR va jamoa tizimi",
                     credibility: "Rossiya va Markaziy Osiyo uchun HR eksperti",
-                    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400",
+                    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fm=webp&fit=crop&q=85&w=400&h=500",
                     telegram: "https://t.me/HRJonibek",
-                    instagram: ""
+                    instagram: "",
+                    website: ""
                 },
                 {
                     id: 6,
                     name: "Gulnara Xolmatova",
                     role: "Boshqaruv tizimi",
                     credibility: "25+ yillik rahbarlik, xalqaro kouching",
-                    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=400",
+                    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?fm=webp&fit=crop&q=85&w=400&h=500",
                     telegram: "",
                     instagram: "",
                     website: "https://gulnarakholmatova.com"
