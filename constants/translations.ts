@@ -220,16 +220,16 @@ export const translations = {
         showcase: {
             slides: [
                 {
-                    title: "From Zero to One",
-                    description: "It starts with a spark. We help you ignite the initial idea, structuring your vision into a viable business model."
+                    title: "Diagnostika",
+                    description: "We analyze your current business systems, identify gaps, and create a roadmap for growth."
                 },
                 {
-                    title: "Rapid Scaling",
-                    description: "Once product-market fit is found, we fuel the fire. Our network and resources help you scale exponentially."
+                    title: "Implementation",
+                    description: "Build working systems together: marketing, sales, finance, operations - step by step."
                 },
                 {
-                    title: "Global Domination",
-                    description: "The sky is not the limit. We connect you with global markets, partners, and exit opportunities."
+                    title: "Scaling",
+                    description: "Once systems are in place, we help you scale efficiently with proven frameworks."
                 }
             ]
         },
@@ -483,16 +483,16 @@ export const translations = {
         showcase: {
             slides: [
                 {
-                    title: "От нуля к единице",
-                    description: "Всё начинается с искры. Помогаем превратить идею в понятную бизнес-модель и план действий."
+                    title: "Диагностика",
+                    description: "Анализируем текущие системы бизнеса, выявляем пробелы и создаем дорожную карту роста."
                 },
                 {
-                    title: "Быстрое масштабирование",
-                    description: "Когда найден product-market fit, мы ускоряем рост. Сеть и ресурсы помогают масштабироваться."
+                    title: "Внедрение",
+                    description: "Строим рабочие системы вместе: маркетинг, продажи, финансы, операции - шаг за шагом."
                 },
                 {
-                    title: "Глобальная экспансия",
-                    description: "Предела нет. Мы подключаем к рынкам, партнёрам и возможностям выхода по всему миру."
+                    title: "Масштабирование",
+                    description: "Когда системы на месте, помогаем масштабироваться эффективно по проверенным фреймворкам."
                 }
             ]
         },
@@ -746,16 +746,16 @@ export const translations = {
         showcase: {
             slides: [
                 {
-                    title: "Noldan birgacha",
-                    description: "Hammasi uchqundan boshlanadi. G'oyani aniq biznes-modelga va reja-ga aylantiramiz."
+                    title: "Diagnostika",
+                    description: "Hozirgi biznes tizimlarini tahlil qilamiz, kamchiliklarni aniqlaymiz va o'sish yo'lxaritasini yaratamiz."
                 },
                 {
-                    title: "Tez masshtablash",
-                    description: "Product-market fit topilgach, o'sishni tezlatamiz. Tarmoq va resurslar yordam beradi."
+                    title: "Joriy qilish",
+                    description: "Ishlaydigan tizimlarni birgalikda quramiz: marketing, savdo, moliya, operatsiyalar - qadam-baqadam."
                 },
                 {
-                    title: "Global kengayish",
-                    description: "Chegara yo'q. Global bozorlar, hamkorlar va exit imkoniyatlariga ulaymiz."
+                    title: "Masshtablash",
+                    description: "Tizimlar tayyor bo'lgach, isbotlangan freymvorklar yordamida samarali masshtablashda yordam beramiz."
                 }
             ]
         },

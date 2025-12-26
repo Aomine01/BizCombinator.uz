@@ -6,7 +6,7 @@ import Globe3D from "@/components/Globe3D";
 import { Globe3DErrorBoundary } from "@/components/Globe3DErrorBoundary";
 import { useLanguage } from "@/context/LanguageContext";
 
-const SLIDE_COLORS = ["from-blue-500 to-cyan-400", "from-orange-500 to-amber-400", "from-purple-500 to-pink-400"];
+const SLIDE_COLORS = ["from-orange-500 to-amber-400", "from-orange-600 to-yellow-500", "from-primary to-orange-300"];
 
 export default function ScrollShowcase() {
     const { t } = useLanguage();
