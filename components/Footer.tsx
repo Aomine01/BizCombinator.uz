@@ -20,7 +20,7 @@ export default function Footer() {
                         <Link href="/" className="block mb-6 w-fit">
                             <div className="relative h-12 w-auto">
                                 <Image
-                                    src="/biz logo qizil.svg"
+                                    src="/logo-red.svg"
                                     alt="BizCombinator"
                                     width={67}
                                     height={67}

@@ -56,7 +56,7 @@ export default function Navbar() {
                 <Link href="/" className="z-50 block">
                     <div className="relative h-10 w-auto transition-transform hover:scale-105">
                         <Image
-                            src="/biz logo qizil.svg"
+                            src="/logo-red.svg"
                             alt="BizCombinator"
                             width={67}
                             height={67}
