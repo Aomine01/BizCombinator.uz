@@ -113,7 +113,7 @@ export default function GlobalReach() {
                                 <div className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[520px] md:h-[520px] rounded-full overflow-hidden">
                                     <Globe3D
                                         quality="high"
-                                        paused={reduceMotion || !globeInView} // Keep existing paused logic
+                                        paused={false} // Always render on desktop
                                     />
                                 </div>
                             </Globe3DErrorBoundary>
