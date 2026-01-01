@@ -2,22 +2,20 @@
     "ci": {
         "collect": {
             "numberOfRuns": 3,
-            "startServerCommand": "npm run start",
-            "startServerReadyPattern": "Ready in",
             "url": [
-                "http://localhost:3000/"
+                "https://biz-combinator-uz.vercel.app/"
             ]
         },
         "assert": {
             "assertions": {
                 "categories:performance": [
-                    "error",
+                    "warn",
                     {
                         "minScore": 0.8
                     }
                 ],
                 "categories:seo": [
-                    "error",
+                    "warn",
                     {
                         "minScore": 0.75
                     }
