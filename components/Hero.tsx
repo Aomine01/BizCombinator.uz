@@ -9,48 +9,17 @@ import { RevealContext } from "@/context/RevealContext";
 import { ShinyButton } from "@/components/ui/ShinyButton";
 import HeroBackground from "@/components/HeroBackground";
 
-const SCROLL_THRESHOLD = 5;
-const HYSTERESIS_TOP = { enter: 40, leave: 70 };
+// No longer needed - using automatic timed reveal
 
 export default function Hero() {
     const { t } = useLanguage();
     const ctx = useContext(RevealContext);
     if (!ctx) throw new Error('RevealContext not found');
 
-    const { isRevealed, scrollY, initRevealIntent } = ctx;
+    const { isRevealed } = ctx;
     const prefersReducedMotion = useReducedMotion();
 
-    const [atTop, setAtTop] = useState(true);
     const [animationComplete, setAnimationComplete] = useState(false);
-
-    // HYSTERESIS for atTop (prevents flicker on scroll bounce)
-    useEffect(() => {
-        if (scrollY < HYSTERESIS_TOP.enter && !atTop) {
-            setAtTop(true);
-        }
-        if (scrollY > HYSTERESIS_TOP.leave && atTop) {
-            setAtTop(false);
-        }
-    }, [scrollY, atTop]);
-
-    // SIMPLIFIED SCROLL DETECTION (no preventDefault - more reliable)
-    useEffect(() => {
-        if (isRevealed || prefersReducedMotion) return;
-
-        const handleScroll = () => {
-            if (window.scrollY > SCROLL_THRESHOLD) {
-                // Trigger reveal immediately
-                initRevealIntent();
-            }
-        };
-
-        // Use scroll event with passive listener
-        window.addEventListener('scroll', handleScroll, { passive: true });
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, [isRevealed, initRevealIntent, prefersReducedMotion]);
 
 
 
@@ -75,13 +44,17 @@ export default function Hero() {
         }
     };
 
-    // Smooth luxury timing
-    const transition = (prefersReducedMotion
+    // Ultra-smooth premium timing
+    const titleTransition = (prefersReducedMotion
         ? { duration: 0 }
-        : { duration: 0.55, ease: [0.16, 1, 0.3, 1] }) as any;
+        : { duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }) as any; // Slow, elegant fade
 
-    const showTitleCard = atTop;
-    const showContent = isRevealed && !atTop;
+    const contentTransition = (prefersReducedMotion
+        ? { duration: 0 }
+        : { duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.2 }) as any; // Smooth appear with delay
+
+    const showTitleCard = !isRevealed;
+    const showContent = isRevealed;
 
     return (
         <section className="relative min-h-screen min-h-[100dvh] flex items-center justify-center overflow-hidden pt-20">
@@ -91,33 +64,39 @@ export default function Hero() {
             {/* Grid Pattern */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
 
-            {/* CENTERED TITLE CARD (Initial State) */}
+            {/* CENTERED TITLE CARD (Fade in from dark, then fade out) */}
             <motion.h1
-                initial={{ opacity: 1 }}
-                animate={{ opacity: showTitleCard ? 1 : 0 }}
-                transition={transition}
-                className="title-card absolute inset-0 flex items-center justify-center text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-white z-50 pointer-events-none px-4"
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{
+                    opacity: showTitleCard ? 1 : 0,
+                    scale: showTitleCard ? 1 : 1.02
+                }}
+                transition={titleTransition}
+                className="title-card absolute inset-0 flex items-center justify-center text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-bold text-white z-50 pointer-events-none px-6 sm:px-8"
                 style={{
                     letterSpacing: '-0.02em',
-                    willChange: showTitleCard ? 'opacity' : 'auto'
+                    willChange: showTitleCard ? 'opacity, transform' : 'auto'
                 }}
             >
                 BizCombinator
             </motion.h1>
 
-            {/* HERO CONTENT (Revealed State) */}
+            {/* HERO CONTENT (Fade in smoothly from dark) */}
             <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: showContent ? 1 : 0 }}
-                transition={transition}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{
+                    opacity: showContent ? 1 : 0,
+                    y: showContent ? 0 : 20
+                }}
+                transition={contentTransition}
                 onAnimationComplete={() => {
-                    if (isRevealed && !atTop) {
+                    if (isRevealed) {
                         setAnimationComplete(true);
                     }
                 }}
-                className="hero-content container mx-auto px-4 relative z-10 text-center"
+                className="hero-content container mx-auto px-6 relative z-10 text-center"
                 style={{
-                    willChange: showContent ? 'opacity' : 'auto'
+                    willChange: showContent ? 'opacity, transform' : 'auto'
                 }}
             >
                 <motion.h1

@@ -59,38 +59,41 @@ export function RevealProvider({ children }: { children: ReactNode }) {
         };
     }, []);
 
-    // Instant reveal for reduced motion users
+    // Automatic timed reveal (2 seconds after mount)
     useEffect(() => {
         if (prefersReducedMotion) {
             setIsRevealed(true);
-        }
-    }, [prefersReducedMotion]);
-
-    // CENTRALIZED REVEAL INTENT - single entry point for all triggers
-    const initRevealIntent = useCallback(() => {
-        if (isRevealed || hasTriggeredRef.current || prefersReducedMotion) {
             return;
         }
 
-        // Mark as triggered (single execution guard)
-        hasTriggeredRef.current = true;
+        // Auto-trigger reveal after 2 seconds
+        const timer = setTimeout(() => {
+            if (!isRevealed && !hasTriggeredRef.current) {
+                hasTriggeredRef.current = true;
 
-        // Analytics: reveal started
-        if (typeof window !== 'undefined' && (window as any).gtag) {
-            (window as any).gtag('event', 'reveal_started', {
-                event_category: 'engagement',
-                event_label: 'hero_reveal'
-            });
-        }
+                // Analytics: reveal started
+                if (typeof window !== 'undefined' && (window as any).gtag) {
+                    (window as any).gtag('event', 'reveal_started', {
+                        event_category: 'engagement',
+                        event_label: 'hero_auto_reveal'
+                    });
+                }
 
-        // Debug log
-        console.log('[RevealIntent] Triggered - natural scroll');
+                console.log('[AutoReveal] Triggered after 2s');
 
-        // Set revealed state (allow natural scrolling during reveal)
-        requestAnimationFrame(() => {
-            setIsRevealed(true);
-        });
+                requestAnimationFrame(() => {
+                    setIsRevealed(true);
+                });
+            }
+        }, 2000);
+
+        return () => clearTimeout(timer);
     }, [isRevealed, prefersReducedMotion]);
+
+    // Keep initRevealIntent for compatibility (now does nothing)
+    const initRevealIntent = useCallback(() => {
+        // No-op: reveal is now automatic
+    }, []);
 
     return (
         <RevealContext.Provider value={{

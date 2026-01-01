@@ -45,7 +45,7 @@ export default function GlobalReach() {
             {/* Background Glow */}
             <div className="absolute top-1/2 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[128px] translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
-            <div className="container mx-auto px-4 relative z-10">
+            <div className="container mx-auto px-6 relative z-10">
                 <div className="grid lg:grid-cols-2 gap-16 items-center">
 
                     <motion.div
@@ -60,22 +60,22 @@ export default function GlobalReach() {
                             {t.global.subtitle}
                         </p>
 
-                        <div className="grid grid-cols-2 gap-12 mb-12">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-12 mb-12">
                             <div>
                                 <Counter value={45} suffix="+" />
-                                <div className="text-slate-500 font-medium uppercase tracking-wider text-sm border-t border-slate-800 pt-4 mt-2">
+                                <div className="text-slate-500 font-medium uppercase tracking-wider text-xs sm:text-sm border-t border-slate-800 pt-4 mt-2">
                                     {t.global.stats.businesses}
                                 </div>
                             </div>
                             <div>
                                 <Counter value={15} suffix="+" />
-                                <div className="text-slate-500 font-medium uppercase tracking-wider text-sm border-t border-slate-800 pt-4 mt-2">
+                                <div className="text-slate-500 font-medium uppercase tracking-wider text-xs sm:text-sm border-t border-slate-800 pt-4 mt-2">
                                     {t.global.stats.mentors}
                                 </div>
                             </div>
-                            <div className="col-span-2">
+                            <div className="sm:col-span-2">
                                 <Counter value={65} suffix="%" />
-                                <div className="text-slate-500 font-medium uppercase tracking-wider text-sm border-t border-slate-800 pt-4 mt-2">
+                                <div className="text-slate-500 font-medium uppercase tracking-wider text-xs sm:text-sm border-t border-slate-800 pt-4 mt-2">
                                     {t.global.stats.growth}
                                 </div>
                             </div>
