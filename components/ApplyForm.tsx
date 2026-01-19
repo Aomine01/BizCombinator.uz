@@ -44,6 +44,8 @@ export default function ApplyForm() {
         try {
             // Create FormData for Web3Forms
             const web3FormData = new FormData(e.currentTarget);
+            // Create backup FormData now before any modifications
+            const backupFormData = new FormData(e.currentTarget);
 
             // Add Web3Forms access key
             web3FormData.append("access_key", "313f672e-4dc0-4ec8-81fc-afbb4406c28d");
@@ -72,7 +74,6 @@ export default function ApplyForm() {
             }
 
             // Secondary: Send to your Telegram API as backup (optional)
-            const backupFormData = new FormData(e.currentTarget);
             fetch('/api/apply', {
                 method: 'POST',
                 body: backupFormData,
