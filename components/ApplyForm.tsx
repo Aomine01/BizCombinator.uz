@@ -41,27 +41,37 @@ export default function ApplyForm() {
         setStatus('sending');
         setErrorMessage('');
 
-        const formData = new FormData(e.currentTarget);
-
-        // Add Web3Forms access key
-        formData.append("access_key", "313f672e-4dc0-4ec8-81fc-afbb4406c28d");
-
         try {
+            // Create FormData for Web3Forms
+            const web3FormData = new FormData(e.currentTarget);
+
+            // Add Web3Forms access key
+            web3FormData.append("access_key", "313f672e-4dc0-4ec8-81fc-afbb4406c28d");
+
+            // Web3Forms expects file field to be named 'attachment'
+            const pitchDeck = web3FormData.get('pitch_deck');
+            if (pitchDeck && pitchDeck instanceof File && pitchDeck.size > 0) {
+                web3FormData.delete('pitch_deck');
+                web3FormData.append('attachment', pitchDeck);
+            } else {
+                web3FormData.delete('pitch_deck');
+            }
+
             // Primary: Send to Web3Forms
             const web3Response = await fetch("https://api.web3forms.com/submit", {
                 method: "POST",
-                body: formData
+                body: web3FormData
             });
 
             const web3Data = await web3Response.json();
 
             if (!web3Data.success) {
                 console.error('Web3Forms submission failed:', web3Data);
+                console.error('Web3Forms error details:', JSON.stringify(web3Data));
                 throw new Error(t.form.errors.submitFailed);
             }
 
             // Secondary: Send to your Telegram API as backup (optional)
-            // Remove the access_key before sending to your API
             const backupFormData = new FormData(e.currentTarget);
             fetch('/api/apply', {
                 method: 'POST',
