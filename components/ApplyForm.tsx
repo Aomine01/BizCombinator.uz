@@ -50,14 +50,9 @@ export default function ApplyForm() {
             // Add Web3Forms access key
             web3FormData.append("access_key", "313f672e-4dc0-4ec8-81fc-afbb4406c28d");
 
-            // Web3Forms expects file field to be named 'attachment'
-            const pitchDeck = web3FormData.get('pitch_deck');
-            if (pitchDeck && pitchDeck instanceof File && pitchDeck.size > 0) {
-                web3FormData.delete('pitch_deck');
-                web3FormData.append('attachment', pitchDeck);
-            } else {
-                web3FormData.delete('pitch_deck');
-            }
+            // NOTE: Web3Forms free plan doesn't support file uploads (Pro feature)
+            // Files are only sent to Telegram backup, not to Web3Forms
+            web3FormData.delete('pitch_deck');
 
             // Primary: Send to Web3Forms
             const web3Response = await fetch("https://api.web3forms.com/submit", {
