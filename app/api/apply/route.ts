@@ -1,8 +1,22 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
-import { Ratelimit } from '@upstash/ratelimit';
-import { Redis } from '@upstash/redis';
 import crypto from 'crypto';
+
+// Optional: Only import if Upstash is configured
+let Ratelimit: any = null;
+let Redis: any = null;
+
+if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
+    try {
+        // Dynamic import to prevent build failures
+        const upstashRatelimit = require('@upstash/ratelimit');
+        const upstashRedis = require('@upstash/redis');
+        Ratelimit = upstashRatelimit.Ratelimit;
+        Redis = upstashRedis.Redis;
+    } catch (error) {
+        console.warn('⚠️ Upstash packages not available - rate limiting disabled');
+    }
+}
 
 // ===== ENVIRONMENT VALIDATION =====
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
@@ -10,7 +24,7 @@ const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
 // ===== DISTRIBUTED RATE LIMITING (REDIS) =====
 // Graceful fallback: If Redis not configured, use in-memory (dev only)
-let ratelimit: Ratelimit | null = null;
+let ratelimit: any | null = null;
 
 try {
     if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
