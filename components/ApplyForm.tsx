@@ -43,21 +43,33 @@ export default function ApplyForm() {
 
         const formData = new FormData(e.currentTarget);
 
+        // Add Web3Forms access key
+        formData.append("access_key", "313f672e-4dc0-4ec8-81fc-afbb4406c28d");
+
         try {
-            // Send FormData directly to preserve file
-            const response = await fetch('/api/apply', {
-                method: 'POST',
-                body: formData,
+            // Primary: Send to Web3Forms
+            const web3Response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                body: formData
             });
 
-            const result = await response.json().catch(() => ({} as any));
+            const web3Data = await web3Response.json();
 
-            if (!response.ok) {
-                // Prefer client-side localized messages.
-                if (response.status === 429) throw new Error(t.form.errors.rateLimited);
-                if (response.status === 400) throw new Error(result.error || t.form.errors.badRequest);
+            if (!web3Data.success) {
+                console.error('Web3Forms submission failed:', web3Data);
                 throw new Error(t.form.errors.submitFailed);
             }
+
+            // Secondary: Send to your Telegram API as backup (optional)
+            // Remove the access_key before sending to your API
+            const backupFormData = new FormData(e.currentTarget);
+            fetch('/api/apply', {
+                method: 'POST',
+                body: backupFormData,
+            }).catch(err => {
+                // Log but don't fail - Web3Forms is primary
+                console.warn('Backup submission to Telegram failed:', err);
+            });
 
             setStatus('success');
             setFileName(null);
@@ -120,12 +132,17 @@ export default function ApplyForm() {
                         transition={{ delay: 0.2 }}
                         className="space-y-6"
                     >
+                        {/* Hidden fields for Web3Forms configuration */}
+                        <input type="hidden" name="subject" value="New BizCombinator Application" />
+                        <input type="hidden" name="from_name" value="BizCombinator Website" />
+                        <input type="hidden" name="redirect" value="false" />
+
                         <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
                                 <label className="text-sm font-medium text-slate-300">{t.form.name}</label>
                                 <input
                                     type="text"
-                                    name="user_name"
+                                    name="name"
                                     required
                                     className="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary/50 outline-none transition-all text-base"
                                     placeholder={t.form.placeholders.name}
@@ -135,7 +152,7 @@ export default function ApplyForm() {
                                 <label className="text-sm font-medium text-slate-300">{t.form.email}</label>
                                 <input
                                     type="email"
-                                    name="user_email"
+                                    name="email"
                                     required
                                     className="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary/50 outline-none transition-all text-base"
                                     placeholder={t.form.placeholders.email}
@@ -145,7 +162,7 @@ export default function ApplyForm() {
                                 <label className="text-sm font-medium text-slate-300">{t.form.phone}</label>
                                 <input
                                     type="tel"
-                                    name="user_phone"
+                                    name="phone"
                                     required
                                     className="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary/50 outline-none transition-all text-base"
                                     placeholder={t.form.placeholders.phone}
