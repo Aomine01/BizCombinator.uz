@@ -1,125 +1,81 @@
 "use client";
-// Force rebuild: 2025-12-20 19:50
 
-import { motion, useInView, useReducedMotion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { CheckCircle2, TrendingUp } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
-import Globe3D from "@/components/Globe3D";
-import { Globe3DErrorBoundary } from "@/components/Globe3DErrorBoundary";
-import { useSmoothCountUp } from "@/hooks/useSmoothCountUp";
-
-function Counter({ value, prefix = "", suffix = "" }: { value: number; prefix?: string; suffix?: string }) {
-    const { elementRef, numberRef } = useSmoothCountUp(value, 2000, {
-        prefix,
-        suffix,
-        decimals: 0,
-        startOnView: true
-    });
-
-    return (
-        <span
-            ref={elementRef}
-            className="font-heading font-bold text-5xl md:text-7xl text-white block mb-2 tracking-tight"
-            style={{
-                fontSize: 'clamp(2.5rem, 6vw + 1rem, 4.5rem)'
-            }}
-        >
-            <span ref={numberRef}>0</span>
-        </span>
-    );
-}
 
 export default function GlobalReach() {
     const { t } = useLanguage();
-    const [isMobile, setIsMobile] = useState(false);
-    const reduceMotion = useReducedMotion();
-    const globeWrapRef = useRef<HTMLDivElement>(null);
-    const globeInView = useInView(globeWrapRef, { margin: "-10% 0px -10% 0px" });
-
-    useEffect(() => {
-        setIsMobile(window.innerWidth < 768);
-    }, []);
-
     return (
-        <section id="global" className="py-24 relative overflow-hidden min-h-screen flex items-center">
+        <section id="results" className="py-24 relative overflow-hidden">
             {/* Background Glow */}
             <div className="absolute top-1/2 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[128px] translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
             <div className="container mx-auto px-6 relative z-10">
-                <div className="grid lg:grid-cols-2 gap-16 items-center">
-
+                <div className="max-w-4xl mx-auto">
+                    {/* Header */}
                     <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
+                        className="text-center mb-16"
                     >
-                        <h2 className="mobile-section-title text-4xl md:text-6xl font-heading font-bold text-white mb-6 leading-tight">
-                            {t.global.title}
+                        <h2 className="mobile-section-title text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-6">
+                            {t.results.title}
                         </h2>
-                        <p className="mobile-section-subtitle text-base md:text-lg text-slate-400 mb-12 leading-relaxed max-w-lg">
-                            {t.global.subtitle}
+                        <p className="mobile-section-subtitle text-lg md:text-xl text-slate-400 max-w-2xl mx-auto">
+                            {t.results.subtitle}
                         </p>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-12 mb-12">
-                            <div>
-                                <Counter value={45} suffix="+" />
-                                <div className="text-slate-500 font-medium uppercase tracking-wider text-xs sm:text-sm border-t border-slate-800 pt-4 mt-2">
-                                    {t.global.stats.businesses}
-                                </div>
-                            </div>
-                            <div>
-                                <Counter value={15} suffix="+" />
-                                <div className="text-slate-500 font-medium uppercase tracking-wider text-xs sm:text-sm border-t border-slate-800 pt-4 mt-2">
-                                    {t.global.stats.mentors}
-                                </div>
-                            </div>
-                            <div className="sm:col-span-2">
-                                <Counter value={65} suffix="%" />
-                                <div className="text-slate-500 font-medium uppercase tracking-wider text-xs sm:text-sm border-t border-slate-800 pt-4 mt-2">
-                                    {t.global.stats.growth}
-                                </div>
-                            </div>
-                        </div>
-
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="px-8 py-4 glass text-white font-medium rounded-lg hover:bg-white/5 transition-all flex items-center gap-2 group"
-                        >
-                            {t.global.viewNetwork}
-                            <span className="w-2 h-2 rounded-full bg-primary group-hover:animate-ping" />
-                        </motion.button>
-
                     </motion.div>
 
-                    {/* Connected Globe Visual - Desktop Only */}
-                    <div className="hidden lg:flex relative h-[400px] lg:h-[600px] items-center justify-center">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            className="absolute inset-0 flex items-center justify-center"
-                        >
-                            <Globe3DErrorBoundary fallback={
-                                <div className="w-full h-full max-w-[600px] max-h-[600px] flex items-center justify-center">
-                                    <div className="text-center text-slate-400">
-                                        <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-                                            <div className="w-16 h-16 rounded-full bg-primary/20" />
-                                        </div>
-                                        <p className="text-sm">{t.common.globeUnavailable}</p>
+                    {/* Deliverables List */}
+                    <div className="space-y-6 mb-12">
+                        {t.results.deliverables.map((item, index) => (
+                            <motion.div
+                                key={item.id}
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                className="glass-card p-6 rounded-xl border-primary/10"
+                            >
+                                <div className="flex items-start gap-4">
+                                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                                        <CheckCircle2 className="w-6 h-6 text-primary" />
+                                    </div>
+
+                                    <div className="flex-1">
+                                        <h3 className="mobile-card-title text-lg md:text-xl font-bold text-white mb-2">
+                                            {item.title}
+                                        </h3>
+                                        <p className="mobile-body-text text-sm md:text-base text-slate-400">
+                                            {item.desc}
+                                        </p>
                                     </div>
                                 </div>
-                            }>
-                                <div className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[520px] md:h-[520px] rounded-full overflow-hidden">
-                                    <Globe3D
-                                        quality="high"
-                                        paused={false} // Always render on desktop
-                                    />
-                                </div>
-                            </Globe3DErrorBoundary>
-                        </motion.div>
+                            </motion.div>
+                        ))}
                     </div>
 
+                    {/* Target Growth Metric */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.5 }}
+                        className="glass-card p-8 rounded-2xl border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-transparent"
+                    >
+                        <div className="flex items-center justify-center gap-4 flex-wrap">
+                            <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
+                                <TrendingUp className="w-8 h-8 text-primary" />
+                            </div>
+
+                            <div className="text-center sm:text-left">
+                                <div className="text-primary text-4xl md:text-5xl font-bold mb-2">{t.results.targetMetric}</div>
+                                <div className="text-slate-300 text-base md:text-lg">{t.results.targetLabel}</div>
+                            </div>
+                        </div>
+                    </motion.div>
                 </div>
             </div>
         </section>

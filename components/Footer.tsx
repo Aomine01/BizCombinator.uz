@@ -42,10 +42,10 @@ export default function Footer() {
                     <div>
                         <h4 className="text-white font-bold mb-6">{t.footer.columns.program}</h4>
                         <ul className="space-y-4">
-                            <FooterLink href="#the-journey">{t.footer.links.journey}</FooterLink>
-                            <FooterLink href="#apply-form">{t.footer.links.apply}</FooterLink>
-                            <FooterLink href="#mentors">{t.footer.links.mentors}</FooterLink>
-                            <FooterLink href="#global">{t.footer.links.global}</FooterLink>
+                            <FooterLink href="/#the-journey">{t.footer.links.journey}</FooterLink>
+                            <FooterLink href="/#apply-form">{t.footer.links.apply}</FooterLink>
+                            <FooterLink href="/#mentors">{t.footer.links.mentors}</FooterLink>
+                            <FooterLink href="/#results">{t.footer.links.global}</FooterLink>
                         </ul>
                     </div>
 
@@ -53,10 +53,10 @@ export default function Footer() {
                     <div>
                         <h4 className="text-white font-bold mb-6">{t.footer.columns.company}</h4>
                         <ul className="space-y-4">
-                            <FooterLink href="#">{t.footer.links.about}</FooterLink>
+                            <FooterLink href="/about">{t.footer.links.about}</FooterLink>
                             <FooterLink href="#">{t.footer.links.stories}</FooterLink>
                             <FooterLink href="#">{t.footer.links.investors}</FooterLink>
-                            <FooterLink href="#">{t.footer.links.contact}</FooterLink>
+                            <FooterLink href="/contact">{t.footer.links.contact}</FooterLink>
                         </ul>
                     </div>
 

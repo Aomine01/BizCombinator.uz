@@ -1,39 +1,59 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import crypto from 'crypto';
+import { applicationLogger } from '@/utils/applicationLogger';
 
-// Optional: Only import if Upstash is configured
-let Ratelimit: any = null;
-let Redis: any = null;
+// ===== STRICT ENVIRONMENT VALIDATION =====
+/**
+ * CRITICAL: All required environment variables MUST be present in production
+ * Fail-fast principle: If configuration is incomplete, don't start the server
+ */
+const REQUIRED_ENV_VARS = {
+    TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN,
+    TELEGRAM_CHAT_ID: process.env.TELEGRAM_CHAT_ID,
+    UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
+    UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
+} as const;
 
-if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
-    try {
-        // Dynamic import to prevent build failures
-        const upstashRatelimit = require('@upstash/ratelimit');
-        const upstashRedis = require('@upstash/redis');
-        Ratelimit = upstashRatelimit.Ratelimit;
-        Redis = upstashRedis.Redis;
-    } catch (error) {
-        console.warn('⚠️ Upstash packages not available - rate limiting disabled');
-    }
+// Validate configuration at startup
+const missingVars = Object.entries(REQUIRED_ENV_VARS)
+    .filter(([_, value]) => !value)
+    .map(([key, _]) => key);
+
+if (missingVars.length > 0) {
+    console.error('❌ FATAL: Missing required environment variables:', missingVars);
+    console.error('⚠️  API will reject all requests until configuration is complete');
 }
 
-// ===== ENVIRONMENT VALIDATION =====
-const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+// ===== REDIS INITIALIZATION (FAIL-CLOSED MODE) =====
+/**
+ * SECURITY ARCHITECTURE: Fail-Closed Rate Limiting
+ * 
+ * Traditional "Fail-Open" approach:
+ *   try { checkRateLimit() } catch { allow() }  ❌ DANGEROUS
+ * 
+ * Our "Fail-Closed" approach:
+ *   if (!rateLimiter) { reject() }
+ *   try { checkRateLimit() } catch { reject() }  ✅ SECURE
+ * 
+ * Principle: Better to have temporary downtime than to allow unlimited abuse
+ */
+import { Ratelimit } from '@upstash/ratelimit';
+import { Redis } from '@upstash/redis';
 
-// ===== DISTRIBUTED RATE LIMITING (REDIS) =====
-// Graceful fallback: If Redis not configured, use in-memory (dev only)
-let ratelimit: any | null = null;
+let ratelimit: Ratelimit | null = null;
 
-try {
-    if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
+// Only initialize if ALL required variables are present
+if (
+    REQUIRED_ENV_VARS.UPSTASH_REDIS_REST_URL &&
+    REQUIRED_ENV_VARS.UPSTASH_REDIS_REST_TOKEN
+) {
+    try {
         const redis = new Redis({
-            url: process.env.UPSTASH_REDIS_REST_URL,
-            token: process.env.UPSTASH_REDIS_REST_TOKEN,
+            url: REQUIRED_ENV_VARS.UPSTASH_REDIS_REST_URL,
+            token: REQUIRED_ENV_VARS.UPSTASH_REDIS_REST_TOKEN,
         });
 
-        // Sliding window: 5 requests per 60 seconds per IP
         ratelimit = new Ratelimit({
             redis,
             limiter: Ratelimit.slidingWindow(5, '60 s'),
@@ -41,13 +61,15 @@ try {
             prefix: '@bizcombinator/apply',
         });
 
-        console.log('✅ Redis rate limiting initialized');
-    } else {
-        console.warn('⚠️  UPSTASH_REDIS not configured - Rate limiting disabled (DEV MODE)');
+        console.log('✅ Redis rate limiting initialized (FAIL-CLOSED mode)');
+    } catch (error) {
+        console.error('❌ FATAL: Redis initialization failed:', error);
+        console.error('⚠️  Rate limiting will REJECT all requests');
+        // Don't set ratelimit - this will trigger 503 errors (fail-closed)
     }
-} catch (error) {
-    console.error('❌ Failed to initialize Redis:', error);
-    console.warn('⚠️  Continuing without rate limiting');
+} else {
+    console.warn('⚠️  CRITICAL: Redis credentials not configured');
+    console.warn('⚠️  All API requests will be REJECTED (fail-closed mode)');
 }
 
 // ===== FILE SIGNATURE VERIFICATION (MAGIC BYTES) =====
@@ -65,10 +87,9 @@ async function verifyFileSignature(file: File): Promise<boolean> {
     const expectedSignature = FILE_SIGNATURES[file.type as keyof typeof FILE_SIGNATURES];
 
     if (!expectedSignature) {
-        return false; // Unknown type
+        return false;
     }
 
-    // Check if first bytes match expected signature
     for (let i = 0; i < expectedSignature.length; i++) {
         if (bytes[i] !== expectedSignature[i]) {
             return false;
@@ -84,7 +105,7 @@ const ApplicationSchema = z.object({
         .string()
         .min(2, 'Name must be at least 2 characters')
         .max(100, 'Name is too long')
-        .regex(/^[a-zA-Z\u0400-\u04FF\s'-]+$/, 'Name contains invalid characters'), // Supports Latin + Cyrillic
+        .regex(/^[a-zA-Z\u0400-\u04FF\s'-]+$/, 'Name contains invalid characters'),
 
     user_email: z
         .string()
@@ -100,7 +121,6 @@ const ApplicationSchema = z.object({
             'Invalid Uzbekistan phone number (expected: +998XXXXXXXXX)'
         )
         .transform(phone => {
-            // Normalize to +998 format
             if (phone.startsWith('+')) return phone;
             if (phone.startsWith('998')) return '+' + phone;
             return '+998' + phone;
@@ -157,42 +177,83 @@ export async function POST(request: Request) {
 
     console.log(`📩 Application request from ${maskedIP}`);
 
-    // ===== RATE LIMITING =====
-    if (ratelimit) {
-        try {
-            const { success, limit, remaining, reset } = await ratelimit.limit(hashedIP);
-
-            if (!success) {
-                console.warn(`🚫 Rate limit exceeded: ${maskedIP} (${remaining}/${limit}, resets in ${Math.floor((reset - Date.now()) / 1000)}s)`);
-                return NextResponse.json(
-                    {
-                        error: 'Too many requests. Please try again later.',
-                        retryAfter: Math.floor((reset - Date.now()) / 1000)
-                    },
-                    {
-                        status: 429,
-                        headers: {
-                            'Retry-After': String(Math.floor((reset - Date.now()) / 1000)),
-                            'X-RateLimit-Limit': String(limit),
-                            'X-RateLimit-Remaining': String(remaining),
-                            'X-RateLimit-Reset': String(reset),
-                        }
-                    }
-                );
+    // ===== FAIL-CLOSED RATE LIMITING (CRITICAL SECURITY LAYER) =====
+    /**
+     * SECURITY: If rate limiting is unavailable, we REJECT the request
+     * 
+     * Why? Because without rate limiting:
+     * - Attackers can flood the endpoint
+     * - Telegram bot can be rate-limited/banned
+     * - Server costs explode
+     * - Data integrity at risk
+     * 
+     * We prefer temporary unavailability over permanent security breach
+     */
+    if (!ratelimit) {
+        console.error('🚨 CRITICAL: Rate limiting not initialized - REJECTING REQUEST');
+        return NextResponse.json(
+            {
+                error: 'Service temporarily unavailable. Rate limiting system offline.',
+                code: 'RATE_LIMIT_UNAVAILABLE',
+                message: 'Our security systems are currently unavailable. Please try again in a few minutes.'
+            },
+            {
+                status: 503,
+                headers: {
+                    'Retry-After': '60',
+                }
             }
+        );
+    }
 
-            console.log(`✅ Rate limit OK: ${maskedIP} (${remaining}/${limit} remaining)`);
-        } catch (error) {
-            console.error('⚠️  Rate limit check failed:', error);
-            // Continue without rate limiting if Redis fails
+    try {
+        const { success, limit, remaining, reset } = await ratelimit.limit(hashedIP);
+
+        if (!success) {
+            const retryAfter = Math.floor((reset - Date.now()) / 1000);
+            console.warn(`🚫 Rate limit exceeded: ${maskedIP} (${remaining}/${limit}, resets in ${retryAfter}s)`);
+            return NextResponse.json(
+                {
+                    error: 'Too many requests. Please try again later.',
+                    retryAfter,
+                    message: `You have submitted too many applications. Please wait ${retryAfter} seconds.`
+                },
+                {
+                    status: 429,
+                    headers: {
+                        'Retry-After': String(retryAfter),
+                        'X-RateLimit-Limit': String(limit),
+                        'X-RateLimit-Remaining': String(remaining),
+                        'X-RateLimit-Reset': String(reset),
+                    }
+                }
+            );
         }
+
+        console.log(`✅ Rate limit OK: ${maskedIP} (${remaining}/${limit} remaining)`);
+    } catch (error) {
+        // 🔒 FAIL-CLOSED: If Redis communication fails, REJECT the request
+        console.error('🚨 CRITICAL: Rate limit check failed - REJECTING REQUEST:', error);
+        return NextResponse.json(
+            {
+                error: 'Service temporarily unavailable. Please try again later.',
+                code: 'RATE_LIMIT_ERROR',
+                message: 'Our security verification system encountered an error. Please try again in a moment.'
+            },
+            {
+                status: 503,
+                headers: {
+                    'Retry-After': '30',
+                }
+            }
+        );
     }
 
     // ===== VALIDATE TELEGRAM CONFIGURATION =====
-    if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
+    if (!REQUIRED_ENV_VARS.TELEGRAM_BOT_TOKEN || !REQUIRED_ENV_VARS.TELEGRAM_CHAT_ID) {
         console.error('❌ Telegram configuration missing');
         return NextResponse.json(
-            { error: 'Service temporarily unavailable' },
+            { error: 'Service configuration error', code: 'CONFIG_ERROR' },
             { status: 503 }
         );
     }
@@ -201,7 +262,6 @@ export async function POST(request: Request) {
         // ===== PARSE FORM DATA =====
         const formData = await request.formData();
         const rawData = {
-            // Support both old (user_*) and new field names for compatibility
             user_name: formData.get('user_name') || formData.get('name'),
             user_email: formData.get('user_email') || formData.get('email'),
             user_phone: formData.get('user_phone') || formData.get('phone'),
@@ -236,7 +296,6 @@ export async function POST(request: Request) {
                 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
             ];
 
-            // Check MIME type
             if (!ALLOWED_TYPES.includes(pitch_deck.type)) {
                 console.warn(`⚠️  Invalid file type: ${pitch_deck.type}`);
                 return NextResponse.json(
@@ -245,7 +304,6 @@ export async function POST(request: Request) {
                 );
             }
 
-            // Check file size
             if (pitch_deck.size > MAX_FILE_SIZE) {
                 console.warn(`⚠️  File too large: ${(pitch_deck.size / 1024 / 1024).toFixed(2)}MB`);
                 return NextResponse.json(
@@ -254,10 +312,9 @@ export async function POST(request: Request) {
                 );
             }
 
-            // 🔒 SECURITY: Verify file signature (magic bytes)
             const isValidSignature = await verifyFileSignature(pitch_deck);
             if (!isValidSignature) {
-                console.error(`🚨 SECURITY: File signature mismatch (type: ${pitch_deck.type}, size: ${pitch_deck.size})`);
+                console.error(`🚨 SECURITY: File signature mismatch (type: ${pitch_deck.type})`);
                 return NextResponse.json(
                     { error: 'File verification failed. File may be corrupted or malicious.' },
                     { status: 400 }
@@ -267,14 +324,53 @@ export async function POST(request: Request) {
             console.log(`📎 File validated: ${pitch_deck.type}, ${(pitch_deck.size / 1024 / 1024).toFixed(2)}MB`);
         }
 
-        // ===== SANITIZE FOR TELEGRAM MARKDOWN =====
+        // ===== STEP 1: PERSIST DATA (CRITICAL - MUST SUCCEED) =====
+        /**
+         * DATA INTEGRITY ARCHITECTURE
+         * 
+         * Order of operations:
+         * 1. Validate (done above)
+         * 2. Persist to storage (CRITICAL - if this fails, request fails)
+         * 3. Send to Telegram (BEST EFFORT - if this fails, data is still safe)
+         * 
+         * Why this order?
+         * - Persistence is our source of truth
+         * - Telegram is just a notification mechanism
+         * - If Telegram fails, we can retry later from our persistent store
+         */
+        const applicationData = {
+            timestamp: new Date().toISOString(),
+            user_name,
+            user_email,
+            user_phone,
+            startup_name,
+            stage,
+            ip_hash: hashedIP,
+            has_pitch_deck: Boolean(pitch_deck && pitch_deck.size > 0),
+            status: 'pending' as const,
+        };
+
+        try {
+            await applicationLogger.logApplication(applicationData);
+        } catch (storageError) {
+            console.error('🚨 CRITICAL: Failed to persist application data:', storageError);
+            return NextResponse.json(
+                {
+                    error: 'Failed to save your application. Please try again.',
+                    code: 'STORAGE_ERROR',
+                    message: 'We could not save your application data. Please try submitting again.'
+                },
+                { status: 500 }
+            );
+        }
+
+        // ===== STEP 2: SEND TO TELEGRAM (BEST EFFORT) =====
         const safe_name = sanitizeForMarkdown(user_name);
         const safe_email = sanitizeForMarkdown(user_email);
         const safe_phone = sanitizeForMarkdown(user_phone);
         const safe_startup = sanitizeForMarkdown(startup_name);
         const safe_stage = sanitizeForMarkdown(stage);
 
-        // ===== CONSTRUCT MESSAGE =====
         const message = `
 🚀 *New Application Received*
 
@@ -287,58 +383,67 @@ export async function POST(request: Request) {
 _Sent from BizCombinator Website_
         `.trim();
 
-        // ===== SEND TO TELEGRAM =====
-        let telegramResponse;
+        let telegramSuccess = false;
 
-        if (pitch_deck && pitch_deck.size > 0) {
-            // Send with document
-            const telegramFormData = new FormData();
-            telegramFormData.append('chat_id', TELEGRAM_CHAT_ID);
-            telegramFormData.append('caption', message);
-            telegramFormData.append('parse_mode', 'Markdown');
-            telegramFormData.append('document', pitch_deck);
+        try {
+            let telegramResponse;
 
-            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument`;
+            if (pitch_deck && pitch_deck.size > 0) {
+                const telegramFormData = new FormData();
+                telegramFormData.append('chat_id', REQUIRED_ENV_VARS.TELEGRAM_CHAT_ID);
+                telegramFormData.append('caption', message);
+                telegramFormData.append('parse_mode', 'Markdown');
+                telegramFormData.append('document', pitch_deck);
 
-            telegramResponse = await fetch(url, {
-                method: 'POST',
-                body: telegramFormData,
-            });
-        } else {
-            // Send text only
-            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+                const url = `https://api.telegram.org/bot${REQUIRED_ENV_VARS.TELEGRAM_BOT_TOKEN}/sendDocument`;
+                telegramResponse = await fetch(url, {
+                    method: 'POST',
+                    body: telegramFormData,
+                });
+            } else {
+                const url = `https://api.telegram.org/bot${REQUIRED_ENV_VARS.TELEGRAM_BOT_TOKEN}/sendMessage`;
+                telegramResponse = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: REQUIRED_ENV_VARS.TELEGRAM_CHAT_ID,
+                        text: message,
+                        parse_mode: 'Markdown',
+                    }),
+                });
+            }
 
-            telegramResponse = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: TELEGRAM_CHAT_ID,
-                    text: message,
-                    parse_mode: 'Markdown',
-                }),
-            });
+            if (!telegramResponse.ok) {
+                const errorText = await telegramResponse.text();
+                console.error(`❌ Telegram API failed (${telegramResponse.status}):`, errorText);
+                throw new Error('Telegram API error');
+            }
+
+            telegramSuccess = true;
+            console.log('✅ Application sent to Telegram');
+        } catch (telegramError) {
+            console.error('❌ Telegram send failed (data is SAFE in persistent storage):', telegramError);
+            // Don't fail the request - data is already saved
         }
 
-        if (!telegramResponse.ok) {
-            const errorText = await telegramResponse.text();
-            console.error(`❌ Telegram API failed (${telegramResponse.status})`);
-            // 🔒 SECURITY: Don't expose Telegram error to user
-            throw new Error('Failed to send application');
-        }
+        // ===== UPDATE STATUS =====
+        await applicationLogger.updateStatus(
+            user_email,
+            telegramSuccess ? 'sent_to_telegram' : 'failed'
+        );
 
         const duration = Date.now() - startTime;
-        console.log(`✅ Application sent to Telegram (${duration}ms)`);
+        console.log(`✅ Application processed (${duration}ms)`);
 
         return NextResponse.json({
             success: true,
-            message: 'Application submitted successfully'
+            message: 'Application submitted successfully. We will contact you soon!'
         });
 
     } catch (error: any) {
         const duration = Date.now() - startTime;
         console.error(`❌ Application error (${duration}ms):`, error.message);
 
-        // 🔒 SECURITY: Generic error message to user, detailed log internally
         return NextResponse.json(
             { error: 'Failed to submit application. Please try again.' },
             { status: 500 }

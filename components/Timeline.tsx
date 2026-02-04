@@ -2,14 +2,18 @@
 
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { CheckCircle2, FileText, Users, Award, Rocket } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
-function TimelineStep({ step, index }: { step: { title: string; desc: string }; index: number }) {
+const icons = [FileText, Users, Award, Rocket, CheckCircle2];
+
+function TimelineStep({ step, index, icon }: { step: { id: number; title: string; desc: string }; index: number; icon: any }) {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { margin: "-50% 0px -50% 0px", once: true });
 
-    // Odd indices (1, 3, 5) = right side, Even indices (0, 2, 4) = left side
+    // Odd indices (1, 3) = right side, Even indices (0, 2, 4) = left side
     const isRight = index % 2 === 1;
+    const Icon = icon;
 
     return (
         <motion.div
@@ -41,8 +45,8 @@ function TimelineStep({ step, index }: { step: { title: string; desc: string }; 
 
             {/* Center column dot */}
             <div className="relative flex items-start justify-center pt-2 md:pt-6">
-                <div className={`w-4 h-4 rounded-full border-4 z-20 transition-all duration-500 bg-slate-950 ${isInView ? "border-primary scale-125 shadow-[0_0_20px_rgba(255,102,0,0.5)]" : "border-slate-800"}`}>
-                    <div className={`absolute inset-0 bg-primary rounded-full transition-opacity duration-500 ${isInView ? "opacity-100" : "opacity-0"}`} />
+                <div className={`w-12 h-12 rounded-full border-4 z-20 transition-all duration-500 bg-slate-950 flex items-center justify-center ${isInView ? "border-primary scale-125 shadow-[0_0_20px_rgba(255,34,0,0.5)]" : "border-slate-800"}`}>
+                    <Icon className={`w-6 h-6 transition-colors duration-500 ${isInView ? "text-primary" : "text-slate-600"}`} />
                 </div>
             </div>
 
@@ -94,15 +98,21 @@ export default function Timeline() {
         offset: ["start end", "end start"]
     });
 
-    // Transform-based animation to avoid layout thrash (no animated height).
     const lineScaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
     return (
         <section id="the-journey" className="py-24 relative overflow-hidden">
             <div className="container mx-auto px-4 relative z-10">
                 <div className="text-center mb-24">
-                    <span className="mobile-hero-badge text-primary font-medium tracking-wider text-sm uppercase mb-3 block">{t.timeline.subtitle}</span>
-                    <h2 className="mobile-section-title text-4xl md:text-6xl font-heading font-bold text-white mb-6">{t.timeline.title}</h2>
+                    <span className="mobile-hero-badge text-primary font-medium tracking-wider text-sm uppercase mb-3 block">
+                        We select only the most motivated entrepreneurs
+                    </span>
+                    <h2 className="mobile-section-title text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white mb-4">
+                        {t.newTimeline.title}
+                    </h2>
+                    <p className="mobile-section-subtitle text-base md:text-lg text-slate-400 max-w-2xl mx-auto">
+                        {t.newTimeline.subtitle}
+                    </p>
                 </div>
 
                 <div ref={containerRef} className="relative max-w-5xl mx-auto">
@@ -112,13 +122,16 @@ export default function Timeline() {
                     {/* Progress Line */}
                     <motion.div
                         style={{ scaleY: lineScaleY }}
-                        className="absolute left-[20px] md:left-1/2 top-0 bottom-0 w-0.5 bg-primary -translate-x-1/2 md:translate-x-0 z-10 origin-top [will-change:transform] [transform:translateZ(0)] shadow-none md:shadow-[0_0_15px_rgba(255,102,0,0.6)]"
+                        className="absolute left-[20px] md:left-1/2 top-0 bottom-0 w-0.5 bg-primary -translate-x-1/2 md:translate-x-0 z-10 origin-top [will-change:transform] [transform:translateZ(0)] shadow-none md:shadow-[0_0_15px_rgba(255,34,0,0.6)]"
                     />
 
-                    <div className="space-y-24">
-                        {t.timeline.steps.map((step, index) => (
-                            <TimelineStep key={index} step={step} index={index} />
-                        ))}
+                    <div className="space-y-12 max-w-4xl mx-auto">
+                        {t.newTimeline.steps.map((step, index) => {
+                            const Icon = icons[index];
+                            return (
+                                <TimelineStep key={step.id} step={step} index={index} icon={Icon} />
+                            );
+                        })}
                     </div>
                 </div>
             </div>

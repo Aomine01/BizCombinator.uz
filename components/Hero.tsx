@@ -102,21 +102,27 @@ export default function Hero() {
                 <motion.h1
                     className="mobile-hero-title font-heading font-bold text-white mb-6 leading-[1.1] text-4xl md:text-5xl lg:text-6xl"
                 >
-                    {t.hero.titleLine1} <br />
-                    <span className="text-primary">{t.hero.titleLine2}</span>
+                    Turn Your Business Into a System. <br />
+                    <span className="text-primary">Scale With Confidence.</span>
                 </motion.h1>
 
                 <motion.p
                     className="mobile-hero-subtitle text-base md:text-lg text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed"
                 >
-                    {t.hero.subtitle}
+                    The BizCombinator Accelerator: A 12-day intensive offline program for young entrepreneurs ready to move from "self-employed" to "professional CEO."
+                </motion.p>
+
+                <motion.p
+                    className="text-sm text-primary font-semibold mb-6"
+                >
+                    ⏰ Next Cohort Starts Soon. Only 70 Spots Available.
                 </motion.p>
 
                 <motion.div
                     className="flex flex-col sm:flex-row items-center justify-center gap-4"
                 >
                     <ShinyButton onClick={() => handleScrollTo("apply-form")} className="bg-primary hover:bg-orange-600">
-                        {t.hero.apply} <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        Apply Now (Limit: 70 Spots) <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </ShinyButton>
                     <ShinyButton
                         onClick={() => handleScrollTo("the-gap")}
