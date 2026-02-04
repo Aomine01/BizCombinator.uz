@@ -6,6 +6,14 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 
+// Mentor images stay consistent across all languages
+const mentorImages = [
+    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=faces",
+    "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&fit=crop&crop=faces",
+    "https://images.unsplash.com/photo-1556157382-97eda2d62296?w=400&h=500&fit=crop&crop=faces",
+    "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=500&fit=crop&crop=faces"
+];
+
 export default function MentorsGrid() {
     const { t } = useLanguage();
     const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -96,7 +104,7 @@ export default function MentorsGrid() {
                                 {/* Portrait Image */}
                                 <div className="relative h-[60%] overflow-hidden">
                                     <Image
-                                        src={mentor.image}
+                                        src={mentorImages[index]}
                                         alt={`${mentor.name} - ${mentor.role}`}
                                         width={280}
                                         height={252}
