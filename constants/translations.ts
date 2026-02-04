@@ -262,7 +262,11 @@ export const translations = {
                 { id: 2, title: "Unpredictable Sales", desc: "Some months are great. Some are terrible. You're always guessing, never confident about next month's revenue." },
                 { id: 3, title: "Messy Finances", desc: "Money comes in, money goes out — but you're never entirely sure where it all went. Is the business profitable? You think so... maybe?" },
                 { id: 4, title: "Stuck at the Same Level", desc: "You've been running this business for 2-3 years, but it feels like you're just spinning your wheels. Same revenue, same stress, no real growth." }
-            ]
+            ],
+            cta: {
+                part1: "If you answered \"Yes,\"",
+                part2: "BizCombinator was built to solve exactly these problems."
+            }
         },
         newTimeline: {
             title: "Your Journey to BizCombinator",
@@ -804,7 +808,11 @@ export const translations = {
                 { id: 2, title: "Непредсказуемые продажи", desc: "Одни месяцы отличные. Другие ужасные. Вы всегда гадаете, никогда не уверены в доходе следующего месяца." },
                 { id: 3, title: "Беспорядок в финансах", desc: "Деньги приходят, деньги уходят — но вы никогда не уверены, куда всё делось. Прибылен ли бизнес? Вроде да... может быть?" },
                 { id: 4, title: "Застряли на одном уровне", desc: "Вы ведёте этот бизнес 2-3 года, но кажется, что крутитесь на месте. Тот же доход, тот же стресс, никакого реального роста." }
-            ]
+            ],
+            cta: {
+                part1: "Если вы ответили «Да»,",
+                part2: "BizCombinator был создан именно для решения этих проблем."
+            }
         },
         newTimeline: {
             title: "Ваш путь в BizCombinator",
@@ -1321,7 +1329,11 @@ export const translations = {
                 { id: 2, title: "Oldindan aytib bo'lmaydigan sotuvlar", desc: "Ba'zi oylar ajoyib. Boshqalari dahshatli. Siz doimo taxmin qilasiz, keyingi oyning daromadiga hech qachon ishonchingiz komil emas." },
                 { id: 3, title: "Moliyaviy tartibsizlik", desc: "Pul kiradi, pul chiqadi — lekin hammasi qayerga ketganiga hech qachon ishonchingiz komil emas. Biznes foydali mi? Shekilli... balki?" },
                 { id: 4, title: "Bir darajada qotib qolgan", desc: "Siz bu biznesni 2-3 yil davomida yuritasiz, lekin aylanib yurgandek tuyuladi. Bir xil daromad, bir xil stress, haqiqiy o'sish yo'q." }
-            ]
+            ],
+            cta: {
+                part1: "Agar javobingiz \"Ha\" bo'lsa,",
+                part2: "BizCombinator aynan ushbu muammolarni hal qilish uchun qurilgan."
+            }
         },
         newTimeline: {
             title: "BizCombinatorga yo'lingiz",

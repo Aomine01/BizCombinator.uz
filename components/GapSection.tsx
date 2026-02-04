@@ -68,7 +68,7 @@ export default function GapSection() {
                     className="text-center max-w-4xl mx-auto"
                 >
                     <p className="text-lg md:text-xl text-white font-medium">
-                        If you answered "Yes," <span className="text-primary">BizCombinator was built to solve exactly these problems.</span>
+                        {t.painPoints.cta.part1} <span className="text-primary">{t.painPoints.cta.part2}</span>
                     </p>
                 </motion.div>
             </div>
