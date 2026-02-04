@@ -495,6 +495,28 @@ export const translations = {
                 description: "Stop managing chaos. Start building systems. Apply to BizCombinator today.",
                 buttonText: "Apply Now"
             }
+        },
+        privacy: {
+            title: "Privacy Policy",
+            lastUpdated: "Last Updated: February 2026",
+            intro: { title: "1. Introduction", text: "Welcome to BizCombinator (\"we,\" \"our,\" or \"us\"). We are committed to protecting the privacy of our applicants and participants. This Privacy Policy explains how we collect, use, and share information when you apply for or participate in our accelerator program in Uzbekistan." },
+            collection: { title: "2. Information We Collect", text: "We collect two types of data to administer the program effectively:", items: [{ title: "Personal Information", text: "Name, date of birth (to verify 18–30 age eligibility), contact details, and identification documents." }, { title: "Business Data", text: "As part of the program’s requirement for \"Transparency\", we collect sensitive business metrics including revenue figures, profit margins, operational costs, and tax status." }] },
+            usage: { title: "3. How We Use Your Information", text: "We use your data for the following purposes:", items: [{ title: "Selection", text: "To verify your business has been active for at least 6 months." }, { title: "Program Delivery", text: "To provide personalized coaching and financial diagnosis." }, { title: "Government Support", text: "To facilitate your access to government incentives, tax simplified regimes, and \"One-Window\" services through our government partners (e.g., Ministry of Economy, Soliq)." }] },
+            sharing: { title: "4. Data Sharing & Third Parties", text: "We do not sell your data. However, by participating, you consent to sharing specific data with:", items: [{ title: "Mentors", text: "To allow them to provide accurate business advice." }, { title: "Government Partners", text: "For the purpose of fast-tracking registrations, licenses, or export documentation as described in our Administrative Support module." }, { title: "Financial Partners", text: "If you opt-in for loan or investment facilitation." }] },
+            security: { title: "5. Data Security", text: "We implement standard security measures to protect your business's financial data. Access to sensitive sales data is restricted to authorized program staff and assigned mentors." },
+            contact: { title: "6. Contact Us", text: "For privacy concerns, please contact us at: ", email: "hello@bizcombinator.com" }
+        },
+        terms: {
+            title: "Terms of Service",
+            subtitle: "(Participation Agreement)",
+            lastUpdated: "Last Updated: February 2026",
+            acceptance: { title: "1. Acceptance of Terms", text: "By applying to BizCombinator, you agree to these Terms of Service. If you do not agree, you may not participate in the program." },
+            eligibility: { title: "2. Eligibility Requirements", text: "To qualify for the program, you must:", items: ["Be between 18 and 30 years old.", "Have an active business operating for at least 6 months.", "Not be in an excluded sector (e.g., gambling, alcohol, tobacco)."] },
+            obligations: { title: "3. Participant Obligations", text: "Selected participants agree to:", items: [{ title: "Mandatory Attendance", text: "You must attend the offline sessions (12 days). Repeated absence may result in expulsion." }, { title: "Transparency", text: "You agree to share accurate sales and financial data with mentors. Falsifying business data is grounds for immediate termination." }, { title: "Execution", text: "You commit to implementing the systems and tasks assigned during the program." }] },
+            ip: { title: "4. Intellectual Property", items: [{ title: "Our Content", text: "All training materials, templates, frameworks, and curriculum provided by BizCombinator are our intellectual property and may not be resold or distributed." }, { title: "Your Data", text: "You retain full ownership of your business data and intellectual property." }] },
+            guarantees: { title: "5. No Guarantees of Results", text: "While we aim for a 20% revenue growth target and provide support for obtaining loans/investments, BizCombinator does not guarantee specific financial results, funding, or business success. All business decisions remain your responsibility." },
+            liability: { title: "6. Limitation of Liability", text: "BizCombinator and its mentors are educators and advisors. We are not liable for any business losses or legal issues arising from your business operations during or after the program." },
+            governing: { title: "7. Governing Law", text: "These terms are governed by the laws of the Republic of Uzbekistan." }
         }
     },
     ru: {
@@ -990,6 +1012,28 @@ export const translations = {
                 description: "Перестаньте управлять хаосом. Начните строить системы. Подайте заявку в BizCombinator сегодня.",
                 buttonText: "Подать заявку сейчас"
             }
+        },
+        privacy: {
+            title: "Политика конфиденциальности",
+            lastUpdated: "Последнее обновление: Февраль 2026",
+            intro: { title: "1. Введение", text: "Добро пожаловать в BizCombinator («мы», «наш» или «нас»). Мы обязуемся защищать конфиденциальность наших заявителей и участников. Эта Политика конфиденциальности объясняет, как мы собираем, используем и делимся информацией, когда вы подаете заявку или участвуете в нашей программе акселерации в Узбекистане." },
+            collection: { title: "2. Информация, которую мы собираем", text: "Мы собираем два типа данных для эффективного управления программой:", items: [{ title: "Личная информация", text: "Имя, дата рождения (для проверки соответствия возрасту 18–30 лет), контактные данные и документы, удостоверяющие личность." }, { title: "Бизнес-данные", text: "В рамках требования программы о «Прозрачности», мы собираем чувствительные бизнес-метрики, включая данные о доходах, рентабельности, операционных расходах и налоговом статусе." }] },
+            usage: { title: "3. Как мы используем вашу информацию", text: "Мы используем ваши данные для следующих целей:", items: [{ title: "Отбор", text: "Для подтверждения того, что ваш бизнес активно работает не менее 6 месяцев." }, { title: "Реализация программы", text: "Для предоставления персонального коучинга и финансовой диагностики." }, { title: "Государственная поддержка", text: "Для содействия вашему доступу к государственным стимулам, упрощенным налоговым режимам и услугам «Единого окна» через наших государственных партнеров (например, Министерство экономики, Soliq)." }] },
+            sharing: { title: "4. Обмен данными и третьи стороны", text: "Мы не продаем ваши данные. Однако, участвуя, вы соглашаетесь делиться конкретными данными с:", items: [{ title: "Наставники", text: "Чтобы позволить им предоставлять точные бизнес-консультации." }, { title: "Государственные партнеры", text: "Для ускорения регистрации, получения лицензий или экспортной документации, как описано в нашем модуле Административной поддержки." }, { title: "Финансовые партнеры", text: "Если вы подписываетесь на содействие в получении кредита или инвестиций." }] },
+            security: { title: "5. Безопасность данных", text: "Мы применяем стандартные меры безопасности для защиты финансовых данных вашего бизнеса. Доступ к чувствительным данным о продажах ограничен уполномоченным персоналом программы и назначенными наставниками." },
+            contact: { title: "6. Свяжитесь с нами", text: "По вопросам конфиденциальности, пожалуйста, свяжитесь с нами по адресу: ", email: "hello@bizcombinator.com" }
+        },
+        terms: {
+            title: "Условия использования",
+            subtitle: "(Соглашение об участии)",
+            lastUpdated: "Последнее обновление: Февраль 2026",
+            acceptance: { title: "1. Принятие условий", text: "Подавая заявку в BizCombinator, вы соглашаетесь с настоящими Условиями использования. Если вы не согласны, вы не можете участвовать в программе." },
+            eligibility: { title: "2. Требования к участникам", text: "Чтобы пройти квалификацию в программу, вы должны:", items: ["Быть в возрасте от 18 до 30 лет.", "Иметь активный бизнес, работающий не менее 6 месяцев.", "Не находиться в исключенном секторе (например, азартные игры, алкоголь, табак)."] },
+            obligations: { title: "3. Обязательства участника", text: "Отобранные участники соглашаются:", items: [{ title: "Обязательное посещение", text: "Вы должны посещать офлайн-сессии (12 дней). Неоднократное отсутствие может привести к исключению." }, { title: "Прозрачность", text: "Вы соглашаетесь делиться точными данными о продажах и финансах с наставниками. Фальсификация бизнес-данных является основанием для немедленного прекращения участия." }, { title: "Исполнение", text: "Вы обязуетесь внедрять системы и задачи, назначенные в ходе программы." }] },
+            ip: { title: "4. Интеллектуальная собственность", items: [{ title: "Наш контент", text: "Все учебные материалы, шаблоны, фреймворки и учебные планы, предоставленные BizCombinator, являются нашей интеллектуальной собственностью и не подлежат перепродаже или распространению." }, { title: "Ваши данные", text: "Вы сохраняете полное право собственности на данные вашего бизнеса и интеллектуальную собственность." }] },
+            guarantees: { title: "5. Никаких гарантий результатов", text: "Хотя мы стремимся к целевому показателю роста выручки на 20% и предоставляем поддержку в получении кредитов/инвестиций, BizCombinator не гарантирует конкретных финансовых результатов, финансирования или успеха бизнеса. Все бизнес-решения остаются вашей ответственностью." },
+            liability: { title: "6. Ограничение ответственности", text: "BizCombinator и его наставники являются педагогами и консультантами. Мы не несем ответственности за любые бизнес-убытки или юридические проблемы, возникающие в результате вашей деятельности во время или после программы." },
+            governing: { title: "7. Регулирующее законодательство", text: "Настоящие условия регулируются законодательством Республики Узбекистан." }
         }
     },
     uz: {
@@ -1485,6 +1529,28 @@ export const translations = {
                 description: "Tartibsizlikni boshqarishni to'xtating. Tizimlar qurishni boshlang. Bugun BizCombinatorga ariza topshiring.",
                 buttonText: "Hozir Ariza Topshiring"
             }
+        },
+        privacy: {
+            title: "Maxfiylik Siyosati",
+            lastUpdated: "Oxirgi yangilanish: Fevral 2026",
+            intro: { title: "1. Kirish", text: "BizCombinator (\"biz\" yoki \"bizning\") ga xush kelibsiz. Biz ariza beruvchilarimiz va ishtirokchilarimizning maxfiyligini himoya qilishga sodiqmiz. Ushbu Maxfiylik Siyosati O'zbekistondagi akselerator dasturimizga ariza topshirganingizda yoki ishtirok etganingizda ma'lumotlarni qanday to'plashimiz, ishlatishimiz va baham ko'rishimizni tushuntiradi." },
+            collection: { title: "2. Biz to'playdigan ma'lumotlar", text: "Dasturni samarali boshqarish uchun ikki turdagi ma'lumotlarni to'playmiz:", items: [{ title: "Shaxsiy ma'lumotlar", text: "Ism, tug'ilgan sana (18–30 yosh talabini tekshirish uchun), aloqa ma'lumotlari va shaxsni tasdiqlovchi hujjatlar." }, { title: "Biznes ma'lumotlari", text: "Dasturning \"Shaffoflik\" talabi doirasida biz daromad raqamlari, foyda marjasi, operatsion xarajatlar va soliq maqomi kabi nozik biznes ko'rsatkichlarini to'playmiz." }] },
+            usage: { title: "3. Ma'lumotlaringizdan qanday foydalanamiz", text: "Biz ma'lumotlaringizdan quyidagi maqsadlarda foydalanamiz:", items: [{ title: "Tanlash", text: "Biznesingiz kamida 6 oy davomida faol ekanligini tekshirish uchun." }, { title: "Dasturni amalga oshirish", text: "Shaxsiylashtirilgan kouching va moliyaviy diagnostika taqdim etish uchun." }, { title: "Davlat ko'magi", text: "Hukumat hamkorlarimiz (masalan, Iqtisodiyot vazirligi, Soliq) orqali davlat imtiyozlari, soddalashtirilgan soliq rejimlari va \"Yagona oyna\" xizmatlaridan foydalanishingizni osonlashtirish uchun." }] },
+            sharing: { title: "4. Ma'lumotlarni almashish va uchinchi tomonlar", text: "Biz ma'lumotlaringizni sotmaymiz. Biroq, ishtirok etish orqali siz quyidagilar bilan ma'lum ma'lumotlarni almashishga rozilik bildirasiz:", items: [{ title: "Mentorlar", text: "Ularga aniq biznes maslahatlarini berish imkoniyatini taqdim etish uchun." }, { title: "Davlat hamkorlari", text: "Ma'muriy qo'llab-quvvatlash modulimizda tavsiflanganidek ro'yxatdan o'tish, litsenziyalar yoki eksport hujjatlarini tezlashtirish maqsadi uchun." }, { title: "Moliyaviy hamkorlar", text: "Agar siz kredit yoki investitsiya ko'magini olishga rozi bo'lsangiz." }] },
+            security: { title: "5. Ma'lumotlar xavfsizligi", text: "Biz biznesingizning moliyaviy ma'lumotlarini himoya qilish uchun standart xavfsizlik choralarini qo'llaymiz. Nozik savdo ma'lumotlariga kirish faqat vakolatli dastur xodimlari va tayinlangan mentorlar uchun cheklangan." },
+            contact: { title: "6. Biz bilan bog'lanish", text: "Maxfiylik masalalari bo'yicha quyidagi manzilga murojaat qiling: ", email: "hello@bizcombinator.com" }
+        },
+        terms: {
+            title: "Foydalanish Shartlari",
+            subtitle: "(Ishtirok etish shartnomasi)",
+            lastUpdated: "Oxirgi yangilanish: Fevral 2026",
+            acceptance: { title: "1. Shartlarni qabul qilish", text: "BizCombinator-ga ariza topshirish orqali siz ushbu Foydalanish Shartlariga rozilik bildirasiz. Agar rozi bo'lmasangiz, dasturda ishtirok eta olmaysiz." },
+            eligibility: { title: "2. Ishtirok etish talablari", text: "Dasturda qatnashish uchun siz quyidagilarga mos kelishingiz kerak:", items: ["Yoshingiz 18 dan 30 gacha bo'lishi kerak.", "Kamida 6 oy davomida faoliyat yuritayotgan biznesga ega bo'lishingiz kerak.", "Taqiqlangan sohada bo'lmasligingiz kerak (masalan, qimor, alkogol, tamaki)."] },
+            obligations: { title: "3. Ishtirokchi majburiyatlari", text: "Tanlangan ishtirokchilar quyidagilarga rozilik bildiradilar:", items: [{ title: "Majburiy davomat", text: "Siz oflayn sessiyalarda (12 kun) qatnashishingiz shart. Takroriy qatnashmaslik chetlatishga olib kelishi mumkin." }, { title: "Shaffoflik", text: "Siz aniq savdo va moliyaviy ma'lumotlarni mentorlar bilan baham ko'rishga rozilik bildirasiz. Biznes ma'lumotlarini soxtalashtirish ishtirokni darhol to'xtatish uchun asos bo'ladi." }, { title: "Ijro", text: "Siz dastur davomida berilgan tizimlar va vazifalarni amalga oshirish majburiyatini olasiz." }] },
+            ip: { title: "4. Intellektual mulk", items: [{ title: "Bizning kontent", text: "BizCombinator tomonidan taqdim etilgan barcha o'quv materiallari, shablonlar, freymvorklar va o'quv dasturlari bizning intellektual mulkimiz hisoblanadi va ularni qayta sotish yoki tarqatish mumkin emas." }, { title: "Sizning ma'lumotlaringiz", text: "Siz biznes ma'lumotlaringiz va intellektual mulkingizga to'liq egalik huquqini saqlab qolasiz." }] },
+            guarantees: { title: "5. Natijalar kafolati yo'q", text: "Biz daromadni 20% ga oshirishni maqsad qilgan bo'lsak-da va kreditlar/investitsiyalar olishda yordam bersak-da, BizCombinator aniq moliyaviy natijalar, moliyalashtirish yoki biznes muvaffaqiyatini kafolatlamaydi. Barcha biznes qarorlari sizning javobgarligingizda qoladi." },
+            liability: { title: "6. Javobgarlikni cheklash", text: "BizCombinator va uning mentorlari ta'lim beruvchilar va maslahatchilardir. Dastur davomida yoki undan keyin biznes faoliyatingizdan kelib chiqadigan har qanday biznes yo'qotishlari yoki huquqiy muammolar uchun biz javobgar emasmiz." },
+            governing: { title: "7. Boshqaruv qonunchiligi", text: "Ushbu shartlar O'zbekiston Respublikasi qonunlari bilan tartibga solinadi." }
         }
     },
 };
