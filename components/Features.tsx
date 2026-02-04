@@ -52,7 +52,7 @@ export default function Features() {
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true, margin: "-100px" }}
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12"
+                    className="flex flex-wrap justify-center gap-6 mb-12"
                 >
                     {t.aboutProgram.details.map((detail, index) => {
                         const Icon = icons[index];
@@ -60,7 +60,7 @@ export default function Features() {
                             <motion.div
                                 key={detail.id}
                                 variants={item}
-                                className="glass-card p-6 rounded-2xl hover:border-primary/30 transition-all duration-300"
+                                className="glass-card p-6 rounded-2xl hover:border-primary/30 transition-all duration-300 w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
                             >
                                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 border border-primary/20">
                                     <Icon className="w-6 h-6 text-primary" />

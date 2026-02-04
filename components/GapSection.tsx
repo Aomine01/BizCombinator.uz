@@ -65,7 +65,7 @@ export default function GapSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.5, duration: 0.6 }}
-                    className="text-center max-w-2xl mx-auto"
+                    className="text-center max-w-4xl mx-auto"
                 >
                     <p className="text-lg md:text-xl text-white font-medium">
                         If you answered "Yes," <span className="text-primary">BizCombinator was built to solve exactly these problems.</span>

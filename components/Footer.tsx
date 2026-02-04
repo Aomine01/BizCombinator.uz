@@ -45,7 +45,6 @@ export default function Footer() {
                             <FooterLink href="/#the-journey">{t.footer.links.journey}</FooterLink>
                             <FooterLink href="/#apply-form">{t.footer.links.apply}</FooterLink>
                             <FooterLink href="/#mentors">{t.footer.links.mentors}</FooterLink>
-                            <FooterLink href="/#results">{t.footer.links.global}</FooterLink>
                         </ul>
                     </div>
 
@@ -54,8 +53,6 @@ export default function Footer() {
                         <h4 className="text-white font-bold mb-6">{t.footer.columns.company}</h4>
                         <ul className="space-y-4">
                             <FooterLink href="/about">{t.footer.links.about}</FooterLink>
-                            <FooterLink href="#">{t.footer.links.stories}</FooterLink>
-                            <FooterLink href="#">{t.footer.links.investors}</FooterLink>
                             <FooterLink href="/contact">{t.footer.links.contact}</FooterLink>
                         </ul>
                     </div>
@@ -78,8 +75,8 @@ export default function Footer() {
                 <div className="pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
                     <p>{t.footer.copyright}</p>
                     <div className="flex gap-8">
-                        <Link href="#" className="hover:text-white transition-colors">{t.footer.links.privacy}</Link>
-                        <Link href="#" className="hover:text-white transition-colors">{t.footer.links.terms}</Link>
+                        <Link href="/privacy-policy" className="hover:text-white transition-colors">{t.footer.links.privacy}</Link>
+                        <Link href="/terms-of-service" className="hover:text-white transition-colors">{t.footer.links.terms}</Link>
                     </div>
                 </div>
             </div>
