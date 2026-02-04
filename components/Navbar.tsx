@@ -81,12 +81,12 @@ export default function Navbar() {
                 {/* Desktop Menu */}
                 <div className="hidden md:flex items-center gap-8">
                     <div className="flex items-center gap-6 text-sm font-medium text-slate-300">
-                        <Link href="/" className="hover:text-primary transition-colors">Home</Link>
-                        <Link href="/about" className="hover:text-primary transition-colors">About</Link>
+                        <Link href="/" className="hover:text-primary transition-colors">{t.nav.home}</Link>
+                        <Link href="/about" className="hover:text-primary transition-colors">{t.nav.about}</Link>
                         <a href="/#the-journey" className="hover:text-primary transition-colors">{t.nav.program}</a>
                         <a href="/#features" className="hover:text-primary transition-colors">{t.nav.benefits}</a>
                         <a href="/#mentors" className="hover:text-primary transition-colors">{t.nav.mentors}</a>
-                        <Link href="/contact" className="hover:text-primary transition-colors">Contact</Link>
+                        <Link href="/contact" className="hover:text-primary transition-colors">{t.nav.contact}</Link>
                     </div>
 
                     {/* Language Switcher */}
@@ -151,12 +151,12 @@ export default function Navbar() {
                             exit={{ opacity: 0 }}
                             className="fixed inset-0 bg-black/90 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-8 md:hidden"
                         >
-                            <Link href="/" className="text-2xl font-heading font-bold text-white hover:text-primary transition-colors" onClick={() => setIsOpen(false)}>Home</Link>
-                            <Link href="/about" className="text-2xl font-heading font-bold text-white hover:text-primary transition-colors" onClick={() => setIsOpen(false)}>About</Link>
+                            <Link href="/" className="text-2xl font-heading font-bold text-white hover:text-primary transition-colors" onClick={() => setIsOpen(false)}>{t.nav.home}</Link>
+                            <Link href="/about" className="text-2xl font-heading font-bold text-white hover:text-primary transition-colors" onClick={() => setIsOpen(false)}>{t.nav.about}</Link>
                             <a href="/#the-journey" className="text-2xl font-heading font-bold text-white hover:text-primary transition-colors" onClick={() => setIsOpen(false)}>{t.nav.program}</a>
                             <a href="/#features" className="text-2xl font-heading font-bold text-white hover:text-primary transition-colors" onClick={() => setIsOpen(false)}>{t.nav.benefits}</a>
                             <a href="/#mentors" className="text-2xl font-heading font-bold text-white hover:text-primary transition-colors" onClick={() => setIsOpen(false)}>{t.nav.mentors}</a>
-                            <Link href="/contact" className="text-2xl font-heading font-bold text-white hover:text-primary transition-colors" onClick={() => setIsOpen(false)}>Contact</Link>
+                            <Link href="/contact" className="text-2xl font-heading font-bold text-white hover:text-primary transition-colors" onClick={() => setIsOpen(false)}>{t.nav.contact}</Link>
 
                             {/* Mobile Language Switcher */}
                             <div className="flex gap-4 mt-4 p-2 bg-white/5 rounded-full border border-white/10">

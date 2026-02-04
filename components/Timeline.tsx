@@ -105,7 +105,7 @@ export default function Timeline() {
             <div className="container mx-auto px-4 relative z-10">
                 <div className="text-center mb-24">
                     <span className="mobile-hero-badge text-primary font-medium tracking-wider text-sm uppercase mb-3 block">
-                        We select only the most motivated entrepreneurs
+                        {t.newTimeline.badge}
                     </span>
                     <h2 className="mobile-section-title text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white mb-4">
                         {t.newTimeline.title}

@@ -7,17 +7,21 @@ export const translations = {
             globeUnavailable: "3D visualization unavailable",
         },
         nav: {
+            home: "Home",
+            about: "About",
+            contact: "Contact",
             program: "Program",
             benefits: "Benefits",
             mentors: "Mentors",
             apply: "Apply Now",
         },
         hero: {
-            titleLine1: "Build Business Systems",
-            titleLine2: "With BizCombinator",
-            subtitle: "Marketing, sales, finance — complete systems accelerator.",
+            titleLine1: "Turn Your Business Into a System.",
+            titleLine2: "Scale With Confidence.",
+            subtitle: "The BizCombinator Accelerator: A 12-day intensive offline program for young entrepreneurs ready to move from \"self-employed\" to \"professional CEO.\"",
             apply: "Apply Now",
             learnMore: "Learn More",
+            urgency: "⏰ Next Cohort Starts Soon. Only 70 Spots Available."
         },
         gap: {
             title: "What Your Business Will Have After the Program",
@@ -262,6 +266,7 @@ export const translations = {
         },
         newTimeline: {
             title: "Your Journey to BizCombinator",
+            badge: "We select only the most motivated entrepreneurs",
             subtitle: "We select only the most motivated entrepreneurs",
             steps: [
                 { id: 1, title: "Online Application", desc: "Fill out the application form. We require that your business has been operating for at least 6 months." },
@@ -497,17 +502,21 @@ export const translations = {
             globeUnavailable: "3D визуализация недоступна",
         },
         nav: {
+            home: "Главная",
+            about: "О нас",
+            contact: "Контакты",
             program: "Программа",
             benefits: "Преимущества",
             mentors: "Менторы",
             apply: "Подать заявку",
         },
         hero: {
-            titleLine1: "Постройте Системы Бизнеса",
-            titleLine2: "С BizCombinator",
-            subtitle: "Маркетинг, продажи, финансы — полный системный акселератор.",
+            titleLine1: "Превратите свой бизнес в систему.",
+            titleLine2: "Масштабируйтесь с уверенностью.",
+            subtitle: "Акселератор BizCombinator: 12-дневная интенсивная офлайн-программа для молодых предпринимателей, готовых перейти от «самозанятости» к «профессиональному CEO».",
             apply: "Подать Заявку",
             learnMore: "Подробнее",
+            urgency: "⏰ Скоро старт следующего потока. Доступно всего 70 мест."
         },
         gap: {
             title: "Что будет в вашем бизнесе после программы",
@@ -777,6 +786,7 @@ export const translations = {
         },
         newTimeline: {
             title: "Ваш путь в BizCombinator",
+            badge: "Мы отбираем только самых мотивированных предпринимателей",
             subtitle: "Мы отбираем только самых мотивированных предпринимателей",
             steps: [
                 { id: 1, title: "Онлайн заявка", desc: "Заполните форму заявки. Мы требуем, чтобы ваш бизнес работал не менее 6 месяцев." },
@@ -987,18 +997,21 @@ export const translations = {
             globeUnavailable: "3D vizualizatsiya mavjud emas",
         },
         nav: {
+            home: "Bosh sahifa",
+            about: "Biz haqimizda",
+            contact: "Bog'lanish",
             program: "Dastur",
             benefits: "Afzalliklar",
             mentors: "Mentorlar",
             apply: "Ariza topshirish",
         },
         hero: {
-            titleLine1: "Biznes Tizimlarini Quring",
-            titleLine2: "BizCombinator Bilan",
-            subtitle: "Marketing, savdo, moliya — to'liq tizimli akselerator.",
+            titleLine1: "Biznesingizni Tizimga Aylantiring.",
+            titleLine2: "Ishonch Bilan Masshtablash.",
+            subtitle: "BizCombinator Akseleratori: \"O'z-o'zini band qilish\"dan \"Professional CEO\"ga o'tishga tayyor yosh tadbirkorlar uchun 12 kunlik intensiv oflayn dastur.",
             apply: "Ariza Topshiring",
             learnMore: "Batafsil",
-            badge: "6 Oylik Akselerator"
+            urgency: "⏰ Keyingi guruh tez orada boshlanadi. Faqat 70 ta joy mavjud."
         },
         gap: {
             title: "Dastur tugagach, biznesingizda mavjud bo'ladi",
@@ -1268,6 +1281,7 @@ export const translations = {
         },
         newTimeline: {
             title: "BizCombinatorga yo'lingiz",
+            badge: "Biz faqat eng motivatsiyali tadbirkorlarni tanlaymiz",
             subtitle: "Biz faqat eng motivatsiyali tadbirkorlarni tanlaymiz",
             steps: [
                 { id: 1, title: "Onlayn ariza", desc: "Ariza shaklini to'ldiring. Biznesingiz kamida 6 oy ishlagan bo'lishi kerak." },
