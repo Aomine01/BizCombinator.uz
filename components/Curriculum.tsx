@@ -9,7 +9,7 @@ const icons = [BookOpen, TrendingUp, Target, Users, Settings];
 export default function Curriculum() {
     const { t } = useLanguage();
     return (
-        <section className="py-20 px-6 relative overflow-hidden" id="curriculum">
+        <section className="pt-32 pb-20 px-6 relative overflow-hidden" id="curriculum">
             {/* Background elements */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-50" />
 

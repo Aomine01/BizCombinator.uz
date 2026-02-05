@@ -65,7 +65,7 @@ export default function GapSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.5, duration: 0.6 }}
-                    className="text-center max-w-4xl mx-auto"
+                    className="text-center max-w-4xl mx-auto mt-12"
                 >
                     <p className="text-lg md:text-xl text-white font-medium">
                         {t.painPoints.cta.part1} <span className="text-primary">{t.painPoints.cta.part2}</span>
